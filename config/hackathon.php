@@ -13,7 +13,7 @@ return [
     'deadline' => env('HACKATHON_DEADLINE', '2026-10-29T23:59:00+03:00'),
 
     // تواريخ إقامة الهاكاثون كما تظهر في الصفحة
-    'event_dates' => env('HACKATHON_EVENT_DATES', '19 – 21 نوفمبر 2026'),
+    'event_dates' => env('HACKATHON_EVENT_DATES', 'يُعلن لاحقًا'),
 
     // فتح أو إغلاق باب التسجيل يدوياً
     'registration_open' => filter_var(env('HACKATHON_REGISTRATION_OPEN', true), FILTER_VALIDATE_BOOL),

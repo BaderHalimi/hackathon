@@ -5,18 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        <title>هاكاثون الأمن السيبراني والذكاء الاصطناعي 2026 | النادي الهندسي</title>
+        <title>هاكاثون السايبر والذكاء الاصطناعي 2026 | النادي الهندسي</title>
         <meta
             name="description"
-            content="هاكاثون الأمن السيبراني والذكاء الاصطناعي 2026 — تنظيم النادي الهندسي، الكلية الجامعية للعلوم التطبيقية - غزة، بالشراكة مع حاضنة يوكاس التكنولوجية. سجّل الآن فردياً أو مع فريقك."
+            content="هاكاثون السايبر والذكاء الاصطناعي 2026 (AI &amp; Cyber Hackathon 2026) — تنظيم النادي الهندسي، لجنة الأنشطة، هندسة الحاسوب، المقر الرئيسي - غزة، بالشراكة مع حاضنة يوكاس التكنولوجية. فرق من 4 أعضاء: 2 أمن سيبراني + 2 ذكاء اصطناعي. سجّل الآن."
         />
-        <meta name="theme-color" content="#04060D" />
+        <meta name="theme-color" content="#FFFFFF" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="هاكاثون الأمن السيبراني والذكاء الاصطناعي 2026" />
+        <meta property="og:title" content="هاكاثون السايبر والذكاء الاصطناعي 2026 — AI &amp; Cyber Hackathon 2026" />
         <meta
             property="og:description"
-            content="48 ساعة. مسارات في الأمن السيبراني والذكاء الاصطناعي. جوائز واحتضان. سجّل الآن."
+            content="Cybersecurity + AI + Innovation — نحو حلول تقنية ذكية وآمنة لمواجهة تحديات واقعية. سجّل الآن وكن جزءًا من التحدي."
         />
         <meta property="og:image" content="{{ asset('images/hackathon-logo.png') }}" />
 
@@ -36,28 +36,34 @@
 
         <style>
             /* =========================================================
-               هاكاثون الأمن السيبراني والذكاء الاصطناعي 2026
-               النادي الهندسي × حاضنة يوكاس التكنولوجية
-               كل الألوان والمواعيد القابلة للتعديل بمكان واحد.
+               هاكاثون السايبر والذكاء الاصطناعي 2026
+               النادي الهندسي — لجنة الأنشطة — هندسة الحاسوب
+               الوضع النهاري (Light Mode) + ألوان الهوية الرسمية
                ========================================================= */
 
             :root {
-                /* ألوان الهوية (من شعار الهاكاثون) */
-                --orange: #f5822b;
-                --orange-2: #ffa657;
-                --navy: #232b69;
-                --navy-2: #4453c4;
-                --green: #8cc63f;
-                --green-2: #b8ef6a;
-                --alert: #ff3b4e;
+                /* الألوان الرسمية من ملف هوية الهاكاثون */
+                --orange: #f1791e;
+                --orange-dark: #d4620b;
+                --orange-soft: #fff4ea;
+                --navy: #2a3876;
+                --navy-dark: #1e2a5c;
+                --navy-soft: #eef1fa;
+                --green: #66ac2f;
+                --green-dark: #519022;
+                --green-soft: #f1f8e9;
 
-                --bg: #04060d;
-                --panel: rgba(255, 255, 255, 0.035);
-                --line: rgba(140, 198, 63, 0.16);
-                --line-2: rgba(255, 255, 255, 0.09);
+                /* النصوص والأسطح */
+                --ink: #1b2244;
+                --ink-2: #37406b;
+                --muted: #5d6684;
+                --bg: #ffffff;
+                --bg-soft: #f6f8fc;
+                --line: rgba(42, 56, 118, 0.13);
+                --line-2: rgba(42, 56, 118, 0.09);
 
-                --text: #e9eefc;
-                --muted: #8e9cbd;
+                --shadow-sm: 0 1px 2px rgba(27, 34, 68, 0.04), 0 4px 14px -8px rgba(27, 34, 68, 0.14);
+                --shadow: 0 20px 45px -28px rgba(42, 56, 118, 0.45);
 
                 --radius: 18px;
                 --radius-sm: 12px;
@@ -65,7 +71,7 @@
 
                 --font-ar: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
                 --font-mono: 'Share Tech Mono', ui-monospace, Consolas, monospace;
-                --font-en: 'Orbitron', 'Cairo', sans-serif;
+                --font-en: 'Cairo', 'Segoe UI', sans-serif;
             }
 
             * {
@@ -86,7 +92,7 @@
             body {
                 margin: 0;
                 background: var(--bg);
-                color: var(--text);
+                color: var(--ink);
                 font-family: var(--font-ar);
                 font-size: 16px;
                 line-height: 1.75;
@@ -121,6 +127,7 @@
                 line-height: 1.3;
                 font-weight: 800;
                 letter-spacing: -0.01em;
+                color: var(--ink);
             }
 
             p {
@@ -129,23 +136,23 @@
 
             ::selection {
                 background: var(--orange);
-                color: #08080a;
+                color: #fff;
             }
 
             :focus-visible {
-                outline: 2px solid var(--green-2);
+                outline: 2px solid var(--navy);
                 outline-offset: 3px;
                 border-radius: 6px;
             }
 
-            /* ---------- خلفيات متحركة ---------- */
+            /* ---------- خلفيات الصفحة ---------- */
             #matrix {
                 position: fixed;
                 inset: 0;
                 width: 100%;
                 height: 100%;
                 z-index: 0;
-                opacity: 0.32;
+                opacity: 1;
                 pointer-events: none;
             }
 
@@ -161,63 +168,52 @@
                 inset: -1px;
                 background-image: linear-gradient(
                         to right,
-                        rgba(140, 198, 63, 0.055) 1px,
+                        rgba(42, 56, 118, 0.05) 1px,
                         transparent 1px
                     ),
                     linear-gradient(
                         to bottom,
-                        rgba(140, 198, 63, 0.055) 1px,
+                        rgba(42, 56, 118, 0.05) 1px,
                         transparent 1px
                     );
-                background-size: 62px 62px;
+                background-size: 64px 64px;
                 mask-image: radial-gradient(
-                    ellipse 90% 70% at 50% 0%,
-                    #000 20%,
-                    transparent 78%
+                    ellipse 90% 65% at 50% 0%,
+                    #000 15%,
+                    transparent 75%
                 );
                 -webkit-mask-image: radial-gradient(
-                    ellipse 90% 70% at 50% 0%,
-                    #000 20%,
-                    transparent 78%
+                    ellipse 90% 65% at 50% 0%,
+                    #000 15%,
+                    transparent 75%
                 );
             }
 
-            .fx-noise {
-                position: absolute;
-                inset: 0;
-                opacity: 0.045;
-                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-            }
-
-            .fx-scan {
-                position: absolute;
-                inset: 0;
-                background: repeating-linear-gradient(
-                    to bottom,
-                    rgba(255, 255, 255, 0.028) 0 1px,
-                    transparent 1px 4px
-                );
-                mix-blend-mode: overlay;
-            }
-
+            /* لمسات لونية ناعمة بدل الخلفية الداكنة */
             .fx-vignette {
                 position: absolute;
                 inset: 0;
-                background: radial-gradient(
-                        ellipse 120% 80% at 50% -10%,
-                        rgba(35, 43, 105, 0.5),
-                        transparent 60%
+                background:
+                    radial-gradient(
+                        ellipse 70% 50% at 100% 0%,
+                        rgba(241, 121, 30, 0.09),
+                        transparent 62%
                     ),
                     radial-gradient(
-                        ellipse 60% 50% at 100% 100%,
-                        rgba(245, 130, 43, 0.11),
-                        transparent 65%
+                        ellipse 60% 45% at 0% 8%,
+                        rgba(102, 172, 47, 0.09),
+                        transparent 62%
                     ),
                     radial-gradient(
-                        ellipse 60% 50% at 0% 90%,
-                        rgba(140, 198, 63, 0.1),
-                        transparent 65%
+                        ellipse 90% 60% at 50% 100%,
+                        rgba(42, 56, 118, 0.05),
+                        transparent 70%
                     );
+            }
+
+            .fx-scan,
+            .fx-noise {
+                display: none;
             }
 
             #cursorGlow {
@@ -230,8 +226,8 @@
                 border-radius: 50%;
                 background: radial-gradient(
                     circle,
-                    rgba(140, 198, 63, 0.1),
-                    rgba(245, 130, 43, 0.06) 40%,
+                    rgba(102, 172, 47, 0.09),
+                    rgba(241, 121, 30, 0.06) 42%,
                     transparent 68%
                 );
                 z-index: 1;
@@ -255,7 +251,6 @@
                 width: 0%;
                 z-index: 90;
                 background: linear-gradient(90deg, var(--green), var(--orange));
-                box-shadow: 0 0 14px rgba(140, 198, 63, 0.7);
             }
 
             /* ---------- أدوات عامة ---------- */
@@ -281,28 +276,29 @@
                 font-size: 13px;
                 letter-spacing: 0.16em;
                 text-transform: uppercase;
-                color: var(--green-2);
+                color: var(--orange-dark);
             }
 
             .eyebrow::before {
                 content: '';
                 width: 26px;
-                height: 1px;
-                background: linear-gradient(90deg, transparent, var(--green));
+                height: 2px;
+                border-radius: 2px;
+                background: linear-gradient(90deg, transparent, var(--orange));
             }
 
             .sec {
-                padding: 96px 0;
+                padding: 92px 0;
                 position: relative;
             }
 
             .sec-head {
                 max-width: 760px;
-                margin-bottom: 52px;
+                margin-bottom: 48px;
             }
 
             .sec-head h2 {
-                font-size: clamp(1.75rem, 4.2vw, 2.7rem);
+                font-size: clamp(1.7rem, 4.2vw, 2.6rem);
                 margin: 14px 0;
             }
 
@@ -312,24 +308,20 @@
             }
 
             .grad {
-                background: linear-gradient(100deg, var(--orange-2), var(--green-2) 55%, #7f8cf0);
+                background: linear-gradient(100deg, var(--orange), var(--green) 92%);
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent;
             }
 
             .card {
-                background: linear-gradient(
-                    170deg,
-                    rgba(255, 255, 255, 0.055),
-                    rgba(255, 255, 255, 0.018)
-                );
-                border: 1px solid var(--line-2);
+                background: #fff;
+                border: 1px solid var(--line);
                 border-radius: var(--radius);
                 padding: 26px;
                 position: relative;
                 overflow: hidden;
-                backdrop-filter: blur(6px);
+                box-shadow: var(--shadow-sm);
                 transition:
                     transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
                     border-color 0.35s,
@@ -340,17 +332,23 @@
                 content: '';
                 position: absolute;
                 inset: 0 0 auto;
-                height: 1px;
-                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-                opacity: 0.6;
+                height: 3px;
+                background: linear-gradient(90deg, var(--orange), var(--green));
+                opacity: 0;
+                transition: opacity 0.35s;
             }
 
             .card:hover {
                 transform: translateY(-5px);
-                border-color: rgba(140, 198, 63, 0.4);
-                box-shadow: 0 24px 60px -30px rgba(140, 198, 63, 0.55);
+                border-color: rgba(42, 56, 118, 0.2);
+                box-shadow: 0 24px 50px -30px rgba(42, 56, 118, 0.55);
             }
 
+            .card:hover::before {
+                opacity: 1;
+            }
+
+            /* ---------- الأزرار ---------- */
             .btn {
                 display: inline-flex;
                 align-items: center;
@@ -368,7 +366,8 @@
                     transform 0.25s,
                     box-shadow 0.3s,
                     background 0.3s,
-                    border-color 0.3s;
+                    border-color 0.3s,
+                    color 0.3s;
                 white-space: nowrap;
             }
 
@@ -377,40 +376,46 @@
             }
 
             .btn-primary {
-                background: linear-gradient(100deg, var(--orange), var(--orange-2));
-                color: #1a0d02;
-                box-shadow:
-                    0 12px 34px -14px rgba(245, 130, 43, 0.9),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+                background: linear-gradient(100deg, var(--orange), #f79141);
+                color: #fff;
+                box-shadow: 0 14px 30px -16px rgba(241, 121, 30, 0.95);
             }
 
             .btn-primary:hover {
                 transform: translateY(-2px);
-                box-shadow:
-                    0 20px 44px -16px rgba(245, 130, 43, 1),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                box-shadow: 0 20px 40px -18px rgba(241, 121, 30, 1);
             }
 
             .btn-ghost {
-                background: rgba(255, 255, 255, 0.04);
-                border-color: var(--line-2);
-                color: var(--text);
-                backdrop-filter: blur(4px);
+                background: #fff;
+                border-color: var(--line);
+                color: var(--navy);
+                box-shadow: var(--shadow-sm);
             }
 
             .btn-ghost:hover {
-                border-color: var(--green);
-                background: rgba(140, 198, 63, 0.1);
+                border-color: var(--navy);
+                background: var(--navy-soft);
                 transform: translateY(-2px);
             }
 
             .btn-green {
-                background: linear-gradient(100deg, var(--green), var(--green-2));
-                color: #0a1402;
-                box-shadow: 0 12px 34px -14px rgba(140, 198, 63, 0.95);
+                background: linear-gradient(100deg, var(--green), #7cc23f);
+                color: #fff;
+                box-shadow: 0 14px 30px -16px rgba(102, 172, 47, 0.95);
             }
 
             .btn-green:hover {
+                transform: translateY(-2px);
+            }
+
+            .btn-navy {
+                background: var(--navy);
+                color: #fff;
+            }
+
+            .btn-navy:hover {
+                background: var(--navy-dark);
                 transform: translateY(-2px);
             }
 
@@ -450,14 +455,15 @@
                 transition:
                     background 0.4s,
                     border-color 0.4s,
-                    backdrop-filter 0.4s;
+                    box-shadow 0.4s;
                 border-bottom: 1px solid transparent;
             }
 
             header.stuck {
-                background: rgba(4, 6, 13, 0.82);
-                backdrop-filter: blur(16px) saturate(1.3);
-                border-bottom-color: var(--line-2);
+                background: rgba(255, 255, 255, 0.9);
+                backdrop-filter: blur(16px) saturate(1.4);
+                border-bottom-color: var(--line);
+                box-shadow: 0 10px 30px -24px rgba(27, 34, 68, 0.5);
             }
 
             .nav {
@@ -474,9 +480,6 @@
                 flex-shrink: 0;
             }
 
-            /* بطاقة الشعار الرسمي (خلفية بيضاء لأن الشعار خلفيته بيضاء)
-               ملاحظة: ارتفاع الصورة قيمة صريحة بالبكسل — النِسب المئوية
-               داخل شبكة بارتفاع تلقائي ما بتنحسب صح وبتكبّر الشعار. */
             .brand-card {
                 display: inline-flex;
                 align-items: center;
@@ -485,7 +488,8 @@
                 padding: 0 12px;
                 border-radius: 12px;
                 background: #fff;
-                box-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.95);
+                border: 1px solid var(--line);
+                box-shadow: var(--shadow-sm);
                 flex-shrink: 0;
             }
 
@@ -511,8 +515,8 @@
             }
 
             .brand-card:not(:has(img)) {
-                background: rgba(140, 198, 63, 0.06);
-                border: 1.5px dashed rgba(140, 198, 63, 0.42);
+                background: var(--navy-soft);
+                border: 1.5px dashed rgba(42, 56, 118, 0.35);
                 box-shadow: none;
             }
 
@@ -525,13 +529,14 @@
             .brand-txt b {
                 font-size: 0.92rem;
                 font-weight: 800;
+                color: var(--ink);
             }
 
             .brand-txt span {
                 font-family: var(--font-mono);
                 font-size: 10.5px;
                 letter-spacing: 0.14em;
-                color: var(--muted);
+                color: var(--orange-dark);
                 text-transform: uppercase;
             }
 
@@ -546,16 +551,16 @@
                 padding: 9px 13px;
                 border-radius: 10px;
                 font-size: 0.93rem;
-                font-weight: 600;
-                color: #c3cde6;
+                font-weight: 700;
+                color: var(--ink-2);
                 transition:
                     color 0.2s,
                     background 0.2s;
             }
 
             .nav-links a:hover {
-                color: #fff;
-                background: rgba(255, 255, 255, 0.06);
+                color: var(--navy);
+                background: var(--navy-soft);
             }
 
             .nav-cta {
@@ -569,19 +574,20 @@
                 width: 46px;
                 height: 46px;
                 border-radius: 12px;
-                border: 1px solid var(--line-2);
-                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid var(--line);
+                background: #fff;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
                 margin-inline-start: auto;
+                box-shadow: var(--shadow-sm);
             }
 
             .burger span {
                 display: block;
                 width: 20px;
                 height: 2px;
-                background: var(--text);
+                background: var(--navy);
                 position: relative;
             }
 
@@ -592,7 +598,7 @@
                 right: 0;
                 width: 20px;
                 height: 2px;
-                background: var(--text);
+                background: var(--navy);
                 transition: transform 0.3s;
             }
 
@@ -621,8 +627,9 @@
                 flex-direction: column;
                 gap: 4px;
                 padding: 12px 22px 26px;
-                background: rgba(4, 6, 13, 0.97);
-                border-bottom: 1px solid var(--line-2);
+                background: #fff;
+                border-bottom: 1px solid var(--line);
+                box-shadow: 0 24px 40px -30px rgba(27, 34, 68, 0.6);
             }
 
             .drawer.open {
@@ -633,10 +640,10 @@
                 padding: 14px 12px;
                 border-radius: 12px;
                 font-weight: 700;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                border-bottom: 1px solid var(--line-2);
             }
 
-            /* ---------- مكان الشعار (يتبدّل تلقائياً عند وصول الصورة) ---------- */
+            /* ---------- مكان الشعار ---------- */
             .logo-slot {
                 position: relative;
                 display: grid;
@@ -646,8 +653,8 @@
                 min-width: 120px;
                 padding: 12px 18px;
                 border-radius: 14px;
-                border: 1.5px dashed rgba(140, 198, 63, 0.42);
-                background: rgba(140, 198, 63, 0.045);
+                border: 1.5px dashed rgba(42, 56, 118, 0.3);
+                background: var(--navy-soft);
                 text-align: center;
                 transition:
                     border-color 0.3s,
@@ -660,7 +667,6 @@
                 width: auto;
                 height: auto;
                 object-fit: contain;
-                filter: drop-shadow(0 6px 22px rgba(0, 0, 0, 0.55));
             }
 
             .partner .logo-slot img {
@@ -684,15 +690,17 @@
             .logo-slot.slot-light:has(img) {
                 background: #fff;
                 padding: 10px 14px;
+                border: 1px solid var(--line);
                 border-radius: 14px;
-                box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.95);
+                box-shadow: var(--shadow-sm);
             }
 
             .slot-hint {
                 font-size: 12.5px;
                 font-weight: 700;
-                color: rgba(233, 238, 252, 0.62);
+                color: var(--navy);
                 line-height: 1.5;
+                opacity: 0.7;
             }
 
             .slot-hint small {
@@ -700,14 +708,14 @@
                 font-family: var(--font-mono);
                 font-size: 9.5px;
                 letter-spacing: 0.1em;
-                color: rgba(140, 198, 63, 0.75);
+                color: var(--orange-dark);
                 margin-top: 3px;
             }
 
             /* ---------- الهيرو ---------- */
             .hero {
                 position: relative;
-                padding: 150px 0 70px;
+                padding: 148px 0 66px;
                 min-height: 100svh;
                 display: flex;
                 align-items: center;
@@ -735,41 +743,41 @@
                 border-radius: 999px;
                 font-size: 12.5px;
                 font-weight: 700;
-                border: 1px solid var(--line-2);
-                background: rgba(255, 255, 255, 0.045);
-                color: #cbd6ef;
-                backdrop-filter: blur(4px);
+                border: 1px solid var(--line);
+                background: #fff;
+                color: var(--ink-2);
+                box-shadow: var(--shadow-sm);
             }
 
             .badge-live {
-                border-color: rgba(140, 198, 63, 0.45);
-                background: rgba(140, 198, 63, 0.11);
-                color: var(--green-2);
+                border-color: rgba(102, 172, 47, 0.4);
+                background: var(--green-soft);
+                color: var(--green-dark);
             }
 
             .dot {
                 width: 7px;
                 height: 7px;
                 border-radius: 50%;
-                background: var(--green-2);
-                box-shadow: 0 0 0 0 rgba(184, 239, 106, 0.8);
+                background: var(--green);
+                box-shadow: 0 0 0 0 rgba(102, 172, 47, 0.6);
                 animation: pulse 1.9s infinite;
             }
 
             @keyframes pulse {
                 70% {
-                    box-shadow: 0 0 0 9px rgba(184, 239, 106, 0);
+                    box-shadow: 0 0 0 9px rgba(102, 172, 47, 0);
                 }
                 100% {
-                    box-shadow: 0 0 0 0 rgba(184, 239, 106, 0);
+                    box-shadow: 0 0 0 0 rgba(102, 172, 47, 0);
                 }
             }
 
             .hero h1 {
-                font-family: var(--font-en);
+                font-family: var(--font-ar);
                 font-weight: 900;
-                font-size: clamp(2rem, 6.1vw, 4.05rem);
-                line-height: 1.04;
+                font-size: clamp(2.1rem, 6vw, 4rem);
+                line-height: 1.08;
                 letter-spacing: -0.02em;
                 margin-bottom: 6px;
                 text-transform: uppercase;
@@ -777,21 +785,20 @@
 
             .hero h1 .line-1 {
                 display: block;
-                color: #fff;
-                text-shadow: 0 0 42px rgba(68, 83, 196, 0.55);
+                color: var(--navy);
             }
 
             .hero h1 .line-2 {
                 display: block;
-                background: linear-gradient(96deg, var(--orange) 8%, var(--orange-2) 45%, var(--green) 100%);
+                background: linear-gradient(96deg, var(--orange) 10%, var(--orange) 45%, var(--green) 100%);
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent;
             }
 
             .hero h1 .yr {
-                -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.75);
-                color: transparent;
+                color: var(--green);
+                -webkit-text-stroke: 0;
             }
 
             .glitch {
@@ -814,17 +821,17 @@
                 animation: glitch-a 3.4s infinite steps(2, end);
                 left: 2px;
                 clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-                mix-blend-mode: screen;
-                opacity: 0.85;
+                mix-blend-mode: multiply;
+                opacity: 0.5;
             }
 
             .glitch::after {
-                color: var(--green-2);
+                color: var(--navy);
                 animation: glitch-b 2.9s infinite steps(2, end);
                 right: 2px;
                 clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-                mix-blend-mode: screen;
-                opacity: 0.8;
+                mix-blend-mode: multiply;
+                opacity: 0.45;
             }
 
             @keyframes glitch-a {
@@ -836,7 +843,7 @@
                 }
                 89% {
                     transform: translate(-3px, -2px);
-                    opacity: 0.9;
+                    opacity: 0.5;
                 }
                 92% {
                     transform: translate(3px, 1px);
@@ -855,7 +862,7 @@
                 }
                 91% {
                     transform: translate(3px, 2px);
-                    opacity: 0.85;
+                    opacity: 0.45;
                 }
                 94% {
                     transform: translate(-3px, -1px);
@@ -866,28 +873,28 @@
             }
 
             .hero h2 {
-                font-size: clamp(1.18rem, 3.1vw, 1.85rem);
+                font-size: clamp(1.2rem, 3.1vw, 1.8rem);
                 font-weight: 800;
                 margin: 18px 0 16px;
-                color: #dfe6f8;
+                color: var(--navy);
             }
 
             .hero-desc {
                 color: var(--muted);
                 font-size: 1.05rem;
-                max-width: 620px;
+                max-width: 640px;
             }
 
             .hero-desc b {
-                color: #e8eefb;
-                font-weight: 700;
+                color: var(--ink);
+                font-weight: 800;
             }
 
             .term-line {
                 margin-top: 22px;
                 font-family: var(--font-mono);
                 font-size: 14px;
-                color: var(--green-2);
+                color: var(--green-dark);
                 min-height: 24px;
                 direction: ltr;
                 text-align: left;
@@ -897,7 +904,7 @@
                 display: inline-block;
                 width: 9px;
                 height: 17px;
-                background: var(--green-2);
+                background: var(--green-dark);
                 vertical-align: -3px;
                 margin-left: 3px;
                 animation: blink 1s steps(1) infinite;
@@ -922,7 +929,7 @@
                 gap: 12px 22px;
                 margin-top: 32px;
                 padding-top: 26px;
-                border-top: 1px solid var(--line-2);
+                border-top: 1px solid var(--line);
             }
 
             .hero-meta div {
@@ -930,25 +937,23 @@
                 align-items: center;
                 gap: 9px;
                 font-size: 0.92rem;
-                color: #c2cce5;
+                color: var(--ink-2);
+                font-weight: 600;
             }
 
             .hero-meta svg {
                 flex-shrink: 0;
-                color: var(--green);
+                color: var(--orange);
             }
 
             /* ---------- العداد ---------- */
             .count-card {
                 position: relative;
-                background: linear-gradient(165deg, rgba(35, 43, 105, 0.5), rgba(4, 6, 13, 0.72));
-                border: 1px solid rgba(140, 198, 63, 0.28);
+                background: #fff;
+                border: 1px solid var(--line);
                 border-radius: 22px;
                 padding: 26px 22px;
-                backdrop-filter: blur(10px);
-                box-shadow:
-                    0 40px 90px -50px rgba(140, 198, 63, 0.75),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+                box-shadow: 0 30px 60px -40px rgba(42, 56, 118, 0.7);
                 overflow: hidden;
             }
 
@@ -959,7 +964,7 @@
                 right: -30%;
                 width: 260px;
                 height: 260px;
-                background: radial-gradient(circle, rgba(245, 130, 43, 0.22), transparent 68%);
+                background: radial-gradient(circle, rgba(241, 121, 30, 0.12), transparent 68%);
                 pointer-events: none;
             }
 
@@ -969,19 +974,21 @@
                 justify-content: space-between;
                 gap: 10px;
                 margin-bottom: 18px;
+                position: relative;
             }
 
             .count-title b {
                 font-size: 1.02rem;
+                color: var(--navy);
             }
 
             .count-title span {
                 font-family: var(--font-mono);
                 font-size: 10.5px;
                 letter-spacing: 0.12em;
-                color: var(--alert);
-                border: 1px solid rgba(255, 59, 78, 0.4);
-                background: rgba(255, 59, 78, 0.1);
+                color: var(--orange-dark);
+                border: 1px solid rgba(241, 121, 30, 0.35);
+                background: var(--orange-soft);
                 padding: 3px 9px;
                 border-radius: 999px;
                 text-transform: uppercase;
@@ -991,10 +998,11 @@
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
                 gap: 10px;
+                position: relative;
             }
 
             .count-cell {
-                background: rgba(4, 6, 13, 0.66);
+                background: var(--bg-soft);
                 border: 1px solid var(--line-2);
                 border-radius: 14px;
                 padding: 14px 6px 11px;
@@ -1007,19 +1015,18 @@
                 content: '';
                 position: absolute;
                 inset: auto 0 0;
-                height: 2px;
+                height: 3px;
                 background: linear-gradient(90deg, transparent, var(--green), transparent);
-                opacity: 0.7;
+                opacity: 0.8;
             }
 
             .count-num {
                 font-family: var(--font-mono);
                 font-size: clamp(1.5rem, 4.4vw, 2.3rem);
                 line-height: 1;
-                color: #fff;
+                color: var(--navy);
                 direction: ltr;
                 display: block;
-                text-shadow: 0 0 22px rgba(140, 198, 63, 0.55);
             }
 
             .count-num.tick {
@@ -1030,12 +1037,10 @@
                 0% {
                     transform: translateY(-38%) scale(1.12);
                     opacity: 0;
-                    filter: blur(2px);
                 }
                 100% {
                     transform: none;
                     opacity: 1;
-                    filter: none;
                 }
             }
 
@@ -1054,16 +1059,25 @@
                 justify-content: center;
                 gap: 9px;
                 font-size: 12.5px;
-                color: #c6d1e9;
+                color: var(--ink-2);
                 text-align: center;
                 flex-wrap: wrap;
+                position: relative;
+            }
+
+            .count-foot svg {
+                color: var(--orange);
+            }
+
+            .count-foot b {
+                color: var(--navy);
             }
 
             .count-closed {
                 display: none;
                 text-align: center;
                 padding: 16px 8px;
-                color: var(--alert);
+                color: var(--orange-dark);
                 font-weight: 800;
             }
 
@@ -1079,7 +1093,7 @@
             /* ---------- الشريط المتحرك ---------- */
             .ticker {
                 border-block: 1px solid var(--line);
-                background: linear-gradient(90deg, rgba(140, 198, 63, 0.07), rgba(245, 130, 43, 0.07));
+                background: var(--navy);
                 overflow: hidden;
                 padding: 13px 0;
                 position: relative;
@@ -1090,7 +1104,7 @@
                 display: flex;
                 gap: 34px;
                 width: max-content;
-                animation: slide 34s linear infinite;
+                animation: slide 38s linear infinite;
                 direction: ltr;
             }
 
@@ -1099,7 +1113,7 @@
                 font-size: 13px;
                 letter-spacing: 0.18em;
                 text-transform: uppercase;
-                color: rgba(233, 238, 252, 0.72);
+                color: rgba(255, 255, 255, 0.85);
                 white-space: nowrap;
                 display: flex;
                 align-items: center;
@@ -1125,10 +1139,10 @@
                 gap: 26px;
                 align-items: center;
                 padding: 34px 30px;
-                border: 1px solid var(--line-2);
+                border: 1px solid var(--line);
                 border-radius: var(--radius);
-                background: linear-gradient(150deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
-                backdrop-filter: blur(6px);
+                background: #fff;
+                box-shadow: var(--shadow-sm);
             }
 
             .partner {
@@ -1146,7 +1160,6 @@
                 font-family: var(--font-mono);
                 font-size: 1.5rem;
                 color: var(--orange);
-                opacity: 0.85;
             }
 
             .partners-note {
@@ -1155,8 +1168,12 @@
                 font-size: 0.88rem;
                 color: var(--muted);
                 padding-top: 16px;
-                border-top: 1px dashed var(--line-2);
+                border-top: 1px dashed var(--line);
                 margin-top: 6px;
+            }
+
+            .partners-note b {
+                color: var(--navy);
             }
 
             /* ---------- الشبكات ---------- */
@@ -1185,14 +1202,20 @@
                 display: grid;
                 place-items: center;
                 margin-bottom: 16px;
-                background: linear-gradient(150deg, rgba(245, 130, 43, 0.18), rgba(140, 198, 63, 0.14));
-                border: 1px solid var(--line-2);
-                color: var(--green-2);
+                background: var(--navy-soft);
+                border: 1px solid var(--line);
+                color: var(--navy);
+            }
+
+            .card:nth-child(even) .icon-box {
+                background: var(--green-soft);
+                color: var(--green-dark);
             }
 
             .card h3 {
                 font-size: 1.12rem;
                 margin-bottom: 9px;
+                color: var(--navy);
             }
 
             .card p {
@@ -1206,16 +1229,17 @@
                 left: 18px;
                 font-family: var(--font-mono);
                 font-size: 11px;
-                color: rgba(140, 198, 63, 0.65);
+                color: var(--orange);
+                opacity: 0.85;
             }
 
-            /* ---------- التيرمنال ---------- */
+            /* ---------- التيرمنال (كتلة داكنة بالهوية) ---------- */
             .terminal {
                 border-radius: var(--radius);
-                border: 1px solid var(--line-2);
-                background: rgba(2, 4, 9, 0.92);
+                border: 1px solid var(--navy-dark);
+                background: linear-gradient(160deg, #2a3876, #1e2a5c);
                 overflow: hidden;
-                box-shadow: 0 40px 90px -50px rgba(0, 0, 0, 0.95);
+                box-shadow: 0 34px 60px -38px rgba(42, 56, 118, 0.95);
             }
 
             .terminal-bar {
@@ -1223,8 +1247,8 @@
                 align-items: center;
                 gap: 8px;
                 padding: 11px 14px;
-                background: rgba(255, 255, 255, 0.045);
-                border-bottom: 1px solid var(--line-2);
+                background: rgba(255, 255, 255, 0.08);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.12);
             }
 
             .terminal-bar i {
@@ -1235,19 +1259,19 @@
             }
 
             .terminal-bar i:nth-child(1) {
-                background: #ff5f57;
+                background: #f1791e;
             }
             .terminal-bar i:nth-child(2) {
-                background: #febc2e;
+                background: #ffd166;
             }
             .terminal-bar i:nth-child(3) {
-                background: #28c840;
+                background: #66ac2f;
             }
 
             .terminal-bar b {
                 font-family: var(--font-mono);
                 font-size: 11.5px;
-                color: var(--muted);
+                color: rgba(255, 255, 255, 0.6);
                 font-weight: 400;
                 margin-inline-start: 8px;
                 direction: ltr;
@@ -1270,22 +1294,22 @@
             }
 
             .terminal-body .l .t {
-                color: #5f6d92;
+                color: rgba(255, 255, 255, 0.42);
                 direction: ltr;
                 display: inline-block;
             }
 
             .terminal-body .ok .m {
-                color: var(--green-2);
+                color: #a9e06b;
             }
             .terminal-body .warn .m {
-                color: #ffc861;
+                color: #ffd166;
             }
             .terminal-body .bad .m {
-                color: var(--alert);
+                color: #ff9f8f;
             }
             .terminal-body .info .m {
-                color: #9fb0e0;
+                color: #c8d3f5;
             }
 
             @keyframes fadein {
@@ -1306,8 +1330,7 @@
                 inset-block: 8px;
                 inset-inline-start: 9px;
                 width: 2px;
-                background: linear-gradient(to bottom, var(--green), var(--orange), transparent);
-                opacity: 0.55;
+                background: linear-gradient(to bottom, var(--green), var(--orange), var(--line));
             }
 
             .tl-item {
@@ -1327,27 +1350,28 @@
                 width: 20px;
                 height: 20px;
                 border-radius: 50%;
-                border: 2px solid var(--green);
-                background: var(--bg);
-                box-shadow: 0 0 16px rgba(140, 198, 63, 0.75);
+                border: 3px solid var(--green);
+                background: #fff;
+                box-shadow: 0 0 0 4px rgba(102, 172, 47, 0.16);
             }
 
             .tl-item.now::before {
                 border-color: var(--orange);
-                box-shadow: 0 0 20px rgba(245, 130, 43, 0.9);
+                box-shadow: 0 0 0 5px rgba(241, 121, 30, 0.18);
                 animation: pulse 1.9s infinite;
             }
 
             .tl-date {
                 font-family: var(--font-mono);
                 font-size: 12.5px;
-                color: var(--orange-2);
-                letter-spacing: 0.04em;
+                color: var(--orange-dark);
+                font-weight: 700;
             }
 
             .tl-item h4 {
                 font-size: 1.06rem;
                 margin: 5px 0;
+                color: var(--navy);
             }
 
             .tl-item p {
@@ -1366,9 +1390,9 @@
             }
 
             .tl-tag.now {
-                background: rgba(245, 130, 43, 0.16);
-                color: var(--orange-2);
-                border: 1px solid rgba(245, 130, 43, 0.4);
+                background: var(--orange-soft);
+                color: var(--orange-dark);
+                border: 1px solid rgba(241, 121, 30, 0.35);
             }
 
             /* ---------- الجوائز ---------- */
@@ -1378,38 +1402,36 @@
             }
 
             .prize .rank {
-                font-family: var(--font-en);
+                font-family: var(--font-ar);
                 font-weight: 900;
-                font-size: 3.1rem;
+                font-size: 3rem;
                 line-height: 1;
                 margin-bottom: 6px;
             }
 
             .prize.p1 {
-                border-color: rgba(245, 130, 43, 0.45);
-                box-shadow: 0 30px 80px -46px rgba(245, 130, 43, 0.9);
+                border-color: rgba(241, 121, 30, 0.45);
+                box-shadow: 0 26px 55px -34px rgba(241, 121, 30, 0.9);
             }
 
             .prize.p1 .rank {
-                background: linear-gradient(180deg, var(--orange-2), var(--orange));
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
+                color: var(--orange);
             }
 
             .prize.p2 .rank {
-                color: #cfd8ee;
+                color: var(--navy);
             }
             .prize.p3 .rank {
-                color: #c79a6a;
+                color: var(--green-dark);
             }
 
             .prize .amount {
                 font-family: var(--font-mono);
                 font-size: 1.32rem;
-                color: var(--green-2);
+                color: var(--green-dark);
                 direction: ltr;
                 margin-bottom: 12px;
+                font-weight: 700;
             }
 
             .prize-use {
@@ -1430,10 +1452,12 @@
                 gap: 8px;
                 padding: 10px 16px;
                 border-radius: 12px;
-                border: 1px solid var(--line-2);
-                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid var(--line);
+                background: #fff;
                 font-size: 0.9rem;
                 font-weight: 700;
+                color: var(--ink-2);
+                box-shadow: var(--shadow-sm);
             }
 
             .ul-check {
@@ -1448,7 +1472,7 @@
                 display: flex;
                 gap: 12px;
                 align-items: flex-start;
-                color: #c8d2e9;
+                color: var(--ink-2);
                 font-size: 0.96rem;
             }
 
@@ -1456,6 +1480,29 @@
                 flex-shrink: 0;
                 margin-top: 5px;
                 color: var(--green);
+            }
+
+            /* صندوق ملاحظة */
+            .note-box {
+                display: flex;
+                gap: 12px;
+                align-items: flex-start;
+                padding: 16px 18px;
+                border-radius: var(--radius-sm);
+                background: var(--navy-soft);
+                border: 1px solid var(--line);
+                font-size: 0.92rem;
+                color: var(--ink-2);
+            }
+
+            .note-box svg {
+                flex-shrink: 0;
+                margin-top: 4px;
+                color: var(--navy);
+            }
+
+            .note-box b {
+                color: var(--navy);
             }
 
             /* ---------- FAQ ---------- */
@@ -1466,18 +1513,19 @@
             }
 
             details.qa {
-                border: 1px solid var(--line-2);
+                border: 1px solid var(--line);
                 border-radius: var(--radius-sm);
-                background: rgba(255, 255, 255, 0.032);
+                background: #fff;
                 overflow: hidden;
+                box-shadow: var(--shadow-sm);
                 transition:
                     border-color 0.3s,
-                    background 0.3s;
+                    box-shadow 0.3s;
             }
 
             details.qa[open] {
-                border-color: rgba(140, 198, 63, 0.4);
-                background: rgba(140, 198, 63, 0.05);
+                border-color: rgba(42, 56, 118, 0.25);
+                box-shadow: 0 18px 40px -30px rgba(42, 56, 118, 0.6);
             }
 
             details.qa summary {
@@ -1485,6 +1533,7 @@
                 padding: 17px 20px;
                 font-weight: 700;
                 font-size: 1rem;
+                color: var(--navy);
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -1500,7 +1549,7 @@
                 content: '+';
                 font-family: var(--font-mono);
                 font-size: 1.3rem;
-                color: var(--green);
+                color: var(--orange);
                 transition: transform 0.3s;
                 line-height: 1;
             }
@@ -1532,10 +1581,11 @@
             }
 
             .aside-box {
-                border: 1px solid var(--line-2);
+                border: 1px solid var(--line);
                 border-radius: var(--radius-sm);
                 padding: 18px;
-                background: rgba(255, 255, 255, 0.035);
+                background: #fff;
+                box-shadow: var(--shadow-sm);
             }
 
             .aside-box h4 {
@@ -1544,6 +1594,7 @@
                 display: flex;
                 align-items: center;
                 gap: 8px;
+                color: var(--navy);
             }
 
             .aside-box h4 svg {
@@ -1565,12 +1616,11 @@
             }
 
             .form-card {
-                border: 1px solid var(--line-2);
+                border: 1px solid var(--line);
                 border-radius: var(--radius);
-                background: linear-gradient(170deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
-                backdrop-filter: blur(8px);
+                background: #fff;
                 padding: 30px;
-                box-shadow: 0 40px 100px -60px rgba(0, 0, 0, 1);
+                box-shadow: 0 28px 60px -45px rgba(42, 56, 118, 0.75);
             }
 
             .mode-switch {
@@ -1579,8 +1629,8 @@
                 gap: 8px;
                 padding: 6px;
                 border-radius: 999px;
-                background: rgba(4, 6, 13, 0.6);
-                border: 1px solid var(--line-2);
+                background: var(--bg-soft);
+                border: 1px solid var(--line);
                 margin-bottom: 26px;
             }
 
@@ -1604,9 +1654,9 @@
             }
 
             .mode-switch button.active {
-                color: #12100a;
-                background: linear-gradient(100deg, var(--green), var(--green-2));
-                box-shadow: 0 10px 30px -14px rgba(140, 198, 63, 0.95);
+                color: #fff;
+                background: var(--navy);
+                box-shadow: 0 10px 24px -14px rgba(42, 56, 118, 0.95);
             }
 
             fieldset {
@@ -1624,7 +1674,7 @@
                 font-size: 12.5px;
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
-                color: var(--green-2);
+                color: var(--navy);
                 margin-bottom: 16px;
             }
 
@@ -1655,7 +1705,7 @@
             .field label {
                 font-size: 0.89rem;
                 font-weight: 700;
-                color: #d5ddf0;
+                color: var(--ink-2);
             }
 
             .field label .req {
@@ -1668,9 +1718,9 @@
                 width: 100%;
                 padding: 13px 15px;
                 border-radius: var(--radius-sm);
-                border: 1px solid var(--line-2);
-                background: rgba(4, 6, 13, 0.62);
-                color: var(--text);
+                border: 1px solid var(--line);
+                background: var(--bg-soft);
+                color: var(--ink);
                 font-family: inherit;
                 font-size: 0.95rem;
                 transition:
@@ -1687,8 +1737,8 @@
             }
 
             .field select {
-                background-image: linear-gradient(45deg, transparent 50%, var(--green) 50%),
-                    linear-gradient(135deg, var(--green) 50%, transparent 50%);
+                background-image: linear-gradient(45deg, transparent 50%, var(--navy) 50%),
+                    linear-gradient(135deg, var(--navy) 50%, transparent 50%);
                 background-position:
                     calc(18px) calc(50% - 2px),
                     calc(23px) calc(50% - 2px);
@@ -1699,35 +1749,31 @@
                 padding-inline-start: 42px;
             }
 
-            .field select option {
-                background: #0a0e1b;
-                color: var(--text);
-            }
-
             .field input::placeholder,
             .field textarea::placeholder {
-                color: #5f6c8c;
+                color: #9aa3bd;
             }
 
             .field input:focus,
             .field select:focus,
             .field textarea:focus {
                 outline: none;
-                border-color: var(--green);
-                background: rgba(4, 6, 13, 0.85);
-                box-shadow: 0 0 0 4px rgba(140, 198, 63, 0.13);
+                border-color: var(--navy);
+                background: #fff;
+                box-shadow: 0 0 0 4px rgba(42, 56, 118, 0.1);
             }
 
             .field.bad input,
             .field.bad select,
             .field.bad textarea {
-                border-color: var(--alert);
-                box-shadow: 0 0 0 4px rgba(255, 59, 78, 0.12);
+                border-color: #d93b3b;
+                background: #fef6f6;
+                box-shadow: 0 0 0 4px rgba(217, 59, 59, 0.1);
             }
 
             .err {
                 font-size: 0.79rem;
-                color: #ff8391;
+                color: #c92b2b;
                 display: none;
             }
 
@@ -1741,14 +1787,14 @@
 
             .hint {
                 font-size: 0.78rem;
-                color: #64729a;
+                color: #8b93ab;
             }
 
             .member {
-                border: 1px solid var(--line-2);
+                border: 1px solid var(--line);
                 border-radius: var(--radius-sm);
                 padding: 18px;
-                background: rgba(255, 255, 255, 0.028);
+                background: var(--bg-soft);
                 margin-bottom: 12px;
                 animation: slide-in 0.35s ease;
             }
@@ -1770,14 +1816,14 @@
 
             .member-head b {
                 font-size: 0.92rem;
-                color: var(--green-2);
+                color: var(--navy);
                 font-family: var(--font-mono);
             }
 
             .rm {
-                border: 1px solid rgba(255, 59, 78, 0.35);
-                background: rgba(255, 59, 78, 0.1);
-                color: #ff8391;
+                border: 1px solid rgba(217, 59, 59, 0.3);
+                background: #fef2f2;
+                color: #c92b2b;
                 border-radius: 9px;
                 padding: 6px 12px;
                 cursor: pointer;
@@ -1787,14 +1833,14 @@
             }
 
             .rm:hover {
-                background: rgba(255, 59, 78, 0.22);
+                background: #fde3e3;
             }
 
             .add-member {
                 width: 100%;
-                border: 1.5px dashed rgba(140, 198, 63, 0.42);
-                background: rgba(140, 198, 63, 0.05);
-                color: var(--green-2);
+                border: 1.5px dashed rgba(42, 56, 118, 0.3);
+                background: var(--navy-soft);
+                color: var(--navy);
                 border-radius: var(--radius-sm);
                 padding: 14px;
                 cursor: pointer;
@@ -1810,12 +1856,12 @@
             }
 
             .add-member:hover {
-                background: rgba(140, 198, 63, 0.12);
-                border-color: var(--green);
+                background: #e4e9f7;
+                border-color: var(--navy);
             }
 
             .add-member[disabled] {
-                opacity: 0.45;
+                opacity: 0.5;
                 cursor: not-allowed;
             }
 
@@ -1824,11 +1870,11 @@
                 gap: 12px;
                 align-items: flex-start;
                 padding: 16px;
-                border: 1px solid var(--line-2);
+                border: 1px solid var(--line);
                 border-radius: var(--radius-sm);
-                background: rgba(4, 6, 13, 0.45);
+                background: var(--bg-soft);
                 font-size: 0.9rem;
-                color: #c3cde6;
+                color: var(--ink-2);
             }
 
             .agree input {
@@ -1841,8 +1887,8 @@
             }
 
             .agree.bad {
-                border-color: var(--alert);
-                background: rgba(255, 59, 78, 0.07);
+                border-color: #d93b3b;
+                background: #fef6f6;
             }
 
             /* ---------- التوست والمودال ---------- */
@@ -1856,12 +1902,12 @@
                 max-width: calc(100% - 40px);
                 padding: 13px 22px;
                 border-radius: 999px;
-                background: rgba(4, 6, 13, 0.96);
-                border: 1px solid var(--line);
+                background: var(--navy);
+                border: 1px solid var(--navy-dark);
                 color: #fff;
                 font-weight: 700;
                 font-size: 0.9rem;
-                box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 1);
+                box-shadow: 0 24px 50px -24px rgba(42, 56, 118, 0.9);
                 transform: translateY(140%);
                 transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
                 display: flex;
@@ -1875,7 +1921,8 @@
             }
 
             .toast.bad {
-                border-color: rgba(255, 59, 78, 0.5);
+                background: #b3261e;
+                border-color: #8f1d17;
             }
 
             .modal {
@@ -1886,8 +1933,8 @@
                 align-items: center;
                 justify-content: center;
                 padding: 22px;
-                background: rgba(2, 4, 9, 0.82);
-                backdrop-filter: blur(8px);
+                background: rgba(27, 34, 68, 0.55);
+                backdrop-filter: blur(6px);
             }
 
             .modal.open {
@@ -1900,11 +1947,11 @@
                 max-height: 88vh;
                 overflow: auto;
                 border-radius: 22px;
-                border: 1px solid rgba(140, 198, 63, 0.35);
-                background: linear-gradient(170deg, #0b1020, #05070e);
+                border: 1px solid var(--line);
+                background: #fff;
                 padding: 34px 30px;
                 text-align: center;
-                box-shadow: 0 60px 120px -50px rgba(140, 198, 63, 0.55);
+                box-shadow: 0 40px 90px -50px rgba(27, 34, 68, 0.9);
                 animation: pop 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
             }
 
@@ -1922,15 +1969,15 @@
                 border-radius: 50%;
                 display: grid;
                 place-items: center;
-                background: rgba(140, 198, 63, 0.13);
-                border: 1px solid rgba(140, 198, 63, 0.45);
-                color: var(--green-2);
-                box-shadow: 0 0 44px -6px rgba(140, 198, 63, 0.6);
+                background: var(--green-soft);
+                border: 1px solid rgba(102, 172, 47, 0.4);
+                color: var(--green-dark);
             }
 
             .modal-box h3 {
                 font-size: 1.5rem;
                 margin-bottom: 10px;
+                color: var(--navy);
             }
 
             .modal-box p {
@@ -1942,8 +1989,8 @@
                 margin: 20px auto;
                 padding: 14px;
                 border-radius: var(--radius-sm);
-                border: 1px dashed rgba(140, 198, 63, 0.45);
-                background: rgba(140, 198, 63, 0.06);
+                border: 1px dashed rgba(102, 172, 47, 0.5);
+                background: var(--green-soft);
             }
 
             .ref span {
@@ -1959,7 +2006,7 @@
             .ref b {
                 font-family: var(--font-mono);
                 font-size: 1.28rem;
-                color: var(--green-2);
+                color: var(--green-dark);
                 direction: ltr;
                 display: block;
             }
@@ -1974,9 +2021,9 @@
 
             /* ---------- الفوتر ---------- */
             footer {
-                border-top: 1px solid var(--line-2);
-                padding: 58px 0 30px;
-                background: linear-gradient(to bottom, transparent, rgba(35, 43, 105, 0.24));
+                background: linear-gradient(170deg, #2a3876, #1e2a5c);
+                color: #fff;
+                padding: 56px 0 26px;
                 position: relative;
                 z-index: 2;
             }
@@ -1985,18 +2032,19 @@
                 display: grid;
                 grid-template-columns: 1.4fr 1fr 1fr;
                 gap: 34px;
-                margin-bottom: 36px;
+                margin-bottom: 30px;
             }
 
             footer h4 {
                 font-size: 0.98rem;
                 margin-bottom: 14px;
+                color: #fff;
             }
 
             footer p,
             footer a,
             footer li {
-                color: var(--muted);
+                color: rgba(255, 255, 255, 0.72);
                 font-size: 0.91rem;
             }
 
@@ -2009,7 +2057,12 @@
             }
 
             footer a:hover {
-                color: var(--green-2);
+                color: #fff;
+            }
+
+            footer .brand-card {
+                border-color: rgba(255, 255, 255, 0.25);
+                box-shadow: none;
             }
 
             .socials {
@@ -2024,30 +2077,29 @@
                 border-radius: 12px;
                 display: grid;
                 place-items: center;
-                border: 1px solid var(--line-2);
-                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.22);
+                background: rgba(255, 255, 255, 0.08);
                 transition:
                     border-color 0.25s,
                     transform 0.25s,
-                    color 0.25s;
+                    background 0.25s;
             }
 
             .socials a:hover {
-                border-color: var(--green);
+                border-color: var(--orange);
+                background: rgba(241, 121, 30, 0.18);
                 transform: translateY(-3px);
-                color: var(--green-2);
             }
 
-            /* شريط المنظّمين بالفوتر */
             .foot-orgs {
                 display: grid;
                 grid-template-columns: repeat(2, minmax(0, 190px));
                 gap: 18px;
                 align-items: center;
                 padding: 22px 0;
-                border-top: 1px dashed var(--line-2);
-                border-bottom: 1px dashed var(--line-2);
-                margin-bottom: 26px;
+                border-top: 1px dashed rgba(255, 255, 255, 0.2);
+                border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+                margin-bottom: 24px;
             }
 
             .foot-orgs .logo-slot {
@@ -2062,7 +2114,7 @@
                 justify-content: space-between;
                 align-items: center;
                 font-size: 0.84rem;
-                color: #6b7899;
+                color: rgba(255, 255, 255, 0.6);
             }
 
             .to-top {
@@ -2074,9 +2126,9 @@
                 border-radius: 14px;
                 display: grid;
                 place-items: center;
-                background: rgba(4, 6, 13, 0.9);
+                background: #fff;
                 border: 1px solid var(--line);
-                color: var(--green-2);
+                color: var(--navy);
                 cursor: pointer;
                 z-index: 70;
                 opacity: 0;
@@ -2084,7 +2136,7 @@
                 transition:
                     opacity 0.3s,
                     transform 0.3s;
-                backdrop-filter: blur(8px);
+                box-shadow: var(--shadow-sm);
             }
 
             .to-top.on {
@@ -2126,7 +2178,7 @@
 
             @media (max-width: 720px) {
                 .sec {
-                    padding: 70px 0;
+                    padding: 68px 0;
                 }
 
                 .hero {
@@ -2193,6 +2245,7 @@
                     opacity: 1;
                     transform: none;
                 }
+
                 #matrix,
                 #cursorGlow {
                     display: none !important;
@@ -2236,14 +2289,14 @@
                         <span class="brand-card">
                             <img
                                 src="{{ asset('images/hackathon-logo.png') }}"
-                                alt="شعار هاكاثون الأمن السيبراني والذكاء الاصطناعي 2026"
+                                alt="شعار هاكاثون السايبر والذكاء الاصطناعي 2026"
                                 onerror="this.remove()"
                             />
                             <span class="slot-hint">الشعار<small>LOGO</small></span>
                         </span>
                         <span class="brand-txt">
-                            <b>هاكاثون الأمن السيبراني والذكاء الاصطناعي</b>
-                            <span>Cyber &amp; AI Hackathon 2026</span>
+                            <b>هاكاثون السايبر والذكاء الاصطناعي</b>
+                            <span>AI &amp; Cyber Hackathon 2026</span>
                         </span>
                     </a>
 
@@ -2274,7 +2327,7 @@
                 <a href="#prizes">الجوائز</a>
                 <a href="#rules">شروط المشاركة</a>
                 <a href="#faq">الأسئلة الشائعة</a>
-                <a href="#register" style="color: var(--orange-2)">← سجّل الآن</a>
+                <a href="#register" style="color: var(--orange)">← سجّل الآن</a>
             </div>
         </header>
 
@@ -2289,26 +2342,28 @@
                                     <i class="dot"></i> التسجيل مفتوح
                                 </span>
                                 <span class="badge">النادي الهندسي × حاضنة يوكاس التكنولوجية</span>
-                                <span class="badge">الكلية الجامعية للعلوم التطبيقية — غزة</span>
+                                <span class="badge">المقر الرئيسي — غزة</span>
                             </div>
 
                             <h1 data-reveal>
-                                <span class="line-1">Cyber &amp; AI</span>
+                                <span class="line-1">AI &amp; Cyber</span>
                                 <span class="line-2 glitch" data-text="Hackathon">Hackathon</span>
                                 <span class="line-1 yr">2026</span>
                             </h1>
 
                             <h2 data-reveal>
                                 هاكاثون
-                                <span class="grad">الأمن السيبراني والذكاء الاصطناعي</span>
+                                <span class="grad">السايبر والذكاء الاصطناعي</span>
                             </h2>
 
                             <p class="hero-desc" data-reveal>
-                                <b>48 ساعة</b> من العمل المتواصل داخل بيئة تنافسية: تبني
-                                حلولاً حقيقية في مواجهة تهديدات سيبرانية، وتوظّف الذكاء
-                                الاصطناعي في الدفاع والتحليل والاستجابة. مسارات متعددة،
-                                مرشدون تقنيون، وتحكيم من مختصين. —
-                                <b>سجّل فردياً أو مع فريقك</b> قبل انتهاء موعد التقديم.
+                                هاكاثون تقني وريادي يجمع طلبة الأمن السيبراني والذكاء
+                                الاصطناعي للعمل ضمن فرق متكاملة على تطوير حلول تقنية
+                                لمشكلات واقعية في قطاع غزة، مع التركيز على الحل البرمجي
+                                والمنطقي التقني والفكرة الريادية والعرض السريع أمام لجنة
+                                التحكيم. فرق من <b>4 أعضاء: 2 أمن سيبراني + 2 ذكاء
+                                اصطناعي</b>، ومدة الفعالية الميدانية <b>6 ساعات</b>. —
+                                <b>سجّل الآن وكن جزءًا من التحدي.</b>
                             </p>
 
                             <div class="term-line" id="termLine">
@@ -2326,19 +2381,19 @@
                             <div class="hero-meta" data-reveal>
                                 <div>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
-                                    <span id="metaDates">19 – 21 نوفمبر 2026</span>
+                                    <span id="metaDates">يُعلن لاحقًا</span>
                                 </div>
                                 <div>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-                                    الكلية الجامعية للعلوم التطبيقية — غزة
+                                    المقر الرئيسي — غزة
                                 </div>
                                 <div>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-                                    48 ساعة تنافسية
+                                    6 ساعات تنافسية
                                 </div>
                                 <div>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /></svg>
-                                    فردي أو فريق (2 – 6)
+                                    فرق 2 سيبراني + 2 ذكاء اصطناعي
                                 </div>
                             </div>
                         </div>
@@ -2387,8 +2442,8 @@
             {{-- ================= الشريط المتحرك ================= --}}
             <div class="ticker" aria-hidden="true">
                 <div class="ticker-track">
-                    <span>Penetration Testing</span><span>AI &amp; Machine Learning</span><span>Threat Detection</span><span>Capture The Flag</span><span>Incident Response</span><span>Generative AI</span><span>Secure Coding</span><span>Red Team</span><span>Blue Team</span><span>Cyber &amp; AI Hackathon 2026</span>
-                    <span>Penetration Testing</span><span>AI &amp; Machine Learning</span><span>Threat Detection</span><span>Capture The Flag</span><span>Incident Response</span><span>Generative AI</span><span>Secure Coding</span><span>Red Team</span><span>Blue Team</span><span>Cyber &amp; AI Hackathon 2026</span>
+                    <span>Penetration Testing</span><span>AI &amp; Machine Learning</span><span>Threat Detection</span><span>Capture The Flag</span><span>Incident Response</span><span>Generative AI</span><span>Secure Coding</span><span>Red Team</span><span>Blue Team</span><span>AI &amp; Cyber Hackathon 2026</span>
+                    <span>Penetration Testing</span><span>AI &amp; Machine Learning</span><span>Threat Detection</span><span>Capture The Flag</span><span>Incident Response</span><span>Generative AI</span><span>Secure Coding</span><span>Red Team</span><span>Blue Team</span><span>AI &amp; Cyber Hackathon 2026</span>
                 </div>
             </div>
 
@@ -2437,7 +2492,7 @@
 
                         <p class="partners-note">
                             ينظّم هذا الحدث
-                            <b>النادي الهندسي — الكلية الجامعية للعلوم التطبيقية، غزة</b>
+                            <b>النادي الهندسي — لجنة الأنشطة — هندسة الحاسوب</b>
                             بالشراكة مع
                             <b>حاضنة يوكاس التكنولوجية</b>
                         </p>
@@ -2449,12 +2504,13 @@
             <section class="sec" id="about">
                 <div class="wrap">
                     <div class="sec-head" data-reveal>
-                        <span class="eyebrow">01 — About the event</span>
-                        <h2>ليس تمريناً على الورق… <span class="grad">بل مواجهة حقيقية</span></h2>
+                        <span class="eyebrow">01 — ما هو الهاكاثون؟</span>
+                        <h2>مساحة تنافسية… <span class="grad">لحلول تقنية مبتكرة</span></h2>
                         <p>
-                            في هذا الهاكاثون ستواجه سيناريوهات أقرب ما تكون للواقع: أنظمة
-                            تحت الضغط، بيانات ملوّثة، وتهديدات تتغيّر أسرع من كودك. مهمتك أن
-                            تبني حلاً يعمل فعلاً — تحت ضغط الوقت، ومع فريقك.
+                            هاكاثون تقني وريادي يجمع طلبة الأمن السيبراني والذكاء الاصطناعي
+                            للعمل ضمن فرق متكاملة على تطوير حلول تقنية لمشكلات واقعية في قطاع
+                            غزة، مع التركيز على الحل البرمجي والمنطقي التقني والفكرة الريادية
+                            والعرض السريع أمام لجنة التحكيم — Cybersecurity + AI + Innovation.
                         </p>
                     </div>
 
@@ -2465,11 +2521,10 @@
                                 <div class="icon-box">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-4Z" /></svg>
                                 </div>
-                                <h3>بيئة تنافسية بمعايير حقيقية</h3>
+                                <h3>تحديات واقعية من قطاع غزة</h3>
                                 <p>
-                                    سيناريوهات مبنية على تحديات واقعية في الأمن السيبراني
-                                    والذكاء الاصطناعي، بمهام محدّدة ومعايير تحكيم معلنة
-                                    مسبقاً.
+                                    مشكلات حقيقية تُطرح على الفرق، مع التركيز على الحل البرمجي
+                                    والمنطقي التقني القابل للتطبيق خلال وقت محدد.
                                 </p>
                             </div>
 
@@ -2478,10 +2533,11 @@
                                 <div class="icon-box">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M3 12h4M17 12h4" /><circle cx="12" cy="12" r="4" /></svg>
                                 </div>
-                                <h3>إرشاد تقني أثناء الحدث</h3>
+                                <h3>فرق متعددة التخصصات</h3>
                                 <p>
-                                    مرشدون من المختصين والأكاديميين يمرّون على الفرق،
-                                    يساعدونك في تحديد الاتجاه وتجاوز العقبات التقنية.
+                                    كل فريق يجمع تخصص الأمن السيبراني وتخصص الذكاء الاصطناعي،
+                                    ومستويات دراسية مختلفة — لأن الحل الأقوى يُبنى من أكثر من
+                                    زاوية.
                                 </p>
                             </div>
 
@@ -2490,11 +2546,11 @@
                                 <div class="icon-box">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                                 </div>
-                                <h3>مسار ما بعد الهاكاثون</h3>
+                                <h3>عرض سريع أمام لجنة تحكيم</h3>
                                 <p>
-                                    أفضل المشاريع تُمنح فرصة احتضان وتطوير داخل
-                                    <b style="color: var(--green-2)">حاضنة يوكاس التكنولوجية</b>،
-                                    مع جلسات إرشاد ريادي.
+                                    فكرة ريادية وعرض تقديمي سريع أمام لجنة التحكيم، وأفضل
+                                    المشاريع تُمنح فرصة احتضان وتطوير داخل
+                                    <b style="color: var(--green-dark)">حاضنة يوكاس التكنولوجية</b>.
                                 </p>
                             </div>
                         </div>
@@ -2506,13 +2562,14 @@
                                     <b>hackathon@eng-club:~/mission</b>
                                 </div>
                                 <div class="terminal-body" id="termBody">
-                                    <span class="l ok"><span class="t">[00:00]</span> <span class="m">بدء الهاكاثون — استلام المهام والتحديات ✔</span></span>
-                                    <span class="l info"><span class="t">[04:30]</span> <span class="m">تحليل المشكلة ورسم المعمارية</span></span>
-                                    <span class="l warn"><span class="t">[12:00]</span> <span class="m">نقطة تحقّق مع المرشد التقني</span></span>
-                                    <span class="l bad"><span class="t">[26:40]</span> <span class="m">اكتشاف ثغرة/خلل — إعادة التقييم</span></span>
-                                    <span class="l info"><span class="t">[38:15]</span> <span class="m">تحسين النموذج وبناء النموذج الأولي</span></span>
-                                    <span class="l ok"><span class="t">[47:00]</span> <span class="m">تسليم المشروع وعرض تقديمي أمام لجنة التحكيم</span></span>
-                                    <span class="l ok"><span class="t">[48:00]</span> <span class="m">إعلان النتائج وتوزيع الجوائز 🏆</span></span>
+                                    <span class="l ok"><span class="t">[00:00]</span> <span class="m">التسجيل والترحيب — تسليم التحديات للفرق ✔</span></span>
+                                    <span class="l info"><span class="t">[00:30]</span> <span class="m">تحليل المشكلة وتحديد الحل البرمجي المقترح</span></span>
+                                    <span class="l warn"><span class="t">[02:00]</span> <span class="m">نقطة تحقّق مع المرشد التقني</span></span>
+                                    <span class="l bad"><span class="t">[03:30]</span> <span class="m">اختبار الحل ومعالجة الأخطاء</span></span>
+                                    <span class="l info"><span class="t">[05:00]</span> <span class="m">تجهيز النموذج الأولي والعرض التقديمي</span></span>
+                                    <span class="l ok"><span class="t">[05:30]</span> <span class="m">العرض السريع أمام لجنة التحكيم</span></span>
+                                    <span class="l ok"><span class="t">[06:00]</span> <span class="m">إعلان النتائج وتوزيع الجوائز 🏆</span></span>
+
                                 </div>
                             </div>
                         </div>
@@ -2524,11 +2581,12 @@
             <section class="sec" id="tracks">
                 <div class="wrap">
                     <div class="sec-head" data-reveal>
-                        <span class="eyebrow">02 — Tracks</span>
-                        <h2>اختر مسارك… <span class="grad">ثم أثبت نفسك</span></h2>
+                        <span class="eyebrow">02 — مجالات التحدي</span>
+                        <h2>Cybersecurity + AI <span class="grad">+ Innovation</span></h2>
                         <p>
-                            يمكنك المنافسة في أحد المسارات التالية. كل مسار له تحدياته
-                            ومعايير تحكيمه الخاصة.
+                            التحديات تجمع بين الأمن السيبراني والذكاء الاصطناعي، وكل فريق
+                            (2 أمن سيبراني + 2 ذكاء اصطناعي) يعمل على حل تقني متكامل خلال
+                            6 ساعات.
                         </p>
                     </div>
 
@@ -2585,7 +2643,8 @@
                     <div class="chips" data-reveal>
                         <span class="chip">المشاركة مجانية بالكامل</span>
                         <span class="chip">شهادات مشاركة للجميع</span>
-                        <span class="chip">وجبات ومكان عمل مجهّز خلال الهاكاثون</span>
+                        <span class="chip">مدة الفعالية الميدانية: 6 ساعات</span>
+                        <span class="chip">تكوين الفريق: 2 سيبراني + 2 ذكاء اصطناعي</span>
                         <span class="chip">تسجيل الفريق كاملاً بورقة واحدة</span>
                     </div>
                 </div>
@@ -2595,15 +2654,15 @@
             <section class="sec" id="timeline">
                 <div class="wrap">
                     <div class="sec-head" data-reveal>
-                        <span class="eyebrow">03 — Timeline</span>
-                        <h2>الخط الزمني <span class="grad">للوصول للقمة</span></h2>
-                        <p>كل مرحلة لها موعد صارم — تأخيرك يعني خسارة الفرصة.</p>
+                        <span class="eyebrow">03 — الخط الزمني</span>
+                        <h2>من التسجيل <span class="grad">إلى يوم التحدي</span></h2>
+                        <p>كل مرحلة لها موعد — تأخيرك يعني خسارة الفرصة.</p>
                     </div>
 
                     <div class="grid-2" style="gap: 40px">
                         <div class="tl" data-reveal>
                             <div class="tl-item now" id="tl-open">
-                                <span class="tl-date" id="tl1">—</span>
+                                <span class="tl-date" id="tl1">يُعلن لاحقًا</span>
                                 <span class="tl-tag now">مفتوح الآن</span>
                                 <h4>فتح باب التسجيل</h4>
                                 <p>
@@ -2622,7 +2681,7 @@
                             </div>
 
                             <div class="tl-item">
-                                <span class="tl-date" id="tl3">—</span>
+                                <span class="tl-date" id="tl3">يُعلن لاحقًا</span>
                                 <h4>الفرز وإعلان الفرق المتأهلة</h4>
                                 <p>
                                     مراجعة الطلبات وإبلاغ المقبولين عبر البريد الإلكتروني
@@ -2631,25 +2690,25 @@
                             </div>
 
                             <div class="tl-item">
-                                <span class="tl-date" id="tl4">—</span>
-                                <h4>جلسة تعريفية للمشاركين</h4>
+                                <span class="tl-date" id="tl4">يُعلن لاحقًا</span>
+                                <h4>جلسة تعريفية + تنبيه بالاستعداد</h4>
                                 <p>
-                                    شرح المسارات، المهام، معايير التحكيم، والتجهيزات
-                                    المطلوبة.
+                                    شرح المهام ومعايير التحكيم والتجهيزات المطلوبة، وتنبيه
+                                    المشاركين بالحضور في الموعد المحدد.
                                 </p>
                             </div>
 
                             <div class="tl-item">
-                                <span class="tl-date" id="tl5">—</span>
-                                <h4>انطلاق الهاكاثون — 48 ساعة</h4>
+                                <span class="tl-date" id="tl5">يُعلن لاحقًا</span>
+                                <h4>يوم الفعالية — 6 ساعات</h4>
                                 <p>
-                                    العمل المتواصل على المشاريع مع المرشدين ونقاط التحقق
-                                    الدورية.
+                                    التسجيل والترحيب، ثم العمل على التحديات مع المرشدين
+                                    والعرض أمام لجنة التحكيم.
                                 </p>
                             </div>
 
                             <div class="tl-item">
-                                <span class="tl-date" id="tl6">—</span>
+                                <span class="tl-date" id="tl6">يُعلن لاحقًا</span>
                                 <h4>العروض التقديمية والتحكيم</h4>
                                 <p>
                                     عرض كل فريق لمشروعه أمام لجنة التحكيم ومناقشة الحلول
@@ -2658,7 +2717,7 @@
                             </div>
 
                             <div class="tl-item">
-                                <span class="tl-date" id="tl7">—</span>
+                                <span class="tl-date" id="tl7">يُعلن لاحقًا</span>
                                 <h4>الحفل الختامي وإعلان الفائزين</h4>
                                 <p>توزيع الجوائز وشهادات المشاركة على الجميع.</p>
                             </div>
@@ -2765,15 +2824,15 @@
                             <ul class="ul-check">
                                 <li>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    طلاب الجامعات والكليات في قطاع غزة (بكالوريوس / دبلوم).
+                                    طلبة الأمن السيبراني والذكاء الاصطناعي من مختلف المستويات الأكاديمية.
                                 </li>
                                 <li>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    خريجون حديثون (خلال سنة من التخرج).
+                                    المشاركة ضمن فرق تجمع تخصصي الأمن السيبراني والذكاء الاصطناعي.
                                 </li>
                                 <li>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    المشاركة فردية أو ضمن فريق من 2 إلى 6 أعضاء.
+                                    تكوين الفريق: 2 طلبة أمن سيبراني + 2 طلبة ذكاء اصطناعي.
                                 </li>
                                 <li>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
@@ -2781,7 +2840,7 @@
                                 </li>
                                 <li>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    الالتزام الكامل بحضور أيام الهاكاثون.
+                                    الالتزام الكامل بالحضور في الموعد المحدد ليوم الفعالية.
                                 </li>
                             </ul>
                         </div>
@@ -2796,7 +2855,7 @@
                                 </li>
                                 <li>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    المشروع يجب أن يُبنى خلال أيام الهاكاثون (يُسمح بالمكتبات
+                                    المشروع يجب أن يُبنى خلال مدة الفعالية (يُسمح بالمكتبات
                                     والأدوات مفتوحة المصدر).
                                 </li>
                                 <li>
@@ -2854,11 +2913,11 @@
                         </details>
 
                         <details class="qa">
-                            <summary>ما الحد الأدنى والأعلى لعدد أعضاء الفريق؟</summary>
+                            <summary>كيف يتكوّن الفريق؟</summary>
                             <div class="ans">
-                                الحد الأدنى عضوان (بما فيهم القائد)، والحد الأعلى ستة
-                                أعضاء. يمكنك أيضاً التسجيل فردياً وسنساعدك في الانضمام إلى
-                                فريق.
+                                الفريق من 4 أعضاء: طالبان من الأمن السيبراني + طالبان من
+                                الذكاء الاصطناعي، مع جمع المستويات الدراسية المختلفة
+                                (Team Leader / Tech / Presenter).
                             </div>
                         </details>
 
@@ -2874,16 +2933,17 @@
                         <details class="qa">
                             <summary>هل الهاكاثون حضوري أم عن بُعد؟</summary>
                             <div class="ans">
-                                الحدث حضوري في مقر الكلية الجامعية للعلوم التطبيقية — غزة،
-                                والالتزام بالحضور شرط أساسي للمشاركة في المسابقة.
+                                الحدث حضوري في المقر الرئيسي — غزة، والالتزام بالحضور في
+                                الموعد المحدد شرط أساسي للمشاركة في المسابقة.
                             </div>
                         </details>
 
                         <details class="qa">
-                            <summary>ما الذي يجب أن أحضّره معي؟</summary>
+                            <summary>كم مدة الفعالية وما الذي يجب أن أحضّره معي؟</summary>
                             <div class="ans">
-                                حاسوبك المحمول ومشغّل الطاقة، وأي أدوات برمجية تفضّلها.
-                                سنوفّر المكان المجهّز والإنترنت والوجبات خلال أيام الحدث.
+                                مدة الفعالية الميدانية 6 ساعات. أحضّر حاسوبك المحمول
+                                ومشغّل الطاقة وأي أدوات برمجية تفضّلها، وسنوفّر المكان
+                                    المجهّز والإنترنت.
                             </div>
                         </details>
 
@@ -2919,7 +2979,7 @@
                                     موعد الإغلاق
                                 </h4>
                                 <p id="asideDeadline">—</p>
-                                <p style="margin-top: 8px; color: var(--orange-2); font-weight: 700" id="asideLeft">—</p>
+                                <p style="margin-top: 8px; color: var(--orange); font-weight: 700" id="asideLeft">—</p>
                             </div>
 
                             <div class="aside-box">
@@ -2932,7 +2992,7 @@
                                     <li>تخصصك وسنتك الدراسية.</li>
                                     <li>المهارات التي تجيدها.</li>
                                     <li>فكرة مبدئية (اختياري لكن يفضّل).</li>
-                                    <li>بيانات أعضاء فريقك إن كنت مسجّلاً كفريق.</li>
+                                    <li>بيانات أعضاء فريقك (التكوين الرسمي 2 + 2).</li>
                                 </ul>
                             </div>
 
@@ -2943,7 +3003,7 @@
                                 </h4>
                                 <p>
                                     راسلنا قبل التسجيل:<br />
-                                    <a href="mailto:{{ config('hackathon.email') }}" style="color: var(--green-2)" id="asideMail">{{ config('hackathon.email') }}</a>
+                                    <a href="mailto:{{ config('hackathon.email') }}" style="color: var(--green-dark)" id="asideMail">{{ config('hackathon.email') }}</a>
                                 </p>
                             </div>
                         </aside>
@@ -3045,6 +3105,15 @@
                                 <fieldset id="teamBlock" hidden>
                                     <div class="fs-title"><span>بيانات الفريق</span></div>
 
+                                    <div class="note-box" style="margin-bottom: 18px">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 16v-5M12 8h.01" /></svg>
+                                        <span>
+                                            <b>التكوين الرسمي للفريق: 4 أعضاء</b> — طالبان
+                                            من الأمن السيبراني + طالبان من الذكاء الاصطناعي،
+                                            مع مراعاة جمع المستويات الدراسية المختلفة.
+                                        </span>
+                                    </div>
+
                                     <div class="form-grid">
                                         <div class="field">
                                             <label for="teamName">اسم الفريق <span class="req">*</span></label>
@@ -3056,11 +3125,11 @@
                                             <label for="teamSize">عدد أعضاء الفريق (بما فيك) <span class="req">*</span></label>
                                             <select id="teamSize" name="teamSize">
                                                 <option value="">اختر…</option>
-                                                <option value="2">2</option>
+                                                <option value="4">4 — التكوين الرسمي (2 أمن سيبراني + 2 ذكاء اصطناعي)</option>
                                                 <option value="3">3</option>
-                                                <option value="4">4</option>
                                                 <option value="5">5</option>
                                                 <option value="6">6</option>
+                                                <option value="2">2</option>
                                             </select>
                                             <span class="err" data-err-for="teamSize"></span>
                                         </div>
@@ -3148,15 +3217,15 @@
                             <span class="brand-card lg">
                                 <img
                                     src="{{ asset('images/hackathon-logo.png') }}"
-                                    alt="شعار هاكاثون الأمن السيبراني والذكاء الاصطناعي 2026"
+                                    alt="شعار هاكاثون السايبر والذكاء الاصطناعي 2026"
                                     onerror="this.remove()"
                                 />
                                 <span class="slot-hint">الشعار<small>LOGO</small></span>
                             </span>
                         </a>
                         <p>
-                            النادي الهندسي — الكلية الجامعية للعلوم التطبيقية، غزة. نصنع
-                            فرصاً عملية للطلاب في التقنية والهندسة.
+                            النادي الهندسي — لجنة الأنشطة — هندسة الحاسوب، الكلية الجامعية
+                            للعلوم التطبيقية، غزة. مساحة للإبداع والتميّز.
                         </p>
                         <div class="socials">
                             <a href="#" aria-label="فيسبوك">
@@ -3191,7 +3260,7 @@
                         <ul>
                             <li><a href="mailto:{{ config('hackathon.email') }}" dir="ltr">{{ config('hackathon.email') }}</a></li>
                             <li><a href="tel:{{ preg_replace('/\s+/', '', config('hackathon.phone')) }}" dir="ltr">{{ config('hackathon.phone') }}</a></li>
-                            <li>الكلية الجامعية للعلوم التطبيقية — غزة</li>
+                            <li>المقر الرئيسي — غزة</li>
                             <li>بالشراكة مع حاضنة يوكاس التكنولوجية</li>
                         </ul>
                     </div>
@@ -3212,10 +3281,10 @@
 
                 <div class="foot-bottom">
                     <span>
-                        © <span id="yr">2026</span> النادي الهندسي — الكلية الجامعية للعلوم
-                        التطبيقية، غزة. جميع الحقوق محفوظة.
+                        © <span id="yr">2026</span> النادي الهندسي — لجنة الأنشطة — هندسة
+                        الحاسوب. جميع الحقوق محفوظة.
                     </span>
-                    <span class="mono" style="direction: ltr">CYBER &amp; AI HACKATHON 2026</span>
+                    <span class="mono" style="direction: ltr">AI &amp; CYBER HACKATHON 2026</span>
                 </div>
             </div>
         </footer>
@@ -3275,8 +3344,18 @@
                         <span class="err"></span>
                     </div>
                     <div class="field">
-                        <label>التخصص / المهارة الأساسية</label>
-                        <input type="text" data-m="major" placeholder="مثال: أمن سيبراني" />
+                        <label>التخصص في الفريق</label>
+                        <select data-m="role">
+                            <option value="">اختر…</option>
+                            <option>أمن سيبراني</option>
+                            <option>ذكاء اصطناعي</option>
+                            <option>أخرى</option>
+                        </select>
+                        <span class="err"></span>
+                    </div>
+                    <div class="field">
+                        <label>المهارة الأساسية / الدور</label>
+                        <input type="text" data-m="major" placeholder="مثال: Team Leader / Presenter" />
                         <span class="err"></span>
                     </div>
                 </div>
@@ -3421,7 +3500,7 @@
                 function draw() {
                     raf = requestAnimationFrame(draw);
 
-                    ctx.fillStyle = 'rgba(4,6,13,0.055)';
+                    ctx.fillStyle = 'rgba(255,255,255,0.09)';
                     ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
                     ctx.font = fs + "px 'Share Tech Mono', monospace";
                     ctx.textBaseline = 'top';
@@ -3439,12 +3518,12 @@
                         // رأس القطرة
                         ctx.fillStyle =
                             Math.random() > 0.99
-                                ? 'rgba(245,130,43,0.6)'
-                                : 'rgba(184,239,106,0.5)';
+                                ? 'rgba(241,121,30,0.42)'
+                                : 'rgba(42,56,118,0.26)';
                         ctx.fillText(GLYPHS[(Math.random() * GLYPHS.length) | 0], x, y);
 
                         // الحرف اللي فوقه بلون أهدأ
-                        ctx.fillStyle = 'rgba(140,198,63,0.2)';
+                        ctx.fillStyle = 'rgba(102,172,47,0.18)';
                         ctx.fillText(GLYPHS[(Math.random() * GLYPHS.length) | 0], x, y - fs);
 
                         if (y > window.innerHeight && Math.random() > 0.985) {
@@ -3678,7 +3757,8 @@
                     teamBlock.hidden = ind;
                     leadTitle.textContent = ind ? 'بيانات المشارك' : 'بيانات قائد الفريق';
                     if (!ind && members.children.length === 0) {
-                        const need = Math.max(1, (parseInt(teamSize.value, 10) || 2) - 1);
+                        const need = Math.max(1, (parseInt(teamSize.value, 10) || 4) - 1);
+
                         for (let i = 0; i < need; i++) addMember(true);
                     }
                     saveDraft();
@@ -3750,7 +3830,7 @@
                     });
                     $$('.member', members).forEach((m) => {
                         const o = {};
-                        $$('input[data-m]', m).forEach((i) => (o[i.dataset.m] = i.value));
+                        $$('input[data-m], select[data-m]', m).forEach((i) => (o[i.dataset.m] = i.value));
                         data.members.push(o);
                     });
                     return data;
@@ -3794,7 +3874,7 @@
                             const node = members.lastElementChild;
                             if (!node) return;
                             Object.entries(m).forEach(([k, v]) => {
-                                const i = node.querySelector('input[data-m="' + k + '"]');
+                                const i = node.querySelector('[data-m="' + k + '"]');
                                 if (i) i.value = v;
                             });
                         });
@@ -3941,7 +4021,8 @@
                                 name: m.querySelector('input[data-m="name"]').value.trim(),
                                 email: m.querySelector('input[data-m="email"]').value.trim(),
                                 phone: m.querySelector('input[data-m="phone"]').value.trim(),
-                                major: m.querySelector('input[data-m="major"]').value.trim(),
+                                role: (m.querySelector('[data-m="role"]') || {}).value?.trim() || '',
+                                major: (m.querySelector('input[data-m="major"]') || {}).value?.trim() || '',
                             })),
                         };
                     }
@@ -3975,7 +4056,7 @@
                 /* ---------- واتساب + تحميل نسخة ---------- */
                 function waText(p) {
                     const L = [];
-                    L.push('*طلب تسجيل — هاكاثون الأمن السيبراني والذكاء الاصطناعي 2026*');
+                    L.push('*طلب تسجيل — هاكاثون السايبر والذكاء الاصطناعي 2026*');
                     L.push('رقم الطلب: ' + p.reference);
                     L.push('نوع المشاركة: ' + p.participationType);
                     L.push('');
@@ -3999,6 +4080,7 @@
                             L.push(
                                 'عضو ' + (i + 2) + ': ' + m.name + ' | ' + m.email +
                                     (m.phone ? ' | ' + m.phone : '') +
+                                    (m.role ? ' | ' + m.role : '') +
                                     (m.major ? ' | ' + m.major : '')
                             );
                         });
