@@ -102,6 +102,7 @@
                 /* ===== الوضع الفاتح (الافتراضي) ===== */
                 --surface: #ffffff;
                 --bg: #ffffff;
+                --header-bg: color-mix(in srgb, var(--bg) 88%, transparent);
                 --bg-soft: #f6f8fc;
                 --ink: #1b2244;
                 --ink-2: #37406b;
@@ -124,6 +125,7 @@
             [data-theme='dark'] {
                 --surface: #131a33;
                 --bg: #0a0f1f;
+                --header-bg: color-mix(in srgb, var(--bg) 86%, transparent);
                 --bg-soft: #172042;
                 --ink: #eef2ff;
                 --ink-2: #c6d0ee;
@@ -141,10 +143,10 @@
                 --danger-soft: color-mix(in srgb, var(--danger) 18%, var(--surface));
                 --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5), 0 4px 14px -8px rgba(0, 0, 0, 0.6);
                 --shadow: 0 20px 45px -28px rgba(0, 0, 0, 0.95);
-                --matrix-fade: rgba(10, 15, 31, 0.09);
-                --matrix-head: rgba(255, 255, 255, 0.22);
+                --matrix-fade: rgba(10, 15, 31, 0.13);
+                --matrix-head: rgba(255, 255, 255, 0.12);
                 --matrix-accent: color-mix(in srgb, var(--primary) 55%, transparent);
-                --matrix-body: color-mix(in srgb, var(--secondary) 26%, transparent);
+                --matrix-body: color-mix(in srgb, var(--secondary) 14%, transparent);
             }
             * {
                 box-sizing: border-box;
@@ -323,6 +325,10 @@
                 width: 0%;
                 z-index: 90;
                 background: var(--two-tone);
+            }
+
+            [data-theme='dark'] #matrix {
+                opacity: 0.62;
             }
 
             /* ---------- أدوات عامة ---------- */
@@ -532,10 +538,10 @@
             }
 
             header.stuck {
-                background: rgba(255, 255, 255, 0.9);
+                background: var(--header-bg);
                 backdrop-filter: blur(16px) saturate(1.4);
                 border-bottom-color: var(--line);
-                box-shadow: 0 10px 30px -24px rgba(27, 34, 68, 0.5);
+                box-shadow: var(--shadow-sm);
             }
 
             .nav {
