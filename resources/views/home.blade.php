@@ -30,7 +30,10 @@
             $clubLogoSrc = $clubLogo['url'];
             $incubatorLogoSrc = $incubatorLogo['url'];
             $iconSrc = $icon['url'];
-            $shareSrc = $share['url'];    @endphp
+            // نقدّم صورة المشاركة من Laravel مباشرة بدل الاعتماد على public/storage.
+            // هذا يجعلها متاحة لزواحف واتساب حتى في الاستضافات التي تمنع symlinks.
+            $shareSrc = route('social-share-image', ['v' => $share['version']]);
+        @endphp
 <html lang="ar" dir="rtl" data-theme="{{ $themeMode }}">
     <head>
         <meta charset="utf-8" />

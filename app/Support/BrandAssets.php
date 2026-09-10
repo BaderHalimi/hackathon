@@ -41,7 +41,7 @@ class BrandAssets
      * ونضيف رقم إصدار على أساس وقت تعديل الملف حتى تتحدّث المعاينة على
      * واتساب لما تتغيّر الصورة.
      *
-     * @return array{url: string, width: int, height: int, mime: string}
+     * @return array{url: string, path: string, width: int, height: int, mime: string, version: int}
      */
     public static function info(string $uploaded, string $defaultRelative): array
     {
@@ -58,14 +58,17 @@ class BrandAssets
             $url = asset($defaultRelative);
         }
 
-        $size = @getimagesize($absolute) ?: [0, 0, null];
-        $version = is_file($absolute) ? filemtime($absolute) : 0;
+        $size = @getimagesize($absolute);
+        $modifiedAt = is_file($absolute) ? filemtime($absolute) : false;
+        $version = $modifiedAt === false ? 0 : $modifiedAt;
 
         return [
             'url' => $url.($version ? '?v='.$version : ''),
-            'width' => (int) ($size[0] ?? 0),
-            'height' => (int) ($size[1] ?? 0),
-            'mime' => (string) ($size['mime'] ?? 'image/png'),
+            'path' => $absolute,
+            'width' => $size === false ? 0 : $size[0],
+            'height' => $size === false ? 0 : $size[1],
+            'mime' => $size === false ? 'image/png' : $size['mime'],
+            'version' => $version,
         ];
     }
 }

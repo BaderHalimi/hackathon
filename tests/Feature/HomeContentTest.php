@@ -7,6 +7,7 @@ use App\Models\HomeSection;
 use App\Models\User;
 use App\Support\HomeContent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -56,5 +57,24 @@ class HomeContentTest extends TestCase
             ->assertHasNoErrors();
 
         $this->assertSame('عنوان محفوظ من Filament', HomeContent::get('hero.subtitle'));
+    }
+
+    public function test_whatsapp_can_fetch_the_uploaded_social_share_image(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('branding/share.png', file_get_contents(public_path('images/share-default.png')));
+
+        $identity = HomeContent::section('identity');
+        $identity['share_image_path'] = 'branding/share.png';
+        HomeContent::save('identity', $identity);
+
+        $this->withHeader('User-Agent', 'WhatsApp/2.26.0')
+            ->get('/social-share-image')
+            ->assertOk()
+            ->assertHeader('content-type', 'image/png');
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee(route('social-share-image', ['v' => filemtime(Storage::disk('public')->path('branding/share.png'))]), false);
     }
 }

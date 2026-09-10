@@ -167,6 +167,7 @@ trait EditsHomeSection
                 ]),
         ];
     }
+
     /** @return array<Component> */
     protected function identityFields(): array
     {
