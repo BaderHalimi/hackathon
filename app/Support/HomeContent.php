@@ -54,6 +54,11 @@ class HomeContent
      * Merge associative settings while allowing repeaters/lists to be replaced
      * completely, so deleting or reordering an item in Filament is respected.
      *
+     * Plain lists (TagsInput) also tolerate a comma separated string, because a
+     * value can be stored as a string from the admin panel and that would
+     * otherwise break the page with "array_merge(): Argument #1 must be of type
+     * array, string given".
+     *
      * @param  array<string, mixed>  $defaults
      * @param  array<string, mixed>  $saved
      * @return array<string, mixed>
@@ -61,13 +66,76 @@ class HomeContent
     protected static function merge(array $defaults, array $saved): array
     {
         foreach ($saved as $key => $value) {
-            if (is_array($value) && is_array($defaults[$key] ?? null) && ! array_is_list($value)) {
-                $defaults[$key] = static::merge($defaults[$key], $value);
-            } else {
-                $defaults[$key] = $value;
+            $default = $defaults[$key] ?? null;
+
+            // قائمة بسيطة (مثل TagsInput): تُقبل كنص مفصول بفواصل أيضًا
+            if (static::isPlainList($default)) {
+                $defaults[$key] = static::toPlainList($value, $default);
+
+                continue;
             }
+
+            // قائمة عناصرها مصفوفات (Repeater): تُستبدل كاملة حتى يُحترم الحذف والترتيب
+            if (is_array($default) && is_array($value) && array_is_list($value)) {
+                $defaults[$key] = $value;
+
+                continue;
+            }
+
+            // إعدادات متداخلة: دمج مفتاح بمفتاح
+            if (is_array($value) && is_array($default)) {
+                $defaults[$key] = static::merge($default, $value);
+
+                continue;
+            }
+
+            // شكل غير متوافق مع الافتراضي: نتجاهله ونُبقي القيمة الافتراضية
+            if ($default !== null && is_array($default) !== is_array($value)) {
+                continue;
+            }
+
+            $defaults[$key] = $value;
         }
 
         return $defaults;
+    }
+
+    /**
+     * هل القيمة الافتراضية قائمة بسيطة (بدون عناصر مصفوفات)؟
+     */
+    protected static function isPlainList(mixed $default): bool
+    {
+        if (! is_array($default) || ! array_is_list($default)) {
+            return false;
+        }
+
+        foreach ($default as $item) {
+            if (is_array($item)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * تحويل قيمة محفوظة إلى قائمة بسيطة (مصفوفة أو نص مفصول بفواصل).
+     *
+     * @param  array<int, mixed>  $default
+     * @return array<int, mixed>
+     */
+    protected static function toPlainList(mixed $value, array $default): array
+    {
+        if (is_array($value)) {
+            return array_values(array_filter($value, fn ($item) => ! is_array($item)));
+        }
+
+        if (is_string($value)) {
+            $items = array_map('trim', explode(',', $value));
+
+            return array_values(array_filter($items, fn ($item) => $item !== ''));
+        }
+
+        return $default;
     }
 }
