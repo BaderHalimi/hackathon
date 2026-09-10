@@ -26,7 +26,20 @@ return [
                 'nav' => ['about' => 'عن الهاكاثون', 'tracks' => 'المسارات', 'timeline' => 'الجدول', 'prizes' => 'الجوائز', 'rules' => 'شروط المشاركة', 'faq' => 'الأسئلة الشائعة', 'register' => 'سجّل الآن'],
             ],
         ],
-        'hero' => [
+        'appearance' => [
+            'label' => 'المظهر والألوان',
+            'description' => 'وضع الصفحة (فاتح أو داكن)، اللون الأساسي واللون الثانوي، ونسبة توزيع اللونين على عناصر الصفحة.',
+            'icon' => 'heroicon-o-swatch',
+            'sort' => 15,
+            'defaults' => [
+                'mode' => 'light',
+                'primary_color' => '#F1791E',
+                'secondary_color' => '#66AC2F',
+                'base_color' => '#2A3876',
+                'tone_split' => 50,
+                'background_enabled' => true,
+            ],
+        ],        'hero' => [
             'label' => 'واجهة الصفحة',
             'description' => 'النص الرئيسي، الشارات، الأزرار، وبيانات الموعد والعداد.',
             'icon' => 'heroicon-o-sparkles',

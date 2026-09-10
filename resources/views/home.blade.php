@@ -1,21 +1,28 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+    @php
+            $identity = $home['identity']; $hero = $home['hero']; $about = $home['about'];
+            $tracks = $home['tracks']; $timeline = $home['timeline']; $prizesRules = $home['prizes_rules'];
+            $faq = $home['faq']; $registration = $home['registration']; $footer = $home['footer'];
+            $appearance = $home['appearance'];
+            $primaryColor = $appearance['primary_color'] ?? '#F1791E';
+            $secondaryColor = $appearance['secondary_color'] ?? '#66AC2F';
+            $baseColor = $appearance['base_color'] ?? '#2A3876';
+            $toneSplit = (int) ($appearance['tone_split'] ?? 50);
+            $themeMode = ($appearance['mode'] ?? 'light') === 'dark' ? 'dark' : 'light';
+            $backgroundOn = (bool) ($appearance['background_enabled'] ?? true);
+    @endphp
+<html lang="ar" dir="rtl" data-theme="{{ $themeMode }}">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        @php
-            $identity = $home['identity']; $hero = $home['hero']; $about = $home['about'];
-            $tracks = $home['tracks']; $timeline = $home['timeline']; $prizesRules = $home['prizes_rules'];
-            $faq = $home['faq']; $registration = $home['registration']; $footer = $home['footer'];
-        @endphp
         <title>{{ $identity['page_title'] }}</title>
         <meta
             name="description"
             content="{{ $identity['meta_description'] }}"
         />
-        <meta name="theme-color" content="#FFFFFF" />
+        <meta name="theme-color" content="{{ $themeMode === 'dark' ? '#0A0F1F' : '#FFFFFF' }}" />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="{{ $identity['page_title'] }}" />
@@ -47,28 +54,62 @@
                ========================================================= */
 
             :root {
-                /* الألوان الرسمية من ملف هوية الهاكاثون */
-                --orange: #f1791e;
-                --orange-dark: #d4620b;
-                --orange-soft: #fff4ea;
-                --navy: #2a3876;
-                --navy-dark: #1e2a5c;
-                --navy-soft: #eef1fa;
-                --green: #66ac2f;
-                --green-dark: #519022;
-                --green-soft: #f1f8e9;
+                /* ===== الألوان القابلة للتحكم من لوحة الإدارة ===== */
+                --primary: {{ $primaryColor }};
+                --secondary: {{ $secondaryColor }};
+                --base: {{ $baseColor }};
+                /* نسبة اللون الأساسي مقابل الثانوي (0 = الثانوي فقط، 100 = الأساسي فقط) */
+                --tone-split: {{ $toneSplit }}%;
 
-                /* النصوص والأسطح */
+                /* ===== اشتقاقات تلقائية من الألوان الثلاثة ===== */
+                --primary-ink: color-mix(in srgb, var(--primary) 78%, #000000);
+                --secondary-ink: color-mix(in srgb, var(--secondary) 78%, #000000);
+                --base-dark: color-mix(in srgb, var(--base) 78%, #000000);
+                --strong: var(--base);
+                --primary-soft: color-mix(in srgb, var(--primary) 9%, var(--surface));
+                --secondary-soft: color-mix(in srgb, var(--secondary) 10%, var(--surface));
+                --base-soft: color-mix(in srgb, var(--base) 6%, var(--surface));
+                --danger: var(--danger);
+                --danger-ink: var(--danger-ink);
+                --danger-soft: var(--danger-soft);
+
+                /* تدرّج اللونين — يتحكّم فيه شريط النسبة */
+                --two-tone: linear-gradient(
+                    100deg,
+                    var(--primary) 0%,
+                    var(--primary) calc(var(--tone-split) - 6%),
+                    var(--secondary) calc(var(--tone-split) + 6%),
+                    var(--secondary) 100%
+                );
+
+                /* خلفية الحروف المتحركة */
+                --matrix-fade: rgba(255, 255, 255, 0.09);
+                --matrix-head: color-mix(in srgb, var(--base) 26%, transparent);
+                --matrix-accent: color-mix(in srgb, var(--primary) 42%, transparent);
+                --matrix-body: color-mix(in srgb, var(--secondary) 18%, transparent);
+
+                /* ===== مرادفات للأنماط الحالية ===== */
+                --orange: var(--primary);
+                --orange-dark: var(--primary-ink);
+                --orange-soft: var(--primary-soft);
+                --green: var(--secondary);
+                --green-dark: var(--secondary-ink);
+                --green-soft: var(--secondary-soft);
+                --navy: var(--strong);
+                --navy-dark: var(--base-dark);
+                --navy-soft: var(--base-soft);
+
+                /* ===== الوضع الفاتح (الافتراضي) ===== */
+                --surface: #ffffff;
+                --bg: #ffffff;
+                --bg-soft: #f6f8fc;
                 --ink: #1b2244;
                 --ink-2: #37406b;
                 --muted: #5d6684;
-                --bg: #ffffff;
-                --bg-soft: #f6f8fc;
-                --line: rgba(42, 56, 118, 0.13);
-                --line-2: rgba(42, 56, 118, 0.09);
-
+                --line: color-mix(in srgb, var(--base) 13%, transparent);
+                --line-2: color-mix(in srgb, var(--base) 9%, transparent);
                 --shadow-sm: 0 1px 2px rgba(27, 34, 68, 0.04), 0 4px 14px -8px rgba(27, 34, 68, 0.14);
-                --shadow: 0 20px 45px -28px rgba(42, 56, 118, 0.45);
+                --shadow: 0 20px 45px -28px color-mix(in srgb, var(--base) 45%, transparent);
 
                 --radius: 18px;
                 --radius-sm: 12px;
@@ -79,6 +120,32 @@
                 --font-en: 'Cairo', 'Segoe UI', sans-serif;
             }
 
+            /* ===== الوضع الداكن ===== */
+            [data-theme='dark'] {
+                --surface: #131a33;
+                --bg: #0a0f1f;
+                --bg-soft: #172042;
+                --ink: #eef2ff;
+                --ink-2: #c6d0ee;
+                --muted: #94a1c6;
+                --line: rgba(255, 255, 255, 0.14);
+                --line-2: rgba(255, 255, 255, 0.08);
+                --strong: color-mix(in srgb, var(--base) 32%, #ffffff);
+                --primary-ink: color-mix(in srgb, var(--primary) 60%, #ffffff);
+                --secondary-ink: color-mix(in srgb, var(--secondary) 60%, #ffffff);
+                --base-dark: color-mix(in srgb, var(--base) 55%, #000000);
+                --primary-soft: color-mix(in srgb, var(--primary) 18%, var(--surface));
+                --secondary-soft: color-mix(in srgb, var(--secondary) 18%, var(--surface));
+                --base-soft: color-mix(in srgb, var(--base) 28%, var(--surface));
+                --danger-ink: #ff9b9b;
+                --danger-soft: color-mix(in srgb, var(--danger) 18%, var(--surface));
+                --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5), 0 4px 14px -8px rgba(0, 0, 0, 0.6);
+                --shadow: 0 20px 45px -28px rgba(0, 0, 0, 0.95);
+                --matrix-fade: rgba(10, 15, 31, 0.09);
+                --matrix-head: rgba(255, 255, 255, 0.22);
+                --matrix-accent: color-mix(in srgb, var(--primary) 55%, transparent);
+                --matrix-body: color-mix(in srgb, var(--secondary) 26%, transparent);
+            }
             * {
                 box-sizing: border-box;
             }
@@ -173,12 +240,12 @@
                 inset: -1px;
                 background-image: linear-gradient(
                         to right,
-                        rgba(42, 56, 118, 0.05) 1px,
+                        color-mix(in srgb, var(--base) 5%, transparent) 1px,
                         transparent 1px
                     ),
                     linear-gradient(
                         to bottom,
-                        rgba(42, 56, 118, 0.05) 1px,
+                        color-mix(in srgb, var(--base) 5%, transparent) 1px,
                         transparent 1px
                     );
                 background-size: 64px 64px;
@@ -201,17 +268,17 @@
                 background:
                     radial-gradient(
                         ellipse 70% 50% at 100% 0%,
-                        rgba(241, 121, 30, 0.09),
+                        color-mix(in srgb, var(--primary) 9%, transparent),
                         transparent 62%
                     ),
                     radial-gradient(
                         ellipse 60% 45% at 0% 8%,
-                        rgba(102, 172, 47, 0.09),
+                        color-mix(in srgb, var(--secondary) 9%, transparent),
                         transparent 62%
                     ),
                     radial-gradient(
                         ellipse 90% 60% at 50% 100%,
-                        rgba(42, 56, 118, 0.05),
+                        color-mix(in srgb, var(--base) 5%, transparent),
                         transparent 70%
                     );
             }
@@ -231,8 +298,8 @@
                 border-radius: 50%;
                 background: radial-gradient(
                     circle,
-                    rgba(102, 172, 47, 0.09),
-                    rgba(241, 121, 30, 0.06) 42%,
+                    color-mix(in srgb, var(--secondary) 9%, transparent),
+                    color-mix(in srgb, var(--primary) 6%, transparent) 42%,
                     transparent 68%
                 );
                 z-index: 1;
@@ -255,7 +322,7 @@
                 height: 3px;
                 width: 0%;
                 z-index: 90;
-                background: linear-gradient(90deg, var(--green), var(--orange));
+                background: var(--two-tone);
             }
 
             /* ---------- أدوات عامة ---------- */
@@ -313,14 +380,14 @@
             }
 
             .grad {
-                background: linear-gradient(100deg, var(--orange), var(--green) 92%);
+                background: var(--two-tone);
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent;
             }
 
             .card {
-                background: #fff;
+                background: var(--surface);
                 border: 1px solid var(--line);
                 border-radius: var(--radius);
                 padding: 26px;
@@ -338,15 +405,15 @@
                 position: absolute;
                 inset: 0 0 auto;
                 height: 3px;
-                background: linear-gradient(90deg, var(--orange), var(--green));
+                background: var(--two-tone);
                 opacity: 0;
                 transition: opacity 0.35s;
             }
 
             .card:hover {
                 transform: translateY(-5px);
-                border-color: rgba(42, 56, 118, 0.2);
-                box-shadow: 0 24px 50px -30px rgba(42, 56, 118, 0.55);
+                border-color: color-mix(in srgb, var(--base) 20%, transparent);
+                box-shadow: 0 24px 50px -30px color-mix(in srgb, var(--base) 55%, transparent);
             }
 
             .card:hover::before {
@@ -381,18 +448,18 @@
             }
 
             .btn-primary {
-                background: linear-gradient(100deg, var(--orange), #f79141);
+                background: linear-gradient(100deg, var(--orange), color-mix(in srgb, var(--primary) 78%, #ffffff));
                 color: #fff;
-                box-shadow: 0 14px 30px -16px rgba(241, 121, 30, 0.95);
+                box-shadow: 0 14px 30px -16px color-mix(in srgb, var(--primary) 95%, transparent);
             }
 
             .btn-primary:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 20px 40px -18px rgba(241, 121, 30, 1);
+                box-shadow: 0 20px 40px -18px color-mix(in srgb, var(--primary) 100%, transparent);
             }
 
             .btn-ghost {
-                background: #fff;
+                background: var(--surface);
                 border-color: var(--line);
                 color: var(--navy);
                 box-shadow: var(--shadow-sm);
@@ -405,9 +472,9 @@
             }
 
             .btn-green {
-                background: linear-gradient(100deg, var(--green), #7cc23f);
+                background: linear-gradient(100deg, var(--green), color-mix(in srgb, var(--secondary) 78%, #ffffff));
                 color: #fff;
-                box-shadow: 0 14px 30px -16px rgba(102, 172, 47, 0.95);
+                box-shadow: 0 14px 30px -16px color-mix(in srgb, var(--secondary) 95%, transparent);
             }
 
             .btn-green:hover {
@@ -415,12 +482,12 @@
             }
 
             .btn-navy {
-                background: var(--navy);
+                background: var(--base);
                 color: #fff;
             }
 
             .btn-navy:hover {
-                background: var(--navy-dark);
+                background: var(--base-dark);
                 transform: translateY(-2px);
             }
 
@@ -492,7 +559,7 @@
                 height: 52px;
                 padding: 0 12px;
                 border-radius: 12px;
-                background: #fff;
+                background: var(--surface);
                 border: 1px solid var(--line);
                 box-shadow: var(--shadow-sm);
                 flex-shrink: 0;
@@ -521,7 +588,7 @@
 
             .brand-card:not(:has(img)) {
                 background: var(--navy-soft);
-                border: 1.5px dashed rgba(42, 56, 118, 0.35);
+                border: 1.5px dashed color-mix(in srgb, var(--base) 35%, transparent);
                 box-shadow: none;
             }
 
@@ -580,7 +647,7 @@
                 height: 46px;
                 border-radius: 12px;
                 border: 1px solid var(--line);
-                background: #fff;
+                background: var(--surface);
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
@@ -632,7 +699,7 @@
                 flex-direction: column;
                 gap: 4px;
                 padding: 12px 22px 26px;
-                background: #fff;
+                background: var(--surface);
                 border-bottom: 1px solid var(--line);
                 box-shadow: 0 24px 40px -30px rgba(27, 34, 68, 0.6);
             }
@@ -658,7 +725,7 @@
                 min-width: 120px;
                 padding: 12px 18px;
                 border-radius: 14px;
-                border: 1.5px dashed rgba(42, 56, 118, 0.3);
+                border: 1.5px dashed color-mix(in srgb, var(--base) 30%, transparent);
                 background: var(--navy-soft);
                 text-align: center;
                 transition:
@@ -749,13 +816,13 @@
                 font-size: 12.5px;
                 font-weight: 700;
                 border: 1px solid var(--line);
-                background: #fff;
+                background: var(--surface);
                 color: var(--ink-2);
                 box-shadow: var(--shadow-sm);
             }
 
             .badge-live {
-                border-color: rgba(102, 172, 47, 0.4);
+                border-color: color-mix(in srgb, var(--secondary) 40%, transparent);
                 background: var(--green-soft);
                 color: var(--green-dark);
             }
@@ -765,16 +832,16 @@
                 height: 7px;
                 border-radius: 50%;
                 background: var(--green);
-                box-shadow: 0 0 0 0 rgba(102, 172, 47, 0.6);
+                box-shadow: 0 0 0 0 color-mix(in srgb, var(--secondary) 60%, transparent);
                 animation: pulse 1.9s infinite;
             }
 
             @keyframes pulse {
                 70% {
-                    box-shadow: 0 0 0 9px rgba(102, 172, 47, 0);
+                    box-shadow: 0 0 0 9px transparent;
                 }
                 100% {
-                    box-shadow: 0 0 0 0 rgba(102, 172, 47, 0);
+                    box-shadow: 0 0 0 0 transparent;
                 }
             }
 
@@ -795,7 +862,7 @@
 
             .hero h1 .line-2 {
                 display: block;
-                background: linear-gradient(96deg, var(--orange) 10%, var(--orange) 45%, var(--green) 100%);
+                background: var(--two-tone);
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent;
@@ -954,11 +1021,11 @@
             /* ---------- العداد ---------- */
             .count-card {
                 position: relative;
-                background: #fff;
+                background: var(--surface);
                 border: 1px solid var(--line);
                 border-radius: 22px;
                 padding: 26px 22px;
-                box-shadow: 0 30px 60px -40px rgba(42, 56, 118, 0.7);
+                box-shadow: 0 30px 60px -40px color-mix(in srgb, var(--base) 70%, transparent);
                 overflow: hidden;
             }
 
@@ -969,7 +1036,7 @@
                 right: -30%;
                 width: 260px;
                 height: 260px;
-                background: radial-gradient(circle, rgba(241, 121, 30, 0.12), transparent 68%);
+                background: radial-gradient(circle, color-mix(in srgb, var(--primary) 12%, transparent), transparent 68%);
                 pointer-events: none;
             }
 
@@ -992,7 +1059,7 @@
                 font-size: 10.5px;
                 letter-spacing: 0.12em;
                 color: var(--orange-dark);
-                border: 1px solid rgba(241, 121, 30, 0.35);
+                border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
                 background: var(--orange-soft);
                 padding: 3px 9px;
                 border-radius: 999px;
@@ -1098,7 +1165,7 @@
             /* ---------- الشريط المتحرك ---------- */
             .ticker {
                 border-block: 1px solid var(--line);
-                background: var(--navy);
+                background: var(--base);
                 overflow: hidden;
                 padding: 13px 0;
                 position: relative;
@@ -1146,7 +1213,7 @@
                 padding: 34px 30px;
                 border: 1px solid var(--line);
                 border-radius: var(--radius);
-                background: #fff;
+                background: var(--surface);
                 box-shadow: var(--shadow-sm);
             }
 
@@ -1242,9 +1309,9 @@
             .terminal {
                 border-radius: var(--radius);
                 border: 1px solid var(--navy-dark);
-                background: linear-gradient(160deg, #2a3876, #1e2a5c);
+                background: linear-gradient(160deg, var(--base), var(--base-dark));
                 overflow: hidden;
-                box-shadow: 0 34px 60px -38px rgba(42, 56, 118, 0.95);
+                box-shadow: 0 34px 60px -38px color-mix(in srgb, var(--base) 95%, transparent);
             }
 
             .terminal-bar {
@@ -1264,13 +1331,13 @@
             }
 
             .terminal-bar i:nth-child(1) {
-                background: #f1791e;
+                background: var(--primary);
             }
             .terminal-bar i:nth-child(2) {
                 background: #ffd166;
             }
             .terminal-bar i:nth-child(3) {
-                background: #66ac2f;
+                background: var(--secondary);
             }
 
             .terminal-bar b {
@@ -1356,13 +1423,13 @@
                 height: 20px;
                 border-radius: 50%;
                 border: 3px solid var(--green);
-                background: #fff;
-                box-shadow: 0 0 0 4px rgba(102, 172, 47, 0.16);
+                background: var(--surface);
+                box-shadow: 0 0 0 4px color-mix(in srgb, var(--secondary) 16%, transparent);
             }
 
             .tl-item.now::before {
                 border-color: var(--orange);
-                box-shadow: 0 0 0 5px rgba(241, 121, 30, 0.18);
+                box-shadow: 0 0 0 5px color-mix(in srgb, var(--primary) 18%, transparent);
                 animation: pulse 1.9s infinite;
             }
 
@@ -1397,7 +1464,7 @@
             .tl-tag.now {
                 background: var(--orange-soft);
                 color: var(--orange-dark);
-                border: 1px solid rgba(241, 121, 30, 0.35);
+                border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
             }
 
             /* ---------- الجوائز ---------- */
@@ -1415,8 +1482,8 @@
             }
 
             .prize.p1 {
-                border-color: rgba(241, 121, 30, 0.45);
-                box-shadow: 0 26px 55px -34px rgba(241, 121, 30, 0.9);
+                border-color: color-mix(in srgb, var(--primary) 45%, transparent);
+                box-shadow: 0 26px 55px -34px color-mix(in srgb, var(--primary) 90%, transparent);
             }
 
             .prize.p1 .rank {
@@ -1458,7 +1525,7 @@
                 padding: 10px 16px;
                 border-radius: 12px;
                 border: 1px solid var(--line);
-                background: #fff;
+                background: var(--surface);
                 font-size: 0.9rem;
                 font-weight: 700;
                 color: var(--ink-2);
@@ -1520,7 +1587,7 @@
             details.qa {
                 border: 1px solid var(--line);
                 border-radius: var(--radius-sm);
-                background: #fff;
+                background: var(--surface);
                 overflow: hidden;
                 box-shadow: var(--shadow-sm);
                 transition:
@@ -1529,8 +1596,8 @@
             }
 
             details.qa[open] {
-                border-color: rgba(42, 56, 118, 0.25);
-                box-shadow: 0 18px 40px -30px rgba(42, 56, 118, 0.6);
+                border-color: color-mix(in srgb, var(--base) 25%, transparent);
+                box-shadow: 0 18px 40px -30px color-mix(in srgb, var(--base) 60%, transparent);
             }
 
             details.qa summary {
@@ -1589,7 +1656,7 @@
                 border: 1px solid var(--line);
                 border-radius: var(--radius-sm);
                 padding: 18px;
-                background: #fff;
+                background: var(--surface);
                 box-shadow: var(--shadow-sm);
             }
 
@@ -1623,9 +1690,9 @@
             .form-card {
                 border: 1px solid var(--line);
                 border-radius: var(--radius);
-                background: #fff;
+                background: var(--surface);
                 padding: 30px;
-                box-shadow: 0 28px 60px -45px rgba(42, 56, 118, 0.75);
+                box-shadow: 0 28px 60px -45px color-mix(in srgb, var(--base) 75%, transparent);
             }
 
             .mode-switch {
@@ -1660,8 +1727,8 @@
 
             .mode-switch button.active {
                 color: #fff;
-                background: var(--navy);
-                box-shadow: 0 10px 24px -14px rgba(42, 56, 118, 0.95);
+                background: var(--base);
+                box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--base) 95%, transparent);
             }
 
             fieldset {
@@ -1764,21 +1831,21 @@
             .field textarea:focus {
                 outline: none;
                 border-color: var(--navy);
-                background: #fff;
-                box-shadow: 0 0 0 4px rgba(42, 56, 118, 0.1);
+                background: var(--surface);
+                box-shadow: 0 0 0 4px color-mix(in srgb, var(--base) 10%, transparent);
             }
 
             .field.bad input,
             .field.bad select,
             .field.bad textarea {
-                border-color: #d93b3b;
-                background: #fef6f6;
-                box-shadow: 0 0 0 4px rgba(217, 59, 59, 0.1);
+                border-color: var(--danger);
+                background: var(--danger-soft);
+                box-shadow: 0 0 0 4px color-mix(in srgb, var(--danger) 10%, transparent);
             }
 
             .err {
                 font-size: 0.79rem;
-                color: #c92b2b;
+                color: var(--danger-ink);
                 display: none;
             }
 
@@ -1826,9 +1893,9 @@
             }
 
             .rm {
-                border: 1px solid rgba(217, 59, 59, 0.3);
-                background: #fef2f2;
-                color: #c92b2b;
+                border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+                background: var(--danger-soft);
+                color: var(--danger-ink);
                 border-radius: 9px;
                 padding: 6px 12px;
                 cursor: pointer;
@@ -1838,12 +1905,12 @@
             }
 
             .rm:hover {
-                background: #fde3e3;
+                background: color-mix(in srgb, var(--danger) 18%, var(--surface));
             }
 
             .add-member {
                 width: 100%;
-                border: 1.5px dashed rgba(42, 56, 118, 0.3);
+                border: 1.5px dashed color-mix(in srgb, var(--base) 30%, transparent);
                 background: var(--navy-soft);
                 color: var(--navy);
                 border-radius: var(--radius-sm);
@@ -1861,7 +1928,7 @@
             }
 
             .add-member:hover {
-                background: #e4e9f7;
+                background: color-mix(in srgb, var(--base) 12%, var(--surface));
                 border-color: var(--navy);
             }
 
@@ -1892,8 +1959,8 @@
             }
 
             .agree.bad {
-                border-color: #d93b3b;
-                background: #fef6f6;
+                border-color: var(--danger);
+                background: var(--danger-soft);
             }
 
             /* ---------- التوست والمودال ---------- */
@@ -1907,12 +1974,12 @@
                 max-width: calc(100% - 40px);
                 padding: 13px 22px;
                 border-radius: 999px;
-                background: var(--navy);
-                border: 1px solid var(--navy-dark);
+                background: var(--base);
+                border: 1px solid var(--base-dark);
                 color: #fff;
                 font-weight: 700;
                 font-size: 0.9rem;
-                box-shadow: 0 24px 50px -24px rgba(42, 56, 118, 0.9);
+                box-shadow: 0 24px 50px -24px color-mix(in srgb, var(--base) 90%, transparent);
                 transform: translateY(140%);
                 transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
                 display: flex;
@@ -1953,7 +2020,7 @@
                 overflow: auto;
                 border-radius: 22px;
                 border: 1px solid var(--line);
-                background: #fff;
+                background: var(--surface);
                 padding: 34px 30px;
                 text-align: center;
                 box-shadow: 0 40px 90px -50px rgba(27, 34, 68, 0.9);
@@ -1975,7 +2042,7 @@
                 display: grid;
                 place-items: center;
                 background: var(--green-soft);
-                border: 1px solid rgba(102, 172, 47, 0.4);
+                border: 1px solid color-mix(in srgb, var(--secondary) 40%, transparent);
                 color: var(--green-dark);
             }
 
@@ -1994,7 +2061,7 @@
                 margin: 20px auto;
                 padding: 14px;
                 border-radius: var(--radius-sm);
-                border: 1px dashed rgba(102, 172, 47, 0.5);
+                border: 1px dashed color-mix(in srgb, var(--secondary) 50%, transparent);
                 background: var(--green-soft);
             }
 
@@ -2026,7 +2093,7 @@
 
             /* ---------- الفوتر ---------- */
             footer {
-                background: linear-gradient(170deg, #2a3876, #1e2a5c);
+                background: linear-gradient(170deg, var(--base), var(--base-dark));
                 color: #fff;
                 padding: 56px 0 26px;
                 position: relative;
@@ -2092,7 +2159,7 @@
 
             .socials a:hover {
                 border-color: var(--orange);
-                background: rgba(241, 121, 30, 0.18);
+                background: color-mix(in srgb, var(--primary) 18%, transparent);
                 transform: translateY(-3px);
             }
 
@@ -2131,7 +2198,7 @@
                 border-radius: 14px;
                 display: grid;
                 place-items: center;
-                background: #fff;
+                background: var(--surface);
                 border: 1px solid var(--line);
                 color: var(--navy);
                 cursor: pointer;
@@ -2267,7 +2334,7 @@
                 }
 
                 body {
-                    background: #fff;
+                    background: var(--surface);
                     color: #000;
                 }
             }
@@ -3089,6 +3156,8 @@
             const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const CSRF = document.querySelector('meta[name="csrf-token"]')?.content || '';
+            /* خلفية الصفحة المتحركة — تُضبط من لوحة الإدارة */
+            const BACKGROUND_ENABLED = {{ $backgroundOn ? 'true' : 'false' }};
 
             /* =========================================================
                2) العداد التنازلي
@@ -3165,7 +3234,7 @@
                ========================================================= */
             (function matrix() {
                 const cv = $('#matrix');
-                if (!cv || reduceMotion) return;
+                if (!cv || reduceMotion || !BACKGROUND_ENABLED) return;
                 const ctx = cv.getContext('2d', { alpha: true });
                 if (!ctx) return;
 
@@ -3173,6 +3242,39 @@
                 const GLYPHS = '01ABCDEF#$%&@{}[]<>/\\+=*?23456789'.split('');
                 // كم صف بتتحرك القطرة بكل إطار — كل ما قلّ الرقم كل ما صار أبطأ
                 const SPEED = 0.12;
+
+                // الألوان تُقرأ من متغيّرات CSS، يعني بتتبع الوضع والألوان المختارة
+                // من لوحة الإدارة. منمرّرها على عنصر مؤقت حتى تتحوّل لقيمة
+                // rgb/rgba صريحة يفهمها الـ canvas.
+                const palette = {
+                    fade: 'rgba(255,255,255,0.09)',
+                    head: 'rgba(42,56,118,0.26)',
+                    accent: 'rgba(241,121,30,0.42)',
+                    body: 'rgba(102,172,47,0.18)',
+                };
+
+                function readPalette() {
+                    const cs = getComputedStyle(document.documentElement);
+                    const probe = document.createElement('span');
+                    probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none';
+                    document.body.appendChild(probe);
+
+                    const resolve = (name, fallback) => {
+                        const raw = (cs.getPropertyValue(name) || '').trim();
+                        if (!raw) return fallback;
+                        probe.style.color = 'rgb(1, 2, 3)';
+                        probe.style.color = raw;
+                        const out = getComputedStyle(probe).color;
+                        return out === 'rgb(1, 2, 3)' ? fallback : out;
+                    };
+
+                    palette.fade = resolve('--matrix-fade', palette.fade);
+                    palette.head = resolve('--matrix-head', palette.head);
+                    palette.accent = resolve('--matrix-accent', palette.accent);
+                    palette.body = resolve('--matrix-body', palette.body);
+                    probe.remove();
+                }
+                readPalette();
 
                 let cols = 0,
                     drops = [],
@@ -3196,7 +3298,7 @@
                 function draw() {
                     raf = requestAnimationFrame(draw);
 
-                    ctx.fillStyle = 'rgba(255,255,255,0.09)';
+                    ctx.fillStyle = palette.fade;
                     ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
                     ctx.font = fs + "px 'Share Tech Mono', monospace";
                     ctx.textBaseline = 'top';
@@ -3212,14 +3314,11 @@
                         const y = row * fs;
 
                         // رأس القطرة
-                        ctx.fillStyle =
-                            Math.random() > 0.99
-                                ? 'rgba(241,121,30,0.42)'
-                                : 'rgba(42,56,118,0.26)';
+                        ctx.fillStyle = Math.random() > 0.99 ? palette.accent : palette.head;
                         ctx.fillText(GLYPHS[(Math.random() * GLYPHS.length) | 0], x, y);
 
                         // الحرف اللي فوقه بلون أهدأ
-                        ctx.fillStyle = 'rgba(102,172,47,0.18)';
+                        ctx.fillStyle = palette.body;
                         ctx.fillText(GLYPHS[(Math.random() * GLYPHS.length) | 0], x, y - fs);
 
                         if (y > window.innerHeight && Math.random() > 0.985) {

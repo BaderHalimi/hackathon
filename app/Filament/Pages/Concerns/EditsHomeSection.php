@@ -4,11 +4,14 @@ namespace App\Filament\Pages\Concerns;
 
 use App\Support\HomeContent;
 use Filament\Actions\Action;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Slider;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\EmbeddedSchema;
@@ -81,6 +84,7 @@ trait EditsHomeSection
     {
         return match (static::sectionKey()) {
             'identity' => $this->identityFields(),
+            'appearance' => $this->appearanceFields(),
             'hero' => $this->heroFields(),
             'about' => $this->aboutFields(),
             'tracks' => $this->tracksFields(),
@@ -116,6 +120,52 @@ trait EditsHomeSection
         ])->columns(2)->collapsible()->reorderable()->columnSpanFull();
     }
 
+    /** @return array<Component> */
+    protected function appearanceFields(): array
+    {
+        return [
+            Section::make('وضع الصفحة')
+                ->description('يحدّد خلفية الصفحة الرئيسية وألوان النصوص والأسطح.')
+                ->schema([
+                    ToggleButtons::make('mode')
+                        ->label('وضع الألوان')
+                        ->options(['light' => 'فاتح', 'dark' => 'داكن'])
+                        ->default('light')
+                        ->inline()
+                        ->required()
+                        ->helperText('الوضع الفاتح هو الافتراضي، والداكن يستخدم نفس ألوان الهوية على خلفية غامقة.'),
+                ]),
+
+            Section::make('الألوان الأساسية')
+                ->description('كل الألوان على الصفحة مشتقّة من هذه الألوان الثلاثة.')
+                ->schema([
+                    ColorPicker::make('primary_color')->label('اللون الأساسي (Primary)')->default('#F1791E')->required()->helperText('اللون الأبرز: أزرار الإجراء الأساسية والعناوين المميزة.'),
+                    ColorPicker::make('secondary_color')->label('اللون الثانوي (Secondary)')->default('#66AC2F')->required()->helperText('اللون المساند: الشارات وعلامات الصح والتأكيدات.'),
+                    ColorPicker::make('base_color')->label('اللون الداكن (Base)')->default('#2A3876')->required()->helperText('يُستخدم للنصوص والعناوين والأسطح الداكنة مثل التذييل والشريط العلوي.'),
+                ])
+                ->columns(3),
+
+            Section::make('نسبة توزيع اللونين')
+                ->description('تتحكّم بمقدار ظهور اللون الأساسي مقابل اللون الثانوي في التدرّجات والشريط الملوّن.')
+                ->schema([
+                    Slider::make('tone_split')
+                        ->label('نسبة اللون الأساسي مقابل اللون الثانوي')
+                        ->range(0, 100)
+                        ->step(5)
+                        ->default(50)
+                        ->helperText('0% = اللون الثانوي فقط، 50% = مناصفة، 100% = اللون الأساسي فقط.'),
+                ]),
+
+            Section::make('خلفية الصفحة')
+                ->description('الشبكة المتحركة خلف المحتوى.')
+                ->schema([
+                    Toggle::make('background_enabled')
+                        ->label('تشغيل الخلفية المتحركة')
+                        ->default(true)
+                        ->helperText('عند إيقافها تصبح الخلفية لونًا صافيًا بدون حركة.'),
+                ]),
+        ];
+    }
     /** @return array<Component> */
     protected function identityFields(): array
     {
