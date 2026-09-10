@@ -5,18 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        <title>هاكاثون السايبر والذكاء الاصطناعي 2026 | النادي الهندسي</title>
+        @php
+            $identity = $home['identity']; $hero = $home['hero']; $about = $home['about'];
+            $tracks = $home['tracks']; $timeline = $home['timeline']; $prizesRules = $home['prizes_rules'];
+            $faq = $home['faq']; $registration = $home['registration']; $footer = $home['footer'];
+        @endphp
+        <title>{{ $identity['page_title'] }}</title>
         <meta
             name="description"
-            content="هاكاثون السايبر والذكاء الاصطناعي 2026 (AI &amp; Cyber Hackathon 2026) — تنظيم النادي الهندسي، لجنة الأنشطة، هندسة الحاسوب، المقر الرئيسي - غزة، بالشراكة مع حاضنة يوكاس التكنولوجية. فرق من 4 أعضاء: 2 أمن سيبراني + 2 ذكاء اصطناعي. سجّل الآن."
+            content="{{ $identity['meta_description'] }}"
         />
         <meta name="theme-color" content="#FFFFFF" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="هاكاثون السايبر والذكاء الاصطناعي 2026 — AI &amp; Cyber Hackathon 2026" />
+        <meta property="og:title" content="{{ $identity['page_title'] }}" />
         <meta
             property="og:description"
-            content="Cybersecurity + AI + Innovation — نحو حلول تقنية ذكية وآمنة لمواجهة تحديات واقعية. سجّل الآن وكن جزءًا من التحدي."
+            content="{{ $identity['meta_description'] }}"
         />
         <meta property="og:image" content="{{ asset('images/hackathon-logo.png') }}" />
 
@@ -2284,35 +2289,35 @@
         {{-- ================= الهيدر ================= --}}
         <header id="hdr">
             <div class="wrap">
-                <nav class="nav" aria-label="التنقل الرئيسي">
-                    <a href="#top" class="brand" aria-label="الرئيسية">
+                <nav class="nav" aria-label="{{ $identity['accessibility']['main_nav'] }}">
+                    <a href="#top" class="brand" aria-label="{{ $identity['accessibility']['home'] }}">
                         <span class="brand-card">
                             <img
                                 src="{{ asset('images/hackathon-logo.png') }}"
-                                alt="شعار هاكاثون السايبر والذكاء الاصطناعي 2026"
+                                alt="{{ $identity['logo_alt'] }}"
                                 onerror="this.remove()"
                             />
-                            <span class="slot-hint">الشعار<small>LOGO</small></span>
+                            <span class="slot-hint">{{ $identity['logo_placeholder'] }}<small>LOGO</small></span>
                         </span>
                         <span class="brand-txt">
-                            <b>هاكاثون السايبر والذكاء الاصطناعي</b>
-                            <span>AI &amp; Cyber Hackathon 2026</span>
+                            <b>{{ $identity['brand_ar'] }}</b>
+                            <span>{{ $identity['brand_en'] }}</span>
                         </span>
                     </a>
 
                     <div class="nav-links">
-                        <a href="#about">عن الهاكاثون</a>
-                        <a href="#tracks">المسارات</a>
-                        <a href="#timeline">الجدول</a>
-                        <a href="#prizes">الجوائز</a>
-                        <a href="#faq">الأسئلة</a>
-                        <a href="#register" class="btn btn-primary nav-cta">سجّل الآن</a>
+                        <a href="#about">{{ $identity['nav']['about'] }}</a>
+                        <a href="#tracks">{{ $identity['nav']['tracks'] }}</a>
+                        <a href="#timeline">{{ $identity['nav']['timeline'] }}</a>
+                        <a href="#prizes">{{ $identity['nav']['prizes'] }}</a>
+                        <a href="#faq">{{ $identity['nav']['faq'] }}</a>
+                        <a href="#register" class="btn btn-primary nav-cta">{{ $identity['nav']['register'] }}</a>
                     </div>
 
                     <button
                         class="burger"
                         id="burger"
-                        aria-label="فتح القائمة"
+                        aria-label="{{ $identity['accessibility']['open_menu'] }}"
                         aria-expanded="false"
                         aria-controls="drawer"
                     >
@@ -2321,13 +2326,13 @@
                 </nav>
             </div>
             <div class="drawer" id="drawer">
-                <a href="#about">عن الهاكاثون</a>
-                <a href="#tracks">المسارات</a>
-                <a href="#timeline">الجدول الزمني</a>
-                <a href="#prizes">الجوائز</a>
-                <a href="#rules">شروط المشاركة</a>
-                <a href="#faq">الأسئلة الشائعة</a>
-                <a href="#register" style="color: var(--orange)">← سجّل الآن</a>
+                <a href="#about">{{ $identity['nav']['about'] }}</a>
+                <a href="#tracks">{{ $identity['nav']['tracks'] }}</a>
+                <a href="#timeline">{{ $identity['nav']['timeline'] }}</a>
+                <a href="#prizes">{{ $identity['nav']['prizes'] }}</a>
+                <a href="#rules">{{ $identity['nav']['rules'] }}</a>
+                <a href="#faq">{{ $identity['nav']['faq'] }}</a>
+                <a href="#register" style="color: var(--orange)">← {{ $identity['nav']['register'] }}</a>
             </div>
         </header>
 
@@ -2339,31 +2344,24 @@
                         <div>
                             <div class="hero-badges" data-reveal>
                                 <span class="badge badge-live">
-                                    <i class="dot"></i> التسجيل مفتوح
+                                    <i class="dot"></i> {{ $hero['registration_open'] ? $hero['status_open'] : $hero['status_closed'] }}
                                 </span>
-                                <span class="badge">النادي الهندسي × حاضنة يوكاس التكنولوجية</span>
-                                <span class="badge">المقر الرئيسي — غزة</span>
+                                <span class="badge">{{ $hero['partner_badge'] }}</span>
+                                <span class="badge">{{ $identity['location'] }}</span>
                             </div>
 
                             <h1 data-reveal>
-                                <span class="line-1">AI &amp; Cyber</span>
-                                <span class="line-2 glitch" data-text="Hackathon">Hackathon</span>
-                                <span class="line-1 yr">2026</span>
+                                <span class="line-1">{{ $hero['title_top'] }}</span>
+                                <span class="line-2 glitch" data-text="{{ $hero['title_main'] }}">{{ $hero['title_main'] }}</span>
+                                <span class="line-1 yr">{{ $hero['title_year'] }}</span>
                             </h1>
 
                             <h2 data-reveal>
-                                هاكاثون
-                                <span class="grad">السايبر والذكاء الاصطناعي</span>
+                                <span class="grad">{{ $hero['subtitle'] }}</span>
                             </h2>
 
                             <p class="hero-desc" data-reveal>
-                                هاكاثون تقني وريادي يجمع طلبة الأمن السيبراني والذكاء
-                                الاصطناعي للعمل ضمن فرق متكاملة على تطوير حلول تقنية
-                                لمشكلات واقعية في قطاع غزة، مع التركيز على الحل البرمجي
-                                والمنطقي التقني والفكرة الريادية والعرض السريع أمام لجنة
-                                التحكيم. فرق من <b>4 أعضاء: 2 أمن سيبراني + 2 ذكاء
-                                اصطناعي</b>، ومدة الفعالية الميدانية <b>6 ساعات</b>. —
-                                <b>سجّل الآن وكن جزءًا من التحدي.</b>
+                                {{ $hero['description'] }}
                             </p>
 
                             <div class="term-line" id="termLine">
@@ -2372,28 +2370,28 @@
 
                             <div class="hero-actions" data-reveal>
                                 <a href="#register" class="btn btn-primary">
-                                    سجّل الآن — مجاناً
+                                    {{ $hero['primary_button'] }}
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
                                 </a>
-                                <a href="#about" class="btn btn-ghost">تفاصيل الهاكاثون</a>
+                                <a href="#about" class="btn btn-ghost">{{ $hero['secondary_button'] }}</a>
                             </div>
 
                             <div class="hero-meta" data-reveal>
                                 <div>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
-                                    <span id="metaDates">يُعلن لاحقًا</span>
+                                    <span id="metaDates">{{ $hero['event_dates'] }}</span>
                                 </div>
                                 <div>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-                                    المقر الرئيسي — غزة
+                                    {{ $identity['location'] }}
                                 </div>
                                 <div>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-                                    6 ساعات تنافسية
+                                    {{ $hero['duration'] }}
                                 </div>
                                 <div>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /></svg>
-                                    فرق 2 سيبراني + 2 ذكاء اصطناعي
+                                    {{ $hero['team_format'] }}
                                 </div>
                             </div>
                         </div>
@@ -2402,36 +2400,36 @@
                         <div data-reveal>
                             <div class="count-card" id="countCard">
                                 <div class="count-title">
-                                    <b>يغلق باب التسجيل بعد</b>
+                                    <b>{{ $hero['countdown_title'] }}</b>
                                     <span>Deadline</span>
                                 </div>
 
                                 <div class="count-grid" role="timer" aria-live="polite">
                                     <div class="count-cell">
                                         <b class="count-num" id="cd-d">--</b>
-                                        <span class="count-lbl">يوم</span>
+                                        <span class="count-lbl">{{ $hero['countdown_units']['days'] }}</span>
                                     </div>
                                     <div class="count-cell">
                                         <b class="count-num" id="cd-h">--</b>
-                                        <span class="count-lbl">ساعة</span>
+                                        <span class="count-lbl">{{ $hero['countdown_units']['hours'] }}</span>
                                     </div>
                                     <div class="count-cell">
                                         <b class="count-num" id="cd-m">--</b>
-                                        <span class="count-lbl">دقيقة</span>
+                                        <span class="count-lbl">{{ $hero['countdown_units']['minutes'] }}</span>
                                     </div>
                                     <div class="count-cell">
                                         <b class="count-num" id="cd-s">--</b>
-                                        <span class="count-lbl">ثانية</span>
+                                        <span class="count-lbl">{{ $hero['countdown_units']['seconds'] }}</span>
                                     </div>
                                 </div>
 
                                 <div class="count-foot">
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
-                                    آخر موعد للتقديم: <b id="deadlineTxt">—</b>
+                                    {{ $hero['deadline_label'] }} <b id="deadlineTxt">—</b>
                                 </div>
 
                                 <div class="count-closed">
-                                    انتهى موعد التقديم — تابعونا لمعرفة الفرق المتأهلة
+                                    {{ $hero['closed_message'] }}
                                 </div>
                             </div>
                         </div>
@@ -2442,8 +2440,7 @@
             {{-- ================= الشريط المتحرك ================= --}}
             <div class="ticker" aria-hidden="true">
                 <div class="ticker-track">
-                    <span>Penetration Testing</span><span>AI &amp; Machine Learning</span><span>Threat Detection</span><span>Capture The Flag</span><span>Incident Response</span><span>Generative AI</span><span>Secure Coding</span><span>Red Team</span><span>Blue Team</span><span>AI &amp; Cyber Hackathon 2026</span>
-                    <span>Penetration Testing</span><span>AI &amp; Machine Learning</span><span>Threat Detection</span><span>Capture The Flag</span><span>Incident Response</span><span>Generative AI</span><span>Secure Coding</span><span>Red Team</span><span>Blue Team</span><span>AI &amp; Cyber Hackathon 2026</span>
+                    @foreach(array_merge($hero['ticker'], $hero['ticker']) as $ticker)<span>{{ $ticker }}</span>@endforeach
                 </div>
             </div>
 
@@ -2460,11 +2457,11 @@
                             <div class="logo-slot slot-light">
                                 <img
                                     src="{{ asset('images/eng-club.png') }}"
-                                    alt="شعار النادي الهندسي — الكلية الجامعية للعلوم التطبيقية، غزة"
+                                    alt="{{ $identity['engineering_logo_alt'] }}"
                                     onerror="this.remove()"
                                 />
                                 <span class="slot-hint">
-                                    مكان شعار النادي الهندسي
+                                    {{ $identity['engineering_logo_placeholder'] }}
                                     <small>ENGINEERING CLUB</small>
                                 </span>
                             </div>
@@ -2480,21 +2477,18 @@
                             <div class="logo-slot slot-light">
                                 <img
                                     src="{{ asset('images/ucas.png') }}"
-                                    alt="شعار حاضنة يوكاس التكنولوجية"
+                                    alt="{{ $identity['incubator_logo_alt'] }}"
                                     onerror="this.remove()"
                                 />
                                 <span class="slot-hint">
-                                    مكان شعار حاضنة يوكاس التكنولوجية
+                                    {{ $identity['incubator_logo_placeholder'] }}
                                     <small>UCAS TECH INCUBATOR</small>
                                 </span>
                             </div>
                         </div>
 
                         <p class="partners-note">
-                            ينظّم هذا الحدث
-                            <b>النادي الهندسي — لجنة الأنشطة — هندسة الحاسوب</b>
-                            بالشراكة مع
-                            <b>حاضنة يوكاس التكنولوجية</b>
+                            {{ $about['partners_note'] }}
                         </p>
                     </div>
                 </div>
@@ -2504,55 +2498,23 @@
             <section class="sec" id="about">
                 <div class="wrap">
                     <div class="sec-head" data-reveal>
-                        <span class="eyebrow">01 — ما هو الهاكاثون؟</span>
-                        <h2>مساحة تنافسية… <span class="grad">لحلول تقنية مبتكرة</span></h2>
-                        <p>
-                            هاكاثون تقني وريادي يجمع طلبة الأمن السيبراني والذكاء الاصطناعي
-                            للعمل ضمن فرق متكاملة على تطوير حلول تقنية لمشكلات واقعية في قطاع
-                            غزة، مع التركيز على الحل البرمجي والمنطقي التقني والفكرة الريادية
-                            والعرض السريع أمام لجنة التحكيم — Cybersecurity + AI + Innovation.
-                        </p>
+                        <span class="eyebrow">{{ $about['eyebrow'] }}</span>
+                        <h2>{{ $about['title'] }}</h2>
+                        <p>{{ $about['description'] }}</p>
                     </div>
 
                     <div class="grid-2" style="align-items: start; gap: 26px">
                         <div style="display: grid; gap: 20px">
+                            @foreach($about['cards'] as $card)
                             <div class="card" data-reveal>
-                                <span class="idx">[ 01 ]</span>
-                                <div class="icon-box">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-4Z" /></svg>
-                                </div>
-                                <h3>تحديات واقعية من قطاع غزة</h3>
-                                <p>
-                                    مشكلات حقيقية تُطرح على الفرق، مع التركيز على الحل البرمجي
-                                    والمنطقي التقني القابل للتطبيق خلال وقت محدد.
-                                </p>
-                            </div>
-
-                            <div class="card" data-reveal>
-                                <span class="idx">[ 02 ]</span>
-                                <div class="icon-box">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M3 12h4M17 12h4" /><circle cx="12" cy="12" r="4" /></svg>
-                                </div>
-                                <h3>فرق متعددة التخصصات</h3>
-                                <p>
-                                    كل فريق يجمع تخصص الأمن السيبراني وتخصص الذكاء الاصطناعي،
-                                    ومستويات دراسية مختلفة — لأن الحل الأقوى يُبنى من أكثر من
-                                    زاوية.
-                                </p>
-                            </div>
-
-                            <div class="card" data-reveal>
-                                <span class="idx">[ 03 ]</span>
+                                <span class="idx">[ {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }} ]</span>
                                 <div class="icon-box">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                                 </div>
-                                <h3>عرض سريع أمام لجنة تحكيم</h3>
-                                <p>
-                                    فكرة ريادية وعرض تقديمي سريع أمام لجنة التحكيم، وأفضل
-                                    المشاريع تُمنح فرصة احتضان وتطوير داخل
-                                    <b style="color: var(--green-dark)">حاضنة يوكاس التكنولوجية</b>.
-                                </p>
+                                <h3>{{ $card['title'] }}</h3>
+                                <p>{{ $card['description'] }}</p>
                             </div>
+                            @endforeach
                         </div>
 
                         <div data-reveal>
@@ -2562,14 +2524,9 @@
                                     <b>hackathon@eng-club:~/mission</b>
                                 </div>
                                 <div class="terminal-body" id="termBody">
-                                    <span class="l ok"><span class="t">[00:00]</span> <span class="m">التسجيل والترحيب — تسليم التحديات للفرق ✔</span></span>
-                                    <span class="l info"><span class="t">[00:30]</span> <span class="m">تحليل المشكلة وتحديد الحل البرمجي المقترح</span></span>
-                                    <span class="l warn"><span class="t">[02:00]</span> <span class="m">نقطة تحقّق مع المرشد التقني</span></span>
-                                    <span class="l bad"><span class="t">[03:30]</span> <span class="m">اختبار الحل ومعالجة الأخطاء</span></span>
-                                    <span class="l info"><span class="t">[05:00]</span> <span class="m">تجهيز النموذج الأولي والعرض التقديمي</span></span>
-                                    <span class="l ok"><span class="t">[05:30]</span> <span class="m">العرض السريع أمام لجنة التحكيم</span></span>
-                                    <span class="l ok"><span class="t">[06:00]</span> <span class="m">إعلان النتائج وتوزيع الجوائز 🏆</span></span>
-
+                                    @foreach($about['schedule'] as $item)
+                                    <span class="l {{ ['ok', 'info', 'warn', 'bad'][$loop->index % 4] }}"><span class="t">[{{ $item['time'] }}]</span> <span class="m">{{ $item['text'] }}</span></span>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -2581,71 +2538,26 @@
             <section class="sec" id="tracks">
                 <div class="wrap">
                     <div class="sec-head" data-reveal>
-                        <span class="eyebrow">02 — مجالات التحدي</span>
-                        <h2>Cybersecurity + AI <span class="grad">+ Innovation</span></h2>
-                        <p>
-                            التحديات تجمع بين الأمن السيبراني والذكاء الاصطناعي، وكل فريق
-                            (2 أمن سيبراني + 2 ذكاء اصطناعي) يعمل على حل تقني متكامل خلال
-                            6 ساعات.
-                        </p>
+                        <span class="eyebrow">{{ $tracks['eyebrow'] }}</span>
+                        <h2>{{ $tracks['title'] }}</h2>
+                        <p>{{ $tracks['description'] }}</p>
                     </div>
 
                     <div class="grid-4">
+                        @foreach($tracks['items'] as $track)
                         <div class="card" data-reveal>
-                            <span class="idx">[ T1 ]</span>
+                            <span class="idx">[ T{{ $loop->iteration }} ]</span>
                             <div class="icon-box">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-4Z" /><path d="m9 12 2 2 4-4" /></svg>
                             </div>
-                            <h3>الاختراق الأخلاقي واختبار الثغرات</h3>
-                            <p>
-                                تحليل تطبيقات وأنظمة، اكتشاف الثغرات، وكتابة تقرير اختراق
-                                احترافي مع حلول المعالجة.
-                            </p>
+                            <h3>{{ $track['title'] }}</h3>
+                            <p>{{ $track['description'] }}</p>
                         </div>
-
-                        <div class="card" data-reveal>
-                            <span class="idx">[ T2 ]</span>
-                            <div class="icon-box">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2" /><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3" /></svg>
-                            </div>
-                            <h3>الذكاء الاصطناعي التوليدي</h3>
-                            <p>
-                                بناء تطبيق ذكي يعتمد على النماذج التوليدية أو معالجة اللغة
-                                العربية لحل مشكلة واقعية.
-                            </p>
-                        </div>
-
-                        <div class="card" data-reveal>
-                            <span class="idx">[ T3 ]</span>
-                            <div class="icon-box">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4" /></svg>
-                            </div>
-                            <h3>كشف التهديدات بالذكاء الاصطناعي</h3>
-                            <p>
-                                توظيف تعلّم الآلة في تحليل السجلات وحركة الشبكة لاكتشاف
-                                الأنماط المشبوهة والهجمات مبكراً.
-                            </p>
-                        </div>
-
-                        <div class="card" data-reveal>
-                            <span class="idx">[ T4 ]</span>
-                            <div class="icon-box">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" /><path d="M14 2v6h6M9 15h6M9 11h3" /></svg>
-                            </div>
-                            <h3>الاستجابة للحوادث والأمن الدفاعي</h3>
-                            <p>
-                                محاكاة حادثة أمنية كاملة: الاحتواء، التحليل الجنائي الرقمي،
-                                وتقليل الأثر وإعادة التأهيل.
-                            </p>
-                        </div>
+                        @endforeach
                     </div>
 
                     <div class="chips" data-reveal>
-                        <span class="chip">المشاركة مجانية بالكامل</span>
-                        <span class="chip">شهادات مشاركة للجميع</span>
-                        <span class="chip">مدة الفعالية الميدانية: 6 ساعات</span>
-                        <span class="chip">تكوين الفريق: 2 سيبراني + 2 ذكاء اصطناعي</span>
-                        <span class="chip">تسجيل الفريق كاملاً بورقة واحدة</span>
+                        @foreach($tracks['chips'] as $chip)<span class="chip">{{ $chip }}</span>@endforeach
                     </div>
                 </div>
             </section>
@@ -2654,110 +2566,33 @@
             <section class="sec" id="timeline">
                 <div class="wrap">
                     <div class="sec-head" data-reveal>
-                        <span class="eyebrow">03 — الخط الزمني</span>
-                        <h2>من التسجيل <span class="grad">إلى يوم التحدي</span></h2>
-                        <p>كل مرحلة لها موعد — تأخيرك يعني خسارة الفرصة.</p>
+                        <span class="eyebrow">{{ $timeline['eyebrow'] }}</span>
+                        <h2>{{ $timeline['title'] }}</h2>
+                        <p>{{ $timeline['description'] }}</p>
                     </div>
 
                     <div class="grid-2" style="gap: 40px">
                         <div class="tl" data-reveal>
-                            <div class="tl-item now" id="tl-open">
-                                <span class="tl-date" id="tl1">يُعلن لاحقًا</span>
-                                <span class="tl-tag now">مفتوح الآن</span>
-                                <h4>فتح باب التسجيل</h4>
-                                <p>
-                                    التسجيل متاح فردياً أو على مستوى الفريق عبر نموذج
-                                    التسجيل في هذه الصفحة.
-                                </p>
+                            @foreach($timeline['items'] as $item)
+                            <div class="tl-item {{ $loop->first ? 'now' : '' }}" @if($loop->first) id="tl-open" @elseif($loop->iteration === 2) id="tl-deadline" @endif>
+                                <span class="tl-date" id="tl{{ $loop->iteration }}">{{ $item['date'] }}</span>
+                                @if($loop->first)<span class="tl-tag now">{{ $hero['registration_open'] ? $hero['status_open'] : $hero['status_closed'] }}</span>@endif
+                                <h4>{{ $item['title'] }}</h4>
+                                <p>{{ $item['description'] }}</p>
                             </div>
-
-                            <div class="tl-item" id="tl-deadline">
-                                <span class="tl-date" id="tl2">—</span>
-                                <h4>إغلاق باب التسجيل</h4>
-                                <p>
-                                    آخر موعد لاستلام الطلبات. لن يُقبل أي طلب بعد هذا
-                                    الموعد نهائياً.
-                                </p>
-                            </div>
-
-                            <div class="tl-item">
-                                <span class="tl-date" id="tl3">يُعلن لاحقًا</span>
-                                <h4>الفرز وإعلان الفرق المتأهلة</h4>
-                                <p>
-                                    مراجعة الطلبات وإبلاغ المقبولين عبر البريد الإلكتروني
-                                    وواتساب.
-                                </p>
-                            </div>
-
-                            <div class="tl-item">
-                                <span class="tl-date" id="tl4">يُعلن لاحقًا</span>
-                                <h4>جلسة تعريفية + تنبيه بالاستعداد</h4>
-                                <p>
-                                    شرح المهام ومعايير التحكيم والتجهيزات المطلوبة، وتنبيه
-                                    المشاركين بالحضور في الموعد المحدد.
-                                </p>
-                            </div>
-
-                            <div class="tl-item">
-                                <span class="tl-date" id="tl5">يُعلن لاحقًا</span>
-                                <h4>يوم الفعالية — 6 ساعات</h4>
-                                <p>
-                                    التسجيل والترحيب، ثم العمل على التحديات مع المرشدين
-                                    والعرض أمام لجنة التحكيم.
-                                </p>
-                            </div>
-
-                            <div class="tl-item">
-                                <span class="tl-date" id="tl6">يُعلن لاحقًا</span>
-                                <h4>العروض التقديمية والتحكيم</h4>
-                                <p>
-                                    عرض كل فريق لمشروعه أمام لجنة التحكيم ومناقشة الحلول
-                                    التقنية.
-                                </p>
-                            </div>
-
-                            <div class="tl-item">
-                                <span class="tl-date" id="tl7">يُعلن لاحقًا</span>
-                                <h4>الحفل الختامي وإعلان الفائزين</h4>
-                                <p>توزيع الجوائز وشهادات المشاركة على الجميع.</p>
-                            </div>
+                            @endforeach
                         </div>
 
                         <div style="display: grid; gap: 18px; align-content: start">
+                            @foreach($timeline['notes'] as $note)
                             <div class="card" data-reveal>
                                 <div class="icon-box">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
                                 </div>
-                                <h3>ليش التسجيل المبكر مهم؟</h3>
-                                <p>
-                                    عدد مقاعد الهاكاثون محدود، والفرق تُقبل حسب جودة الطلب
-                                    مع مراعاة أسبقية التسجيل. كل ما تأخّرت، كل ما صار
-                                    التنافس أصعب.
-                                </p>
+                                <h3>{{ $note['title'] }}</h3>
+                                <p>{{ $note['description'] }}</p>
                             </div>
-
-                            <div class="card" data-reveal>
-                                <div class="icon-box">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H5.2L4 17.5V4Z" /></svg>
-                                </div>
-                                <h3>محتاج فريق؟</h3>
-                                <p>
-                                    سجّل فردياً وسنساعدك في ربطك مع مشاركين آخرين يكمّلون
-                                    مهاراتك (مبرمج / أمن سيبراني / مصمم / باحث ذكاء
-                                    اصطناعي).
-                                </p>
-                            </div>
-
-                            <div class="card" data-reveal>
-                                <div class="icon-box">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                </div>
-                                <h3>لا تحتاج خبرة سابقة</h3>
-                                <p>
-                                    الهاكاثون مفتوح للطلاب من كل المستويات. الأساسيات تكفي —
-                                    والباقي تتعلمه أثناء الحدث.
-                                </p>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -2767,44 +2602,24 @@
             <section class="sec" id="prizes">
                 <div class="wrap">
                     <div class="sec-head" data-reveal>
-                        <span class="eyebrow">04 — Prizes</span>
-                        <h2>الجوائز <span class="grad">والفرص</span></h2>
-                        <p>
-                            جوائز نقدية للفرق الفائزة، وفرص احتضان وتطوير للمشاريع الواعدة.
-                        </p>
+                        <span class="eyebrow">{{ $prizesRules['prizes_eyebrow'] }}</span>
+                        <h2>{{ $prizesRules['prizes_title'] }}</h2>
+                        <p>{{ $prizesRules['prizes_description'] }}</p>
                     </div>
 
                     <div class="grid-3">
-                        <div class="card prize p2" data-reveal>
-                            <div class="rank">2</div>
-                            <div class="amount">$1,500</div>
-                            <h3>المركز الثاني</h3>
-                            <p class="prize-use">جائزة نقدية + شهادات تقدير لأعضاء الفريق</p>
+                        @foreach($prizesRules['prizes'] as $prize)
+                        <div class="card prize p{{ $prize['rank'] }}" data-reveal>
+                            <div class="rank">{{ $prize['rank'] }}</div>
+                            <div class="amount">{{ $prize['amount'] }}</div>
+                            <h3>{{ $prize['title'] }}</h3>
+                            <p class="prize-use">{{ $prize['description'] }}</p>
                         </div>
-
-                        <div class="card prize p1" data-reveal>
-                            <div class="rank">1</div>
-                            <div class="amount">$3,000</div>
-                            <h3>المركز الأول</h3>
-                            <p class="prize-use">
-                                جائزة نقدية + فرصة احتضان في حاضنة يوكاس التكنولوجية
-                            </p>
-                        </div>
-
-                        <div class="card prize p3" data-reveal>
-                            <div class="rank">3</div>
-                            <div class="amount">$750</div>
-                            <h3>المركز الثالث</h3>
-                            <p class="prize-use">جائزة نقدية + شهادات تقدير لأعضاء الفريق</p>
-                        </div>
+                        @endforeach
                     </div>
 
                     <div class="chips" data-reveal>
-                        <span class="chip">جائزة أفضل حل ذكاء اصطناعي</span>
-                        <span class="chip">جائزة أفضل حل أمن سيبراني</span>
-                        <span class="chip">جائزة الابتكار والتميّز التقني</span>
-                        <span class="chip">جائزة أفضل عرض تقديمي</span>
-                        <span class="chip">شهادات مشاركة لكل المشاركين</span>
+                        @foreach($prizesRules['extra_prizes'] as $prize)<span class="chip">{{ $prize }}</span>@endforeach
                     </div>
                 </div>
             </section>
@@ -2813,64 +2628,33 @@
             <section class="sec" id="rules">
                 <div class="wrap">
                     <div class="sec-head" data-reveal>
-                        <span class="eyebrow">05 — Eligibility</span>
-                        <h2>شروط <span class="grad">المشاركة</span></h2>
-                        <p>اقرأ الشروط قبل التسجيل لتضمن قبول طلبك.</p>
+                        <span class="eyebrow">{{ $prizesRules['rules_eyebrow'] }}</span>
+                        <h2>{{ $prizesRules['rules_title'] }}</h2>
+                        <p>{{ $prizesRules['rules_description'] }}</p>
                     </div>
 
                     <div class="grid-2">
                         <div class="card" data-reveal>
-                            <h3 style="margin-bottom: 16px">من يحق له المشاركة؟</h3>
+                            <h3 style="margin-bottom: 16px">{{ $prizesRules['eligibility_title'] }}</h3>
                             <ul class="ul-check">
+                                @foreach($prizesRules['eligibility'] as $rule)
                                 <li>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    طلبة الأمن السيبراني والذكاء الاصطناعي من مختلف المستويات الأكاديمية.
+                                    {{ $rule }}
                                 </li>
-                                <li>
-                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    المشاركة ضمن فرق تجمع تخصصي الأمن السيبراني والذكاء الاصطناعي.
-                                </li>
-                                <li>
-                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    تكوين الفريق: 2 طلبة أمن سيبراني + 2 طلبة ذكاء اصطناعي.
-                                </li>
-                                <li>
-                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    لا يُقبل العضو في أكثر من فريق واحد.
-                                </li>
-                                <li>
-                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    الالتزام الكامل بالحضور في الموعد المحدد ليوم الفعالية.
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
 
                         <div class="card" data-reveal>
-                            <h3 style="margin-bottom: 16px">قواعد الحدث</h3>
+                            <h3 style="margin-bottom: 16px">{{ $prizesRules['event_rules_title'] }}</h3>
                             <ul class="ul-check">
+                                @foreach($prizesRules['event_rules'] as $rule)
                                 <li>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    يُمنع أي استخدام غير أخلاقي أو غير قانوني للأدوات التقنية —
-                                    الحدث تعليمي ودفاعي.
+                                    {{ $rule }}
                                 </li>
-                                <li>
-                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    المشروع يجب أن يُبنى خلال مدة الفعالية (يُسمح بالمكتبات
-                                    والأدوات مفتوحة المصدر).
-                                </li>
-                                <li>
-                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    يُمنع تقديم مشروع سبق الفوز به في مسابقة أخرى.
-                                </li>
-                                <li>
-                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    قرارات لجنة التحكيم نهائية وغير قابلة للطعن.
-                                </li>
-                                <li>
-                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    يحق للمنظّمين تعديل المواعيد أو آلية التنظيم مع إشعار
-                                    المشاركين مسبقاً.
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -2881,79 +2665,18 @@
             <section class="sec" id="faq">
                 <div class="wrap">
                     <div class="sec-head" data-reveal>
-                        <span class="eyebrow">06 — FAQ</span>
-                        <h2>الأسئلة <span class="grad">الشائعة</span></h2>
+                        <span class="eyebrow">{{ $faq['eyebrow'] }}</span>
+                        <h2>{{ $faq['title'] }}</h2>
+                        <p>{{ $faq['description'] }}</p>
                     </div>
 
                     <div class="faq" data-reveal>
-                        <details class="qa" open>
-                            <summary>هل المشاركة مجانية؟</summary>
-                            <div class="ans">
-                                نعم، التسجيل والمشاركة مجانيان بالكامل ولا توجد أي رسوم على
-                                المشاركين.
-                            </div>
+                        @foreach($faq['items'] as $item)
+                        <details class="qa" @if($loop->first) open @endif>
+                            <summary>{{ $item['question'] }}</summary>
+                            <div class="ans">{{ $item['answer'] }}</div>
                         </details>
-
-                        <details class="qa">
-                            <summary>أنا طالب مبتدئ… هل يمكنني المشاركة؟</summary>
-                            <div class="ans">
-                                بالتأكيد. الهاكاثون مفتوح لكل المستويات، وهناك مرشدون
-                                تقنيون يساعدونك أثناء الحدث. الأهم هو حماسك للتعلم والعمل
-                                بروح الفريق.
-                            </div>
-                        </details>
-
-                        <details class="qa">
-                            <summary>كيف أسجّل مع فريق؟</summary>
-                            <div class="ans">
-                                اختر «فريق» في نموذج التسجيل، وحدّد اسم الفريق وبيانات قائد
-                                الفريق، ثم أضف بيانات كل عضو من زر «إضافة عضو». عضو واحد فقط
-                                يسجّل نيابة عن الفريق كاملاً.
-                            </div>
-                        </details>
-
-                        <details class="qa">
-                            <summary>كيف يتكوّن الفريق؟</summary>
-                            <div class="ans">
-                                الفريق من 4 أعضاء: طالبان من الأمن السيبراني + طالبان من
-                                الذكاء الاصطناعي، مع جمع المستويات الدراسية المختلفة
-                                (Team Leader / Tech / Presenter).
-                            </div>
-                        </details>
-
-                        <details class="qa">
-                            <summary>هل يجب أن تكون فكرة المشروع جاهزة؟</summary>
-                            <div class="ans">
-                                لا. يكفي أن تكتب فكرة مبدئية في النموذج (أو تكتب أنك بحاجة
-                                لمساعدة في اختيار الفكرة)، والتحديات التفصيلية ستُعلن أثناء
-                                الهاكاثون.
-                            </div>
-                        </details>
-
-                        <details class="qa">
-                            <summary>هل الهاكاثون حضوري أم عن بُعد؟</summary>
-                            <div class="ans">
-                                الحدث حضوري في المقر الرئيسي — غزة، والالتزام بالحضور في
-                                الموعد المحدد شرط أساسي للمشاركة في المسابقة.
-                            </div>
-                        </details>
-
-                        <details class="qa">
-                            <summary>كم مدة الفعالية وما الذي يجب أن أحضّره معي؟</summary>
-                            <div class="ans">
-                                مدة الفعالية الميدانية 6 ساعات. أحضّر حاسوبك المحمول
-                                ومشغّل الطاقة وأي أدوات برمجية تفضّلها، وسنوفّر المكان
-                                    المجهّز والإنترنت.
-                            </div>
-                        </details>
-
-                        <details class="qa">
-                            <summary>هل هناك شهادات مشاركة؟</summary>
-                            <div class="ans">
-                                نعم، تُمنح شهادات مشاركة معتمدة من النادي الهندسي وحاضنة
-                                يوكاس التكنولوجية لكل المشاركين الذين يكملون الحدث.
-                            </div>
-                        </details>
+                        @endforeach
                     </div>
                 </div>
             </section>
@@ -2962,12 +2685,9 @@
             <section class="sec" id="register">
                 <div class="wrap">
                     <div class="sec-head" data-reveal>
-                        <span class="eyebrow">07 — Registration</span>
-                        <h2>سجّل الآن… <span class="grad">قبل إغلاق الباب</span></h2>
-                        <p>
-                            املأ النموذج بدقة. سنتواصل معك عبر البريد الإلكتروني أو واتساب
-                            لتأكيد قبول طلبك.
-                        </p>
+                        <span class="eyebrow">{{ $registration['eyebrow'] }}</span>
+                        <h2>{{ $registration['title'] }}</h2>
+                        <p>{{ $registration['description'] }}</p>
                     </div>
 
                     <div class="reg-shell">
@@ -2976,7 +2696,7 @@
                             <div class="aside-box">
                                 <h4>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-                                    موعد الإغلاق
+                                    {{ $registration['deadline_card_title'] }}
                                 </h4>
                                 <p id="asideDeadline">—</p>
                                 <p style="margin-top: 8px; color: var(--orange); font-weight: 700" id="asideLeft">—</p>
@@ -2985,117 +2705,102 @@
                             <div class="aside-box">
                                 <h4>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg>
-                                    خلّص تحضيرك
+                                    {{ $registration['preparation_title'] }}
                                 </h4>
                                 <ul>
-                                    <li>اسمك الثلاثي وبيانات تواصل صحيحة.</li>
-                                    <li>تخصصك وسنتك الدراسية.</li>
-                                    <li>المهارات التي تجيدها.</li>
-                                    <li>فكرة مبدئية (اختياري لكن يفضّل).</li>
-                                    <li>بيانات أعضاء فريقك (التكوين الرسمي 2 + 2).</li>
+                                    @foreach($registration['preparation_items'] as $item)<li>{{ $item }}</li>@endforeach
                                 </ul>
                             </div>
 
                             <div class="aside-box">
                                 <h4>
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16v12H5.2L4 17.5V4Z" /></svg>
-                                    عندك سؤال؟
+                                    {{ $registration['contact_card_title'] }}
                                 </h4>
                                 <p>
-                                    راسلنا قبل التسجيل:<br />
-                                    <a href="mailto:{{ config('hackathon.email') }}" style="color: var(--green-dark)" id="asideMail">{{ config('hackathon.email') }}</a>
+                                    <a href="mailto:{{ $identity['email'] }}" style="color: var(--green-dark)" id="asideMail">{{ $identity['email'] }}</a>
                                 </p>
                             </div>
                         </aside>
 
                         {{-- النموذج --}}
                         <div class="form-card" data-reveal>
-                            <div class="mode-switch" role="tablist" aria-label="نوع المشاركة">
+                            <div class="mode-switch" role="tablist" aria-label="{{ $identity['accessibility']['participation_type'] }}">
                                 <button type="button" id="modeIndividual" class="active" role="tab" aria-selected="true" aria-controls="paneIndividual">
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6" /></svg>
-                                    مشاركة فردية
+                                    {{ $registration['individual_tab'] }}
                                 </button>
                                 <button type="button" id="modeTeam" role="tab" aria-selected="false" aria-controls="paneTeam">
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="8" r="3.4" /><path d="M2.5 20c0-3.4 3-5.2 6.5-5.2s6.5 1.8 6.5 5.2" /><path d="M17 8.2a3 3 0 1 1 0 6M18 20c0-2.2-.6-3.6-1.6-4.6" /></svg>
-                                    مشاركة فريق
+                                    {{ $registration['team_tab'] }}
                                 </button>
                             </div>
 
                             <form id="regForm" novalidate>
                                 <fieldset>
-                                    <div class="fs-title"><span id="leadTitle">بيانات المشارك</span></div>
+                                    <div class="fs-title"><span id="leadTitle">{{ $registration['participant_title'] }}</span></div>
 
                                     <div class="form-grid">
                                         <div class="field">
-                                            <label for="fullName">الاسم الكامل <span class="req">*</span></label>
-                                            <input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="مثال: أحمد محمد سالم" required />
+                                            <label for="fullName">{{ $registration['fields']['full_name'] }} <span class="req">*</span></label>
+                                            <input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="{{ $registration['placeholders']['full_name'] }}" required />
                                             <span class="err" data-err-for="fullName"></span>
                                         </div>
 
                                         <div class="field">
-                                            <label for="email">البريد الإلكتروني <span class="req">*</span></label>
+                                            <label for="email">{{ $registration['fields']['email'] }} <span class="req">*</span></label>
                                             <input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" dir="ltr" required />
                                             <span class="err" data-err-for="email"></span>
                                         </div>
 
                                         <div class="field">
-                                            <label for="phone">رقم الجوال / واتساب <span class="req">*</span></label>
+                                            <label for="phone">{{ $registration['fields']['phone'] }} <span class="req">*</span></label>
                                             <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05xxxxxxxx" dir="ltr" required />
                                             <span class="err" data-err-for="phone"></span>
                                         </div>
 
                                         <div class="field">
-                                            <label for="university">الجامعة / الجهة <span class="req">*</span></label>
-                                            <input id="university" name="university" type="text" placeholder="مثال: الكلية الجامعية للعلوم التطبيقية - غزة" required />
+                                            <label for="university">{{ $registration['fields']['university'] }} <span class="req">*</span></label>
+                                            <input id="university" name="university" type="text" placeholder="{{ $registration['placeholders']['university'] }}" required />
                                             <span class="err" data-err-for="university"></span>
                                         </div>
 
                                         <div class="field">
-                                            <label for="major">التخصص <span class="req">*</span></label>
-                                            <input id="major" name="major" type="text" placeholder="مثال: هندسة الحاسوب / علوم الحاسوب" required />
+                                            <label for="major">{{ $registration['fields']['major'] }} <span class="req">*</span></label>
+                                            <input id="major" name="major" type="text" placeholder="{{ $registration['placeholders']['major'] }}" required />
                                             <span class="err" data-err-for="major"></span>
                                         </div>
 
                                         <div class="field">
-                                            <label for="year">السنة الدراسية</label>
+                                            <label for="year">{{ $registration['fields']['year'] }}</label>
                                             <select id="year" name="year">
-                                                <option value="">اختر…</option>
-                                                <option>أولى</option>
-                                                <option>ثانية</option>
-                                                <option>ثالثة</option>
-                                                <option>رابعة</option>
-                                                <option>خامسة أو أكثر</option>
-                                                <option>خريج</option>
+                                                <option value="">{{ $registration['select_placeholder'] }}</option>
+                                                @foreach($registration['year_options'] as $option)<option>{{ $option }}</option>@endforeach
                                             </select>
                                             <span class="err" data-err-for="year"></span>
                                         </div>
 
                                         <div class="field full">
-                                            <label for="skills">المهارات الأساسية <span class="req">*</span></label>
-                                            <input id="skills" name="skills" type="text" placeholder="مثال: Python، تحليل شبكات، Linux، تعلّم آلة (افصل بينها بفاصلة)" required />
+                                            <label for="skills">{{ $registration['fields']['skills'] }} <span class="req">*</span></label>
+                                            <input id="skills" name="skills" type="text" placeholder="{{ $registration['placeholders']['skills'] }}" required />
                                             <span class="err" data-err-for="skills"></span>
                                         </div>
 
                                         <div class="field">
-                                            <label for="track">المسار المفضّل <span class="req">*</span></label>
+                                            <label for="track">{{ $registration['fields']['track'] }} <span class="req">*</span></label>
                                             <select id="track" name="track" required>
-                                                <option value="">اختر المسار…</option>
-                                                <option>الاختراق الأخلاقي واختبار الثغرات</option>
-                                                <option>الذكاء الاصطناعي التوليدي</option>
-                                                <option>كشف التهديدات بالذكاء الاصطناعي</option>
-                                                <option>الاستجابة للحوادث والأمن الدفاعي</option>
-                                                <option>لم أحدّد بعد — أحتاج مساعدة</option>
+                                                <option value="">{{ $registration['track_placeholder'] }}</option>
+                                                @foreach($tracks['items'] as $track)<option>{{ $track['title'] }}</option>@endforeach
+                                                <option>{{ $registration['track_unsure'] }}</option>
                                             </select>
                                             <span class="err" data-err-for="track"></span>
                                         </div>
 
                                         <div class="field">
-                                            <label for="experience">مستوى الخبرة</label>
+                                            <label for="experience">{{ $registration['fields']['experience'] }}</label>
                                             <select id="experience" name="experience">
-                                                <option value="">اختر…</option>
-                                                <option>مبتدئ</option>
-                                                <option>متوسط</option>
-                                                <option>متقدّم</option>
+                                                <option value="">{{ $registration['select_placeholder'] }}</option>
+                                                @foreach($registration['experience_options'] as $option)<option>{{ $option }}</option>@endforeach
                                             </select>
                                             <span class="err" data-err-for="experience"></span>
                                         </div>
@@ -3103,33 +2808,27 @@
                                 </fieldset>
 
                                 <fieldset id="teamBlock" hidden>
-                                    <div class="fs-title"><span>بيانات الفريق</span></div>
+                                    <div class="fs-title"><span>{{ $registration['fields']['team_data'] }}</span></div>
 
                                     <div class="note-box" style="margin-bottom: 18px">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 16v-5M12 8h.01" /></svg>
                                         <span>
-                                            <b>التكوين الرسمي للفريق: 4 أعضاء</b> — طالبان
-                                            من الأمن السيبراني + طالبان من الذكاء الاصطناعي،
-                                            مع مراعاة جمع المستويات الدراسية المختلفة.
+                                            {{ $registration['team_note'] }}
                                         </span>
                                     </div>
 
                                     <div class="form-grid">
                                         <div class="field">
-                                            <label for="teamName">اسم الفريق <span class="req">*</span></label>
-                                            <input id="teamName" name="teamName" type="text" placeholder="مثال: Team Phantom" />
+                                            <label for="teamName">{{ $registration['fields']['team_name'] }} <span class="req">*</span></label>
+                                            <input id="teamName" name="teamName" type="text" placeholder="{{ $registration['placeholders']['team_name'] }}" />
                                             <span class="err" data-err-for="teamName"></span>
                                         </div>
 
                                         <div class="field">
-                                            <label for="teamSize">عدد أعضاء الفريق (بما فيك) <span class="req">*</span></label>
+                                            <label for="teamSize">{{ $registration['fields']['team_size'] }} <span class="req">*</span></label>
                                             <select id="teamSize" name="teamSize">
-                                                <option value="">اختر…</option>
-                                                <option value="4">4 — التكوين الرسمي (2 أمن سيبراني + 2 ذكاء اصطناعي)</option>
-                                                <option value="3">3</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="2">2</option>
+                                                <option value="">{{ $registration['select_placeholder'] }}</option>
+                                                @foreach($registration['team_sizes'] as $option)<option value="{{ (int) $option }}">{{ $option }}</option>@endforeach
                                             </select>
                                             <span class="err" data-err-for="teamSize"></span>
                                         </div>
@@ -3138,8 +2837,8 @@
                                     <div style="margin-top: 20px">
                                         <div class="fs-title" style="margin-bottom: 12px">
                                             <span>
-                                                بيانات بقية الأعضاء
-                                                <small class="hint" style="text-transform: none; letter-spacing: 0">— لا تكرّر بياناتك</small>
+                                                {{ $registration['fields']['members'] }}
+                                                <small class="hint" style="text-transform: none; letter-spacing: 0">— {{ $registration['members_hint'] }}</small>
                                             </span>
                                         </div>
 
@@ -3147,36 +2846,31 @@
 
                                         <button type="button" class="add-member" id="addMember">
                                             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14" /></svg>
-                                            إضافة عضو
+                                            {{ $registration['fields']['add_member'] }}
                                         </button>
                                     </div>
                                 </fieldset>
 
                                 <fieldset>
-                                    <div class="fs-title"><span>تفاصيل المشروع</span></div>
+                                    <div class="fs-title"><span>{{ $registration['fields']['project'] }}</span></div>
 
                                     <div class="form-grid">
                                         <div class="field full">
-                                            <label for="idea">فكرة مبدئية عن المشروع (اختياري)</label>
-                                            <textarea id="idea" name="idea" placeholder="اكتب باختصار: ما المشكلة؟ وما الحل المقترح؟ وما التقنيات التي تتوقع استخدامها؟"></textarea>
-                                            <span class="hint">إذا لم تكن الفكرة واضحة، اتركها فارغة وسنساعدك في تحديدها.</span>
+                                            <label for="idea">{{ $registration['fields']['idea'] }}</label>
+                                            <textarea id="idea" name="idea" placeholder="{{ $registration['placeholders']['idea'] }}"></textarea>
+                                            <span class="hint">{{ $registration['idea_hint'] }}</span>
                                         </div>
 
                                         <div class="field">
-                                            <label for="links">حساب GitHub / Portfolio (اختياري)</label>
+                                            <label for="links">{{ $registration['fields']['links'] }}</label>
                                             <input id="links" name="links" type="text" dir="ltr" placeholder="https://github.com/username" />
                                         </div>
 
                                         <div class="field">
-                                            <label for="source">كيف عرفت عن الهاكاثون؟</label>
+                                            <label for="source">{{ $registration['fields']['source'] }}</label>
                                             <select id="source" name="source">
-                                                <option value="">اختر…</option>
-                                                <option>النادي الهندسي</option>
-                                                <option>حاضنة يوكاس التكنولوجية</option>
-                                                <option>الجامعة / الكلية</option>
-                                                <option>سوشال ميديا</option>
-                                                <option>صديق / زميل</option>
-                                                <option>أخرى</option>
+                                                <option value="">{{ $registration['select_placeholder'] }}</option>
+                                                @foreach($registration['source_options'] as $option)<option>{{ $option }}</option>@endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -3185,21 +2879,18 @@
                                 <div class="agree" id="agreeWrap">
                                     <input type="checkbox" id="agree" />
                                     <label for="agree" style="cursor: pointer">
-                                        أتعهد بصحة البيانات المدخلة، وبالالتزام بأنظمة الهاكاثون
-                                        وشروط المشاركة، وأوافق على استخدام بياناتي للتواصل بشأن
-                                        الحدث فقط. <span class="req">*</span>
+                                        {{ $registration['agreement'] }} <span class="req">*</span>
                                     </label>
                                 </div>
                                 <span class="err" data-err-for="agree" style="margin-top: 8px"></span>
 
                                 <button type="submit" class="btn btn-primary btn-block" id="submitBtn" style="margin-top: 22px">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /></svg>
-                                    إرسال طلب التسجيل
+                                    {{ $registration['submit'] }}
                                 </button>
 
                                 <p class="hint" style="text-align: center; margin-top: 14px">
-                                    سيتم إشعارك عند استلام الطلب. لن يتم استخدام بياناتك لأي
-                                    غرض غير تنظيم الحدث.
+                                    {{ $registration['privacy_note'] }}
                                 </p>
                             </form>
                         </div>
@@ -3217,51 +2908,48 @@
                             <span class="brand-card lg">
                                 <img
                                     src="{{ asset('images/hackathon-logo.png') }}"
-                                    alt="شعار هاكاثون السايبر والذكاء الاصطناعي 2026"
+                                    alt="{{ $identity['logo_alt'] }}"
                                     onerror="this.remove()"
                                 />
-                                <span class="slot-hint">الشعار<small>LOGO</small></span>
+                                <span class="slot-hint">{{ $identity['logo_placeholder'] }}<small>LOGO</small></span>
                             </span>
                         </a>
-                        <p>
-                            النادي الهندسي — لجنة الأنشطة — هندسة الحاسوب، الكلية الجامعية
-                            للعلوم التطبيقية، غزة. مساحة للإبداع والتميّز.
-                        </p>
+                        <p>{{ $footer['description'] }}</p>
                         <div class="socials">
-                            <a href="#" aria-label="فيسبوك">
+                            <a href="{{ $identity['facebook_url'] ?: '#' }}" aria-label="فيسبوك">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5h1.65V4.6c-.29-.04-1.27-.13-2.41-.13-2.39 0-4.02 1.46-4.02 4.13v2.3H7.5V14h2.77v8h3.23Z" /></svg>
                             </a>
-                            <a href="#" aria-label="إنستغرام">
+                            <a href="{{ $identity['instagram_url'] ?: '#' }}" aria-label="إنستغرام">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none" /></svg>
                             </a>
-                            <a href="#" aria-label="تيليجرام">
+                            <a href="{{ $identity['telegram_url'] ?: '#' }}" aria-label="تيليجرام">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 4.3 2.9 11.5c-.9.35-.9.85-.15 1.06l4.3 1.35 1.65 5.05c.2.55.36.77.72.77.35 0 .5-.16.7-.35l2.05-2 4.25 3.15c.78.43 1.34.2 1.53-.72l2.76-13c.28-1.13-.4-1.65-1.1-1.35Z" /></svg>
                             </a>
-                            <a href="#" aria-label="لينكدإن">
+                            <a href="{{ $identity['linkedin_url'] ?: '#' }}" aria-label="لينكدإن">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5A1.94 1.94 0 1 1 5 6.94 1.94 1.94 0 0 1 6.94 5ZM5.3 8.9h3.3V19H5.3V8.9Zm5.4 0h3.16v1.38h.05c.44-.77 1.5-1.58 3.1-1.58 3.3 0 3.9 2.02 3.9 4.65V19h-3.3v-4.86c0-1.16-.02-2.65-1.7-2.65-1.7 0-2.96 1.26-2.96 2.57V19h-3.3V8.9Z" /></svg>
                             </a>
                         </div>
                     </div>
 
                     <div>
-                        <h4>روابط سريعة</h4>
+                        <h4>{{ $footer['quick_links_title'] }}</h4>
                         <ul>
-                            <li><a href="#about">عن الهاكاثون</a></li>
-                            <li><a href="#tracks">المسارات</a></li>
-                            <li><a href="#timeline">الجدول الزمني</a></li>
-                            <li><a href="#prizes">الجوائز</a></li>
-                            <li><a href="#rules">شروط المشاركة</a></li>
-                            <li><a href="#register">التسجيل</a></li>
+                            <li><a href="#about">{{ $identity['nav']['about'] }}</a></li>
+                            <li><a href="#tracks">{{ $identity['nav']['tracks'] }}</a></li>
+                            <li><a href="#timeline">{{ $identity['nav']['timeline'] }}</a></li>
+                            <li><a href="#prizes">{{ $identity['nav']['prizes'] }}</a></li>
+                            <li><a href="#rules">{{ $identity['nav']['rules'] }}</a></li>
+                            <li><a href="#register">{{ $identity['nav']['register'] }}</a></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4>تواصل معنا</h4>
+                        <h4>{{ $footer['contact_title'] }}</h4>
                         <ul>
-                            <li><a href="mailto:{{ config('hackathon.email') }}" dir="ltr">{{ config('hackathon.email') }}</a></li>
-                            <li><a href="tel:{{ preg_replace('/\s+/', '', config('hackathon.phone')) }}" dir="ltr">{{ config('hackathon.phone') }}</a></li>
-                            <li>المقر الرئيسي — غزة</li>
-                            <li>بالشراكة مع حاضنة يوكاس التكنولوجية</li>
+                            <li><a href="mailto:{{ $identity['email'] }}" dir="ltr">{{ $identity['email'] }}</a></li>
+                            <li><a href="tel:{{ preg_replace('/\s+/', '', $identity['phone']) }}" dir="ltr">{{ $identity['phone'] }}</a></li>
+                            <li>{{ $identity['location'] }}</li>
+                            <li>{{ $footer['partner_line'] }}</li>
                         </ul>
                     </div>
                 </div>
@@ -3269,27 +2957,26 @@
                 <div class="foot-orgs">
                     {{-- مكان شعار النادي الهندسي (يوصل لاحقاً) --}}
                     <div class="logo-slot slot-light">
-                        <img src="{{ asset('images/eng-club.png') }}" alt="شعار النادي الهندسي" onerror="this.remove()" />
-                        <span class="slot-hint">شعار النادي الهندسي<small>ENG CLUB</small></span>
+                        <img src="{{ asset('images/eng-club.png') }}" alt="{{ $identity['engineering_logo_alt'] }}" onerror="this.remove()" />
+                        <span class="slot-hint">{{ $identity['engineering_logo_placeholder'] }}<small>ENG CLUB</small></span>
                     </div>
                     {{-- مكان شعار حاضنة يوكاس (يوصل لاحقاً) --}}
                     <div class="logo-slot slot-light">
-                        <img src="{{ asset('images/ucas.png') }}" alt="شعار حاضنة يوكاس التكنولوجية" onerror="this.remove()" />
-                        <span class="slot-hint">شعار حاضنة يوكاس<small>UCAS INCUBATOR</small></span>
+                        <img src="{{ asset('images/ucas.png') }}" alt="{{ $identity['incubator_logo_alt'] }}" onerror="this.remove()" />
+                        <span class="slot-hint">{{ $identity['incubator_logo_placeholder'] }}<small>UCAS INCUBATOR</small></span>
                     </div>
                 </div>
 
                 <div class="foot-bottom">
                     <span>
-                        © <span id="yr">2026</span> النادي الهندسي — لجنة الأنشطة — هندسة
-                        الحاسوب. جميع الحقوق محفوظة.
+                        © <span id="yr">{{ $hero['title_year'] }}</span> {{ $footer['copyright'] }}
                     </span>
-                    <span class="mono" style="direction: ltr">AI &amp; CYBER HACKATHON 2026</span>
+                    <span class="mono" style="direction: ltr">{{ $footer['signature'] }}</span>
                 </div>
             </div>
         </footer>
 
-        <button class="to-top" id="toTop" aria-label="العودة للأعلى">
+        <button class="to-top" id="toTop" aria-label="{{ $identity['accessibility']['back_to_top'] }}">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
         </button>
 
@@ -3301,21 +2988,18 @@
                 <div class="ok-ring">
                     <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                 </div>
-                <h3 id="okTitle">تم استلام طلبك بنجاح</h3>
-                <p id="okMsg">
-                    شكراً لك! سنراجع طلبك ونتواصل معك عبر البريد الإلكتروني أو واتساب
-                    لتأكيد القبول.
-                </p>
+                <h3 id="okTitle">{{ $registration['success_title'] }}</h3>
+                <p id="okMsg">{{ $registration['success_message'] }}</p>
 
                 <div class="ref">
-                    <span>رقم الطلب المرجعي</span>
+                    <span>{{ $registration['reference_label'] }}</span>
                     <b id="okRef">—</b>
                 </div>
 
                 <div class="modal-actions">
-                    <a class="btn btn-green" id="okWa" href="#" target="_blank" rel="noopener" hidden>إرسال نسخة على واتساب</a>
-                    <button class="btn btn-ghost" id="okDownload" type="button">تحميل نسخة من الطلب</button>
-                    <button class="btn btn-ghost" id="okClose" type="button">إغلاق</button>
+                    <a class="btn btn-green" id="okWa" href="#" target="_blank" rel="noopener" hidden>{{ $registration['whatsapp_button'] }}</a>
+                    <button class="btn btn-ghost" id="okDownload" type="button">{{ $registration['download_button'] }}</button>
+                    <button class="btn btn-ghost" id="okClose" type="button">{{ $registration['close_button'] }}</button>
                 </div>
             </div>
         </div>
@@ -3324,38 +3008,36 @@
         <template id="memberTpl">
             <div class="member">
                 <div class="member-head">
-                    <b>عضو #<span class="mnum"></span></b>
-                    <button type="button" class="rm">حذف العضو</button>
+                    <b>{{ $registration['member_label'] }} #<span class="mnum"></span></b>
+                    <button type="button" class="rm">{{ $registration['remove_member'] }}</button>
                 </div>
                 <div class="form-grid">
                     <div class="field">
-                        <label>الاسم الكامل <span class="req">*</span></label>
-                        <input type="text" data-m="name" placeholder="اسم العضو" />
+                        <label>{{ $registration['fields']['full_name'] }} <span class="req">*</span></label>
+                        <input type="text" data-m="name" placeholder="{{ $registration['member_name_placeholder'] }}" />
                         <span class="err"></span>
                     </div>
                     <div class="field">
-                        <label>البريد الإلكتروني <span class="req">*</span></label>
+                        <label>{{ $registration['fields']['email'] }} <span class="req">*</span></label>
                         <input type="email" data-m="email" dir="ltr" placeholder="name@example.com" />
                         <span class="err"></span>
                     </div>
                     <div class="field">
-                        <label>رقم الجوال / واتساب</label>
+                        <label>{{ $registration['fields']['phone'] }}</label>
                         <input type="tel" data-m="phone" dir="ltr" placeholder="05xxxxxxxx" />
                         <span class="err"></span>
                     </div>
                     <div class="field">
-                        <label>التخصص في الفريق</label>
+                        <label>{{ $registration['member_role_label'] }}</label>
                         <select data-m="role">
-                            <option value="">اختر…</option>
-                            <option>أمن سيبراني</option>
-                            <option>ذكاء اصطناعي</option>
-                            <option>أخرى</option>
+                            <option value="">{{ $registration['select_placeholder'] }}</option>
+                            @foreach($registration['role_options'] as $option)<option>{{ $option }}</option>@endforeach
                         </select>
                         <span class="err"></span>
                     </div>
                     <div class="field">
-                        <label>المهارة الأساسية / الدور</label>
-                        <input type="text" data-m="major" placeholder="مثال: Team Leader / Presenter" />
+                        <label>{{ $registration['member_skill_label'] }}</label>
+                        <input type="text" data-m="major" placeholder="{{ $registration['member_skill_placeholder'] }}" />
                         <span class="err"></span>
                     </div>
                 </div>
@@ -3368,19 +3050,33 @@
                ========================================================= */
             const CONFIG = {
                 /* آخر موعد للتقديم (بتوقيت غزة +03:00) */
-                deadline: '{{ config('hackathon.deadline') }}',
+                deadline: @json($hero['deadline']),
 
                 /* تواريخ الحدث كما تظهر بالصفحة */
-                eventDates: '{{ config('hackathon.event_dates') }}',
+                eventDates: @json($hero['event_dates']),
 
                 /* إغلاق التسجيل يدوياً عند الحاجة */
-                registrationOpen: {{ config('hackathon.registration_open') ? 'true' : 'false' }},
+                registrationOpen: {{ $hero['registration_open'] ? 'true' : 'false' }},
 
                 /* راوت Laravel اللي بيستقبل الطلب */
                 endpoint: '{{ route('registrations.store') }}',
 
                 /* رقم واتساب بصيغة دولية بدون + (يظهر زر إرسال نسخة إذا تعبّى) */
-                whatsapp: '{{ config('hackathon.whatsapp') }}',
+                whatsapp: @json(config('hackathon.whatsapp')),
+
+                participantTitle: @json($registration['participant_title']),
+                leaderTitle: @json($registration['leader_title']),
+                successTitle: @json($registration['success_title']),
+                successMessage: @json($registration['success_message']),
+                failureTitle: @json($registration['failure_title']),
+                failureMessage: @json($registration['failure_message']),
+                terminalText: @json($hero['terminal_text']),
+                deadlineEnded: @json($hero['deadline_ended']),
+                registrationPaused: @json($hero['registration_paused']),
+                remainingPrefix: @json($hero['remaining_prefix']),
+                countdownUnits: @json($hero['countdown_units']),
+                messages: @json($registration['client_messages']),
+                addMemberText: @json($registration['fields']['add_member']),
 
                 /* الحد الأعلى لعدد أعضاء الفريق (بما فيهم القائد) */
                 maxTeamSize: {{ (int) config('hackathon.max_team_size', 6) }},
@@ -3437,7 +3133,7 @@
                     if (!open) {
                         card.classList.add('closed');
                         const n = $('#asideLeft');
-                        if (n) n.textContent = CONFIG.registrationOpen ? 'انتهى موعد التقديم' : 'التسجيل متوقف حالياً';
+                        if (n) n.textContent = CONFIG.registrationOpen ? CONFIG.deadlineEnded : CONFIG.registrationPaused;
                         const tl = $('#tl-open');
                         if (tl) tl.classList.remove('now');
                         return;
@@ -3454,7 +3150,7 @@
                     set('s', secs);
 
                     const n = $('#asideLeft');
-                    if (n) n.textContent = 'متبقّي ' + days + ' يوم و ' + hrs + ' ساعة و ' + mins + ' دقيقة';
+                    if (n) n.textContent = CONFIG.remainingPrefix + ' ' + days + ' ' + CONFIG.countdownUnits.days + ' و ' + hrs + ' ' + CONFIG.countdownUnits.hours + ' و ' + mins + ' ' + CONFIG.countdownUnits.minutes;
                 }
 
                 tick();
@@ -3655,12 +3351,7 @@
                 const line = $('#termLine');
                 if (line) {
                     const caret = line.querySelector('.caret');
-                    const words = [
-                        '> initializing hackathon_2026 ...',
-                        '> load modules: [ cyber_security, ai, defense ]',
-                        '> registration status: OPEN',
-                        '> awaiting your team ...',
-                    ];
+                    const words = [CONFIG.terminalText];
                     if (reduceMotion) {
                         line.insertBefore(document.createTextNode(words[0]), caret);
                     } else {
@@ -3755,7 +3446,7 @@
                     bInd.setAttribute('aria-selected', String(ind));
                     bTeam.setAttribute('aria-selected', String(!ind));
                     teamBlock.hidden = ind;
-                    leadTitle.textContent = ind ? 'بيانات المشارك' : 'بيانات قائد الفريق';
+                    leadTitle.textContent = ind ? CONFIG.participantTitle : CONFIG.leaderTitle;
                     if (!ind && members.children.length === 0) {
                         const need = Math.max(1, (parseInt(teamSize.value, 10) || 4) - 1);
 
@@ -3776,10 +3467,10 @@
                     const full = members.children.length >= max;
                     addBtn.disabled = full;
                     if (full) {
-                        addBtn.textContent = 'وصلت للحد الأعلى (' + CONFIG.maxTeamSize + ' أعضاء)';
+                        addBtn.textContent = CONFIG.messages.max_members.replace(':max', CONFIG.maxTeamSize);
                     } else {
                         addBtn.innerHTML =
-                            '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> إضافة عضو';
+                            '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> ' + CONFIG.addMemberText;
                     }
                 }
 
@@ -3894,13 +3585,13 @@
                     let first = null;
 
                     const req = [
-                        ['fullName', 'الرجاء إدخال الاسم الكامل'],
-                        ['email', 'الرجاء إدخال البريد الإلكتروني'],
-                        ['phone', 'الرجاء إدخال رقم الجوال'],
-                        ['university', 'الرجاء إدخال الجامعة أو الجهة'],
-                        ['major', 'الرجاء إدخال التخصص'],
-                        ['skills', 'الرجاء إدخال مهاراتك الأساسية'],
-                        ['track', 'الرجاء اختيار المسار المفضّل'],
+                        ['fullName', CONFIG.messages.full_name_required],
+                        ['email', CONFIG.messages.email_required],
+                        ['phone', CONFIG.messages.phone_required],
+                        ['university', CONFIG.messages.university_required],
+                        ['major', CONFIG.messages.major_required],
+                        ['skills', CONFIG.messages.skills_required],
+                        ['track', CONFIG.messages.track_required],
                     ];
 
                     req.forEach(([id, msg]) => {
@@ -3915,14 +3606,14 @@
 
                     const em = $('#email');
                     if (em && em.value.trim() && !isEmail(em.value.trim())) {
-                        setErr(em, 'صيغة البريد الإلكتروني غير صحيحة');
+                        setErr(em, CONFIG.messages.invalid_email);
                         ok = false;
                         first = first || em;
                     }
 
                     const ph = $('#phone');
                     if (ph && ph.value.trim() && !isPhone(ph.value)) {
-                        setErr(ph, 'رقم الجوال غير صحيح (8 أرقام على الأقل)');
+                        setErr(ph, CONFIG.messages.invalid_phone);
                         ok = false;
                         first = first || ph;
                     }
@@ -3930,14 +3621,14 @@
                     if (mode === 'team') {
                         const tn = $('#teamName');
                         if (!tn.value.trim()) {
-                            setErr(tn, 'الرجاء إدخال اسم الفريق');
+                            setErr(tn, CONFIG.messages.team_name_required);
                             ok = false;
                             first = first || tn;
                         } else setErr(tn, '');
 
                         const sizeVal = parseInt(teamSize.value, 10);
                         if (!sizeVal) {
-                            setBlockErr('teamSize', 'حدّد عدد أعضاء الفريق');
+                            setBlockErr('teamSize', CONFIG.messages.team_size_required);
                             ok = false;
                         } else if (members.children.length < sizeVal - 1) {
                             setBlockErr(
@@ -3953,17 +3644,17 @@
                             const name = m.querySelector('input[data-m="name"]');
                             const mail = m.querySelector('input[data-m="email"]');
                             if (!name.value.trim()) {
-                                setErr(name, 'اسم العضو مطلوب');
+                                setErr(name, CONFIG.messages.member_name_required);
                                 ok = false;
                                 first = first || name;
                             } else setErr(name, '');
 
                             if (!mail.value.trim()) {
-                                setErr(mail, 'بريد العضو مطلوب');
+                                setErr(mail, CONFIG.messages.member_email_required);
                                 ok = false;
                                 first = first || mail;
                             } else if (!isEmail(mail.value.trim())) {
-                                setErr(mail, 'صيغة البريد غير صحيحة');
+                                setErr(mail, CONFIG.messages.invalid_email);
                                 ok = false;
                                 first = first || mail;
                             } else setErr(mail, '');
@@ -3973,7 +3664,7 @@
                     const ag = $('#agree');
                     if (!ag.checked) {
                         agreeWrap.classList.add('bad');
-                        setBlockErr('agree', 'يجب الموافقة على الشروط للمتابعة');
+                        setBlockErr('agree', CONFIG.messages.agreement_required);
                         ok = false;
                         first = first || ag;
                     } else {
@@ -3983,7 +3674,7 @@
 
                     if (!ok && first) {
                         scrollToFirst(first);
-                        toast('يرجى تصحيح الحقول المعلّمة بالأحمر', true);
+                        toast(CONFIG.messages.fix_fields, true);
                     }
                     return ok;
                 }
@@ -4107,10 +3798,8 @@
                 /* ---------- المودال ---------- */
                 function openModal(payload, success) {
                     $('#okRef').textContent = payload.reference;
-                    $('#okTitle').textContent = success ? 'تم استلام طلبك بنجاح' : 'تعذّر الإرسال تلقائياً';
-                    $('#okMsg').textContent = success
-                        ? 'شكراً لك! سنراجع طلبك ونتواصل معك عبر البريد الإلكتروني أو واتساب لتأكيد القبول. احتفظ برقم الطلب للمتابعة.'
-                        : 'طلبك جاهز لكن لم نتمكن من إرساله للخادم. أرسل نسخة مباشرة عبر واتساب أو حمّل نسخة من الطلب واحتفظ بها.';
+                    $('#okTitle').textContent = success ? CONFIG.successTitle : CONFIG.failureTitle;
+                    $('#okMsg').textContent = success ? CONFIG.successMessage : CONFIG.failureMessage;
 
                     const wa = $('#okWa');
                     if (CONFIG.whatsapp) {
@@ -4153,7 +3842,7 @@
                     e.preventDefault();
 
                     if (!CONFIG.registrationOpen) {
-                        toast('التقديم مغلق حالياً', true);
+                        toast(CONFIG.messages.registration_closed, true);
                         return;
                     }
                     if (!validate()) return;
@@ -4164,7 +3853,7 @@
 
                     submitBtn.disabled = true;
                     const original = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<span class="mono">SENDING REQUEST …</span>';
+                    submitBtn.textContent = CONFIG.messages.sending;
 
                     try {
                         const res = await fetch(CONFIG.endpoint, {
@@ -4211,7 +3900,7 @@
                         openModal(payload, true);
                     } catch (err) {
                         console.error(err);
-                        toast('تعذّر الإرسال — جرّب واتساب أو أعد المحاولة', true);
+                        toast(CONFIG.messages.send_failed, true);
                         openModal(payload, false);
                     } finally {
                         submitBtn.disabled = false;

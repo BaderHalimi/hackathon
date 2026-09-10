@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Registration;
+use App\Support\HomeContent;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -90,13 +91,19 @@ class RegistrationController extends Controller
      */
     protected function ensureRegistrationIsOpen(): void
     {
-        if (! config('hackathon.registration_open')) {
+        $hero = HomeContent::section('hero');
+
+        if (! $hero['registration_open']) {
             throw ValidationException::withMessages([
                 'registration' => 'التسجيل على الهاكاثون متوقف حالياً.',
             ]);
         }
 
-        $deadline = Carbon::parse(config('hackathon.deadline'));
+        if (blank($hero['deadline'])) {
+            return;
+        }
+
+        $deadline = Carbon::parse($hero['deadline']);
 
         if (now()->greaterThan($deadline)) {
             throw ValidationException::withMessages([
