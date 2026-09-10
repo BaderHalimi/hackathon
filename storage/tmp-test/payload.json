@@ -1,0 +1,25 @@
+{
+  "participationType": "فريق",
+  "applicant": {
+    "fullName": "أحمد محمد سالم",
+    "email": "ahmed.test@example.com",
+    "phone": "0599123456",
+    "university": "الكلية الجامعية للعلوم التطبيقية - غزة",
+    "major": "هندسة الحاسوب",
+    "year": "رابعة",
+    "skills": "Python, Linux, تحليل شبكات",
+    "track": "كشف التهديدات بالذكاء الاصطناعي",
+    "experience": "متوسط",
+    "links": "https://github.com/ahmed",
+    "source": "النادي الهندسي"
+  },
+  "project": { "idea": "نظام لكشف التسلل باستخدام تعلّم الآلة" },
+  "team": {
+    "name": "Team Phantom",
+    "size": "3",
+    "members": [
+      { "name": "سارة علي", "email": "sara.test@example.com", "phone": "0599000111", "major": "أمن سيبراني" },
+      { "name": "يوسف كمال", "email": "yousef.test@example.com", "phone": "0599000222", "major": "علوم حاسوب" }
+    ]
+  }
+}
