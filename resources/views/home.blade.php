@@ -10,7 +10,34 @@
             $toneSplit = (int) ($appearance['tone_split'] ?? 50);
             $themeMode = ($appearance['mode'] ?? 'light') === 'dark' ? 'dark' : 'light';
             $backgroundOn = (bool) ($appearance['background_enabled'] ?? true);
-    @endphp
+
+            // صور الهوية: لكل شعار نسخة للوضع الفاتح ونسخة للوضع الداكن.
+            // لو المطلوب فارغ نرجع للنسخة الثانية، ثم للشعار المشترك، ثم للملف الافتراضي.
+            $storageUrl = fn (string $path): string => \Illuminate\Support\Facades\Storage::disk('public')->url($path);
+            $pickImage = function (string $base) use ($identity, $themeMode, $storageUrl): string {
+                $order = $themeMode === 'dark'
+                    ? ['_dark_path', '_light_path', '_path']
+                    : ['_light_path', '_dark_path', '_path'];
+
+                foreach ($order as $suffix) {
+                    $value = trim((string) ($identity[$base.$suffix] ?? ''));
+
+                    if ($value !== '') {
+                        return $storageUrl($value);
+                    }
+                }
+
+                return '';
+            };
+            $logoSrc = $pickImage('logo') ?: asset('images/hackathon-logo.png');
+            $clubLogoSrc = $pickImage('engineering_logo') ?: asset('images/eng-club.png');
+            $incubatorLogoSrc = $pickImage('incubator_logo') ?: asset('images/ucas.png');
+            $iconSrc = trim((string) ($identity['icon_path'] ?? '')) !== ''
+                ? $storageUrl(trim((string) $identity['icon_path']))
+                : asset('favicon.ico');
+            $shareSrc = url(trim((string) ($identity['share_image_path'] ?? '')) !== ''
+                ? $storageUrl(trim((string) $identity['share_image_path']))
+                : $logoSrc);    @endphp
 <html lang="ar" dir="rtl" data-theme="{{ $themeMode }}">
     <head>
         <meta charset="utf-8" />
@@ -30,9 +57,9 @@
             property="og:description"
             content="{{ $identity['meta_description'] }}"
         />
-        <meta property="og:image" content="{{ asset('images/hackathon-logo.png') }}" />
+        <meta property="og:image" content="{{ $shareSrc }}" />
 
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="{{ $iconSrc }}" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -103,6 +130,7 @@
                 --surface: #ffffff;
                 --bg: #ffffff;
                 --header-bg: color-mix(in srgb, var(--bg) 88%, transparent);
+                --logo-card-bg: #ffffff;
                 --bg-soft: #f6f8fc;
                 --ink: #1b2244;
                 --ink-2: #37406b;
@@ -126,6 +154,7 @@
                 --surface: #131a33;
                 --bg: #0a0f1f;
                 --header-bg: color-mix(in srgb, var(--bg) 86%, transparent);
+                --logo-card-bg: rgba(255, 255, 255, 0.07);
                 --bg-soft: #172042;
                 --ink: #eef2ff;
                 --ink-2: #c6d0ee;
@@ -766,7 +795,7 @@
             }
 
             .logo-slot.slot-light:has(img) {
-                background: #fff;
+                background: var(--logo-card-bg);
                 padding: 10px 14px;
                 border: 1px solid var(--line);
                 border-radius: 14px;
@@ -2366,7 +2395,7 @@
                     <a href="#top" class="brand" aria-label="{{ $identity['accessibility']['home'] }}">
                         <span class="brand-card">
                             <img
-                                src="{{ asset('images/hackathon-logo.png') }}"
+                                src="{{ $logoSrc }}"
                                 alt="{{ $identity['logo_alt'] }}"
                                 onerror="this.remove()"
                             />
@@ -2529,7 +2558,7 @@
                             --}}
                             <div class="logo-slot slot-light">
                                 <img
-                                    src="{{ asset('images/eng-club.png') }}"
+                                    src="{{ $clubLogoSrc }}"
                                     alt="{{ $identity['engineering_logo_alt'] }}"
                                     onerror="this.remove()"
                                 />
@@ -2549,7 +2578,7 @@
                             --}}
                             <div class="logo-slot slot-light">
                                 <img
-                                    src="{{ asset('images/ucas.png') }}"
+                                    src="{{ $incubatorLogoSrc }}"
                                     alt="{{ $identity['incubator_logo_alt'] }}"
                                     onerror="this.remove()"
                                 />
@@ -2980,7 +3009,7 @@
                         <a href="#top" class="brand" style="margin-bottom: 14px">
                             <span class="brand-card lg">
                                 <img
-                                    src="{{ asset('images/hackathon-logo.png') }}"
+                                    src="{{ $logoSrc }}"
                                     alt="{{ $identity['logo_alt'] }}"
                                     onerror="this.remove()"
                                 />
@@ -3030,12 +3059,12 @@
                 <div class="foot-orgs">
                     {{-- مكان شعار النادي الهندسي (يوصل لاحقاً) --}}
                     <div class="logo-slot slot-light">
-                        <img src="{{ asset('images/eng-club.png') }}" alt="{{ $identity['engineering_logo_alt'] }}" onerror="this.remove()" />
+                        <img src="{{ $clubLogoSrc }}" alt="{{ $identity['engineering_logo_alt'] }}" onerror="this.remove()" />
                         <span class="slot-hint">{{ $identity['engineering_logo_placeholder'] }}<small>ENG CLUB</small></span>
                     </div>
                     {{-- مكان شعار حاضنة يوكاس (يوصل لاحقاً) --}}
                     <div class="logo-slot slot-light">
-                        <img src="{{ asset('images/ucas.png') }}" alt="{{ $identity['incubator_logo_alt'] }}" onerror="this.remove()" />
+                        <img src="{{ $incubatorLogoSrc }}" alt="{{ $identity['incubator_logo_alt'] }}" onerror="this.remove()" />
                         <span class="slot-hint">{{ $identity['incubator_logo_placeholder'] }}<small>UCAS INCUBATOR</small></span>
                     </div>
                 </div>

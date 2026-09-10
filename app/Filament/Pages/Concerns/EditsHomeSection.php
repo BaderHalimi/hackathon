@@ -5,6 +5,7 @@ namespace App\Filament\Pages\Concerns;
 use App\Support\HomeContent;
 use Filament\Actions\Action;
 use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Slider;
 use Filament\Forms\Components\TagsInput;
@@ -170,6 +171,25 @@ trait EditsHomeSection
     protected function identityFields(): array
     {
         return [
+            Section::make('الأيقونة')
+                ->description('شعار الموقع وأيقونة المتصفح وصورة المشاركة. الملفات المرفوعة تُخزَّن في storage/app/public/branding.')
+                ->schema([
+                    FileUpload::make('logo_light_path')->label('شعار الموقع — الوضع الفاتح')->image()->disk('public')->directory('branding')->visibility('public')->maxSize(3072)->helperText('يظهر في الهيدر والتذييل بالوضع الفاتح.'),
+                    FileUpload::make('logo_dark_path')->label('شعار الموقع — الوضع الداكن')->image()->disk('public')->directory('branding')->visibility('public')->maxSize(3072)->helperText('يظهر في الهيدر والتذييل بالوضع الداكن. لو تركته فارغًا بيُستخدم شعار الوضع الفاتح.'),
+                    FileUpload::make('icon_path')->label('أيقونة الموقع (Favicon)')->image()->disk('public')->directory('branding')->visibility('public')->maxSize(1024)->helperText('الأيقونة الصغيرة في تبويب المتصفح — مربّعة يُفضّل.'),
+                    FileUpload::make('share_image_path')->label('صورة المشاركة على السوشيال ميديا')->image()->disk('public')->directory('branding')->visibility('public')->maxSize(5120)->helperText('تظهر عند مشاركة رابط الصفحة. المقاس المفضّل 1200×630، ولو تركتها فارغة بيُستخدم شعار الموقع.'),
+                ])
+                ->columns(2),
+
+            Section::make('شعارات الجهتين')
+                ->description('شعار النادي الهندسي وشعار حاضنة يوكاس التكنولوجية. لكل واحد نسخة للوضع الفاتح ونسخة للوضع الداكن — لو رفعت نسخة واحدة بتُستخدم في الوضعين، ولو ما رفعت شي بيظهر مكان الشعار الفاضي.')
+                ->schema([
+                    FileUpload::make('engineering_logo_light_path')->label('شعار النادي الهندسي — الوضع الفاتح')->image()->disk('public')->directory('branding')->visibility('public')->maxSize(3072),
+                    FileUpload::make('engineering_logo_dark_path')->label('شعار النادي الهندسي — الوضع الداكن')->image()->disk('public')->directory('branding')->visibility('public')->maxSize(3072)->helperText('لو فارغ بيُستخدم شعار الوضع الفاتح.'),
+                    FileUpload::make('incubator_logo_light_path')->label('شعار حاضنة يوكاس — الوضع الفاتح')->image()->disk('public')->directory('branding')->visibility('public')->maxSize(3072),
+                    FileUpload::make('incubator_logo_dark_path')->label('شعار حاضنة يوكاس — الوضع الداكن')->image()->disk('public')->directory('branding')->visibility('public')->maxSize(3072)->helperText('لو فارغ بيُستخدم شعار الوضع الفاتح.'),
+                ])
+                ->columns(2),
             Section::make('محركات البحث')->schema([$this->text('page_title', 'عنوان الصفحة'), $this->area('meta_description', 'وصف الصفحة')]),
             Section::make('هوية الحدث')->schema([$this->text('brand_ar', 'الاسم بالعربية'), $this->text('brand_en', 'الاسم بالإنجليزية'), $this->text('location', 'الموقع'), $this->text('email', 'البريد')->email(), $this->text('phone', 'رقم الهاتف')])->columns(2),
             Section::make('روابط التواصل')->schema([$this->text('facebook_url', 'فيسبوك', false)->url(), $this->text('instagram_url', 'إنستغرام', false)->url(), $this->text('telegram_url', 'تيليجرام', false)->url(), $this->text('linkedin_url', 'لينكدإن', false)->url()])->columns(2)->collapsed(),
