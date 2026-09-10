@@ -11,33 +11,26 @@
             $themeMode = ($appearance['mode'] ?? 'light') === 'dark' ? 'dark' : 'light';
             $backgroundOn = (bool) ($appearance['background_enabled'] ?? true);
 
-            // صور الهوية: لكل شعار نسخة للوضع الفاتح ونسخة للوضع الداكن.
-            // لو المطلوب فارغ نرجع للنسخة الثانية، ثم للشعار المشترك، ثم للملف الافتراضي.
-            $storageUrl = fn (string $path): string => \Illuminate\Support\Facades\Storage::disk('public')->url($path);
-            $pickImage = function (string $base) use ($identity, $themeMode, $storageUrl): string {
-                $order = $themeMode === 'dark'
-                    ? ['_dark_path', '_light_path', '_path']
-                    : ['_light_path', '_dark_path', '_path'];
+            // صور الهوية: لكل شعار نسخة فاتحة ونسخة داكنة، ومع الرجوع للنسخة
+            // الثانية ثم للشعار المشترك ثم للملف الافتراضي (App\Support\BrandAssets).
+            $logo = \App\Support\BrandAssets::info(\App\Support\BrandAssets::upload($identity, 'logo', $themeMode), 'images/hackathon-logo.png');
+            $clubLogo = \App\Support\BrandAssets::info(\App\Support\BrandAssets::upload($identity, 'engineering_logo', $themeMode), 'images/eng-club.png');
+            $incubatorLogo = \App\Support\BrandAssets::info(\App\Support\BrandAssets::upload($identity, 'incubator_logo', $themeMode), 'images/ucas.png');
 
-                foreach ($order as $suffix) {
-                    $value = trim((string) ($identity[$base.$suffix] ?? ''));
+            $iconUpload = trim((string) ($identity['icon_path'] ?? ''));
+            $icon = \App\Support\BrandAssets::info($iconUpload, 'favicon.ico');
+            $appleIcon = \App\Support\BrandAssets::info($iconUpload, 'apple-touch-icon.png');
 
-                    if ($value !== '') {
-                        return $storageUrl($value);
-                    }
-                }
+            $shareUpload = trim((string) ($identity['share_image_path'] ?? ''));
+            $share = $shareUpload !== ''
+                ? \App\Support\BrandAssets::info($shareUpload, 'images/hackathon-logo.png')
+                : \App\Support\BrandAssets::info('', 'images/share-default.png');
 
-                return '';
-            };
-            $logoSrc = $pickImage('logo') ?: asset('images/hackathon-logo.png');
-            $clubLogoSrc = $pickImage('engineering_logo') ?: asset('images/eng-club.png');
-            $incubatorLogoSrc = $pickImage('incubator_logo') ?: asset('images/ucas.png');
-            $iconSrc = trim((string) ($identity['icon_path'] ?? '')) !== ''
-                ? $storageUrl(trim((string) $identity['icon_path']))
-                : asset('favicon.ico');
-            $shareSrc = url(trim((string) ($identity['share_image_path'] ?? '')) !== ''
-                ? $storageUrl(trim((string) $identity['share_image_path']))
-                : $logoSrc);    @endphp
+            $logoSrc = $logo['url'];
+            $clubLogoSrc = $clubLogo['url'];
+            $incubatorLogoSrc = $incubatorLogo['url'];
+            $iconSrc = $icon['url'];
+            $shareSrc = $share['url'];    @endphp
 <html lang="ar" dir="rtl" data-theme="{{ $themeMode }}">
     <head>
         <meta charset="utf-8" />
@@ -51,15 +44,37 @@
         />
         <meta name="theme-color" content="{{ $themeMode === 'dark' ? '#0A0F1F' : '#FFFFFF' }}" />
 
+        <link rel="canonical" href="{{ url()->current() }}" />
+
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="{{ $identity['brand_ar'] }}" />
+        <meta property="og:locale" content="ar_AR" />
+        <meta property="og:url" content="{{ url()->current() }}" />
         <meta property="og:title" content="{{ $identity['page_title'] }}" />
         <meta
             property="og:description"
             content="{{ $identity['meta_description'] }}"
         />
         <meta property="og:image" content="{{ $shareSrc }}" />
+        @if (str_starts_with($shareSrc, "https://"))
+            <meta property="og:image:secure_url" content="{{ $shareSrc }}" />
+        @endif
+        <meta property="og:image:type" content="{{ $share['mime'] }}" />
+        @if ($share['width'] > 0 && $share['height'] > 0)
+            <meta property="og:image:width" content="{{ $share['width'] }}" />
+            <meta property="og:image:height" content="{{ $share['height'] }}" />
+        @endif
+        <meta property="og:image:alt" content="{{ $identity['logo_alt'] }}" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="{{ $identity['page_title'] }}" />
+        <meta name="twitter:description" content="{{ $identity['meta_description'] }}" />
+        <meta name="twitter:image" content="{{ $shareSrc }}" />
 
-        <link rel="icon" href="{{ $iconSrc }}" />
+        <link rel="icon" href="{{ $iconSrc }}" sizes="any" />
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('icon-32.png') }}" />
+        <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('icon-192.png') }}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ $appleIcon['url'] }}" />
+        <link rel="manifest" href="{{ asset('site.webmanifest') }}" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
