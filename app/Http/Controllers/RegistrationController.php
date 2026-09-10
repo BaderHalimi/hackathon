@@ -43,6 +43,7 @@ class RegistrationController extends Controller
             'team.members.*.name' => ['required', 'string', 'max:120'],
             'team.members.*.email' => ['required', 'string', 'email', 'max:150'],
             'team.members.*.phone' => ['nullable', 'string', 'max:30'],
+            'team.members.*.role' => ['nullable', 'string', 'max:40'],
             'team.members.*.major' => ['nullable', 'string', 'max:120'],
         ], $this->messages(), $this->attributes());
 
@@ -195,6 +196,7 @@ class RegistrationController extends Controller
             'team.members.*.name' => 'اسم العضو',
             'team.members.*.email' => 'بريد العضو',
             'team.members.*.phone' => 'جوال العضو',
+            'team.members.*.role' => 'التخصص في الفريق',
             'team.members.*.major' => 'تخصص العضو',
         ];
     }
