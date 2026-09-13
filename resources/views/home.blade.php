@@ -135,18 +135,29 @@
         --navy-soft: var(--base-soft);
 
         /* ===== الوضع الفاتح (الافتراضي) ===== */
+        /* النصوص والعناوين مشتقّة من اللون الداكن (Base) */
         --surface: #ffffff;
         --bg: #ffffff;
-        --header-bg: color-mix(in srgb, var(--bg) 88%, transparent);
+        --bg-soft: color-mix(in srgb, var(--base) 5%, #ffffff);
+        --header-bg: color-mix(in srgb, var(--base) 5%, color-mix(in srgb, var(--bg) 88%, transparent));
         --logo-card-bg: #ffffff;
-        --bg-soft: #f6f8fc;
-        --ink: #1b2244;
-        --ink-2: #37406b;
-        --muted: #5d6684;
+        --ink: color-mix(in srgb, var(--base) 80%, #000000);
+        --ink-2: color-mix(in srgb, var(--base) 66%, #000000);
+        --muted: color-mix(in srgb, var(--base) 50%, #6b7280);
         --line: color-mix(in srgb, var(--base) 13%, transparent);
         --line-2: color-mix(in srgb, var(--base) 9%, transparent);
-        --shadow-sm: 0 1px 2px rgba(27, 34, 68, 0.04), 0 4px 14px -8px rgba(27, 34, 68, 0.14);
+        --shadow-sm: 0 1px 2px color-mix(in srgb, var(--base) 4%, transparent), 0 4px 14px -8px color-mix(in srgb, var(--base) 16%, transparent);
         --shadow: 0 20px 45px -28px color-mix(in srgb, var(--base) 45%, transparent);
+
+        /* ===== السطح الداكن للتذييل — يتبع اللون الداكن (Base) ===== */
+        --footer-bg: linear-gradient(
+            170deg,
+            color-mix(in srgb, var(--base) 36%, #06070f),
+            color-mix(in srgb, var(--base) 20%, #06070f)
+        );
+        --footer-ink: color-mix(in srgb, var(--base) 10%, #ffffff);
+        --footer-ink-2: color-mix(in srgb, var(--base) 14%, rgba(255, 255, 255, 0.72));
+        --footer-muted: color-mix(in srgb, var(--base) 14%, rgba(255, 255, 255, 0.6));
 
         /* خلفية الحروف المتحركة (مطر رقمي) */
         --matrix-fade: color-mix(in srgb, var(--bg) 8%, transparent);
@@ -188,11 +199,12 @@
 
     /* ===== الوضع الداكن ===== */
     [data-theme='dark'] {
-        --surface: #131a33;
-        --bg: #0a0f1f;
+        /* أسطح الوضع الداكن مشتقّة من اللون الداكن (Base) */
+        --surface: color-mix(in srgb, var(--base) 30%, #04060f);
+        --bg: color-mix(in srgb, var(--base) 22%, #04060f);
         --header-bg: color-mix(in srgb, var(--bg) 86%, transparent);
         --logo-card-bg: rgba(255, 255, 255, 0.07);
-        --bg-soft: #172042;
+        --bg-soft: color-mix(in srgb, var(--base) 38%, #04060f);
         --ink: #eef2ff;
         --ink-2: #c6d0ee;
         --muted: #94a1c6;
@@ -522,7 +534,7 @@
 }
 
     .grad {
-        background: linear-gradient(100deg, var(--gold-1), var(--gold-3), var(--gold-2));
+        background: linear-gradient(100deg, var(--primary), var(--secondary));
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -2215,8 +2227,8 @@
 
     /* ---------- الفوتر ---------- */
     footer {
-        background: linear-gradient(170deg, var(--bg-soft), var(--bg));
-        color: var(--ink);
+        background: var(--footer-bg);
+        color: var(--footer-ink);
         padding: 56px 0 26px;
         position: relative;
         z-index: 2;
@@ -2237,7 +2249,7 @@
     }
 
     footer p, footer a, footer li {
-        color: var(--ink-2);
+        color: var(--footer-ink-2);
         font-size: 0.91rem;
     }
 
@@ -2301,7 +2313,7 @@
         justify-content: space-between;
         align-items: center;
         font-size: 0.84rem;
-        color: var(--muted);
+        color: var(--footer-muted);
     }
 
     .to-top {
@@ -2783,6 +2795,10 @@
                                     <span class="yr-inline">{{ $hero['title_year'] }}</span>
                                 </span>
                             </h1>
+
+                            <h2 class="hero-sub" data-reveal>
+                                <span class="grad">{{ $hero['subtitle'] }}</span>
+                            </h2>
                             {{-- <h1 data-reveal>
                                 <span class="line-1">{{ $hero['title_top'] }}</span>
                                 <span class="line-2 glitch" data-text="{{ $hero['title_main'] }}">{{ $hero['title_main'] }}</span>
