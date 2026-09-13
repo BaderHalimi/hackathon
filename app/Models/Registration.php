@@ -18,12 +18,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $skills
  * @property string $track
  * @property string|null $experience
+ * @property string|null $attendance_location
  * @property string|null $portfolio
  * @property string|null $source
  * @property string|null $team_name
  * @property int|null $team_size
  * @property array<int, array<string, string>>|null $team_members
- * @property string|null $idea
  */
 #[Fillable([
     'reference',
@@ -37,12 +37,12 @@ use Illuminate\Database\Eloquent\Model;
     'skills',
     'track',
     'experience',
+    'attendance_location',
     'portfolio',
     'source',
     'team_name',
     'team_size',
     'team_members',
-    'idea',
     'ip_address',
     'user_agent',
 ])]

@@ -33,10 +33,9 @@ class RegistrationController extends Controller
             'applicant.skills' => ['required', 'string', 'max:500'],
             'applicant.track' => ['required', 'string', 'max:120'],
             'applicant.experience' => ['nullable', 'string', 'max:40'],
+            'applicant.location' => ['required', 'string', 'max:120'],
             'applicant.links' => ['nullable', 'string', 'max:255'],
             'applicant.source' => ['nullable', 'string', 'max:80'],
-
-            'project.idea' => ['nullable', 'string', 'max:3000'],
 
             'team.name' => ['nullable', 'required_if:participationType,فريق', 'string', 'max:120'],
             'team.size' => ['nullable', 'required_if:participationType,فريق', 'integer', "between:2,{$maxTeamSize}"],
@@ -66,14 +65,13 @@ class RegistrationController extends Controller
             'skills' => data_get($data, 'applicant.skills'),
             'track' => data_get($data, 'applicant.track'),
             'experience' => data_get($data, 'applicant.experience'),
+            'attendance_location' => data_get($data, 'applicant.location'),
             'portfolio' => data_get($data, 'applicant.links'),
             'source' => data_get($data, 'applicant.source'),
 
             'team_name' => data_get($data, 'team.name'),
             'team_size' => data_get($data, 'team.size'),
             'team_members' => $members ?: null,
-
-            'idea' => data_get($data, 'project.idea'),
 
             'ip_address' => $request->ip(),
             'user_agent' => Str::limit((string) $request->userAgent(), 255, ''),
@@ -194,9 +192,9 @@ class RegistrationController extends Controller
             'applicant.skills' => 'المهارات الأساسية',
             'applicant.track' => 'المسار المفضّل',
             'applicant.experience' => 'مستوى الخبرة',
+            'applicant.location' => 'مكان الحضور',
             'applicant.links' => 'حساب GitHub / Portfolio',
             'applicant.source' => 'مصدر المعرفة بالهاكاثون',
-            'project.idea' => 'فكرة المشروع',
             'team.name' => 'اسم الفريق',
             'team.size' => 'عدد أعضاء الفريق',
             'team.members' => 'أعضاء الفريق',
