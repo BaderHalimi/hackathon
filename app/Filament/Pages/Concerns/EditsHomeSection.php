@@ -212,7 +212,7 @@ trait EditsHomeSection
     /** @return array<Component> */
     protected function aboutFields(): array
     {
-        return [Section::make('الشركاء')->schema([$this->area('partners_note', 'عبارة الشركاء')]), Section::make('مقدمة القسم')->schema($this->headingFields())->columns(2), Section::make('بطاقات التعريف')->schema([$this->cards('cards', 'البطاقات')]), Section::make('برنامج الساعات')->schema([Repeater::make('schedule')->label('المحطات')->schema([$this->text('time', 'الوقت'), $this->text('text', 'النص')])->columns(2)->reorderable()->collapsible()])];
+        return [Section::make('الشركاء')->schema([$this->area('partners_note', 'عبارة الشركاء')]), Section::make('مقدمة القسم')->schema($this->headingFields())->columns(2), Section::make('بطاقات التعريف')->schema([$this->cards('cards', 'البطاقات')]), Section::make('برنامج أيام الفعالية')->description('أضف يومًا واحدًا أو أكثر. لكل يوم عنوان اختياري ومحطاته الزمنية — وإذا تركت وقت المحطة فارغًا تُعرض كملاحظة بدون وقت.')->schema([Repeater::make('schedule_days')->label('الأيام')->schema([$this->text('title', 'عنوان اليوم', false)->placeholder('مثال: اليوم الأول'), Repeater::make('items')->label('محطات اليوم')->schema([$this->text('time', 'الوقت', false)->placeholder('00:00'), $this->text('text', 'النص')])->columns(2)->reorderable()->collapsible()->addActionLabel('إضافة محطة')->columnSpanFull()])->itemLabel(fn (array $state): ?string => $state['title'] ?? null)->reorderable()->collapsible()->addActionLabel('إضافة يوم')])];
     }
 
     /** @return array<Component> */

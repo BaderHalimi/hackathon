@@ -1596,6 +1596,26 @@
     .terminal-body .bad .m { color: var(--gold-3); }
     .terminal-body .info .m { color: var(--gold-2); }
 
+    /* عنوان اليوم داخل البرنامج — يوم واحد أو أكثر */
+    .terminal-body .day {
+        margin: 16px 0 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px dashed color-mix(in srgb, var(--primary) 30%, transparent);
+    }
+
+    .terminal-body .day:first-child { margin-top: 0; }
+
+    .terminal-body .day .m {
+        font-family: var(--font-ar);
+        font-size: 1.12rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        color: var(--primary);
+    }
+
+    /* محطة بدون وقت (ملاحظة) */
+    .terminal-body .note .m { color: var(--neon-primary); font-weight: 700; }
+
     @keyframes fadein {
         to { opacity: 1; }
     }
@@ -2994,8 +3014,22 @@
                                     <b>hackathon@eng-club:~/mission</b>
                                 </div>
                                 <div class="terminal-body" id="termBody">
-                                    @foreach($about['schedule'] as $item)
-                                    <span class="l {{ ['ok', 'info', 'warn', 'bad'][$loop->index % 4] }}"><span class="t">[{{ $item['time'] }}]</span> <span class="m">{{ $item['text'] }}</span></span>
+                                    @php
+                                        // برنامج الفعالية: يوم واحد أو أكثر. كل يوم له عنوان اختياري ومحطاته.
+                                        // ندعم كذلك الشكل القديم (قائمة محطات مسطّحة) للتوافق مع محتوى محفوظ سابقًا.
+                                        $scheduleDays = $about['schedule_days'] ?? [];
+                                        if (empty($scheduleDays)) {
+                                            $scheduleDays = [['title' => '', 'items' => $about['schedule'] ?? []]];
+                                        }
+                                    @endphp
+                                    @foreach($scheduleDays as $day)
+                                        @if(trim((string) ($day['title'] ?? '')) !== '')
+                                        <span class="l day"><span class="m">{{ $day['title'] }}</span></span>
+                                        @endif
+                                        @foreach($day['items'] ?? [] as $item)
+                                            @php $slotTime = trim((string) ($item['time'] ?? '')); @endphp
+                                            <span class="l {{ $slotTime === '' ? 'note' : ['ok', 'info', 'warn', 'bad'][$loop->index % 4] }}">@if($slotTime !== '')<span class="t">[{{ $slotTime }}]</span> @endif<span class="m">{{ $item['text'] ?? '' }}</span></span>
+                                        @endforeach
                                     @endforeach
                                 </div>
                             </div>
