@@ -814,7 +814,7 @@
         font-family: var(--font-mono);
         font-size: 10.5px;
         letter-spacing: 0.14em;
-        margin-block-start: 3px;
+        margin-block-start: 5px;
         color: var(--neon-primary);
         text-transform: uppercase;
     }
