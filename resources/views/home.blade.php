@@ -2019,6 +2019,35 @@
         background-size: 5px 5px, 5px 5px;
         background-repeat: no-repeat;
         padding-inline-start: 42px;
+        color-scheme: light;
+    }
+
+    .field select option {
+        background: var(--surface);
+        color: var(--ink);
+    }
+
+    .field select option:checked {
+        background: var(--primary);
+        color: #ffffff;
+    }
+
+    .field select option:disabled {
+        color: var(--muted);
+    }
+
+    [data-theme='dark'] .field select {
+        color-scheme: dark;
+    }
+
+    [data-theme='dark'] .field select option {
+        background: var(--surface);
+        color: var(--ink);
+    }
+
+    [data-theme='dark'] .field select option:checked {
+        background: var(--primary);
+        color: #ffffff;
     }
 
     .field input::placeholder, .field textarea::placeholder {
